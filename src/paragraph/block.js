@@ -2,12 +2,16 @@
 import './style.scss';
 import './editor.scss';
 
+import classnames from 'classnames';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const AlignmentToolbar = wp.blocks.AlignmentToolbar;
 const BlockControls = wp.blocks.BlockControls;
 const Fragment = wp.element.Fragment;
 const RichText = wp.blocks.RichText;
+const InspectorControls = wp.blocks.InspectorControls;
+const SelectControl = wp.components.SelectControl;
 
 registerBlockType( 'eleven-online/block-paragraph', {
 	title: __( 'Paragraph' ),
@@ -28,16 +32,37 @@ registerBlockType( 'eleven-online/block-paragraph', {
 		align: {
 			type: 'string',
 		},
+		extraClass: {
+			type: 'string',
+			default: 'primary'
+		},
 		placeholder: {
 			type: 'string'
 		}	
 	},
 
-	edit: function( {attributes, setAttributes, className} ) {
-		const { align, content, placeholder } = attributes;
+	edit: function( {attributes, setAttributes, className, isSelected} ) {
+		const { align, content, placeholder, extraClass } = attributes;
+		
+		const controls = isSelected ? 
+			<InspectorControls>
+				<SelectControl
+					label={ __( 'Style' ) }
+					value={ extraClass }
+					options={[
+						{ value: 'primary', label: 'Primary'},
+						{ value: 'secondary', label: 'Secondary'},
+					]}
+					onChange={ (value) => setAttributes( { extraClass: value } ) }
+				/>
+			</InspectorControls>
+			: null;
+
+		const classes = classnames(className, extraClass)
+		
 		return (
 			<Fragment>
-
+				{controls}
 				<BlockControls>
 					<AlignmentToolbar
 						value={ align }
@@ -46,10 +71,9 @@ registerBlockType( 'eleven-online/block-paragraph', {
 						} }
 					/>
 				</BlockControls>
-
 				<RichText
 					tagName="p"
-					className={'eleven-online-paragraph ' + className}
+					className={classes}
 					value={ content }
 					style={{textAlign: align}}
 					onChange={ ( nextContent ) => {
@@ -66,12 +90,13 @@ registerBlockType( 'eleven-online/block-paragraph', {
 	},
 
 	save: function({attributes, className}) {
-		const { align, content } = attributes;
+		const { align, content, extraClass } = attributes;
+		const classes = classnames(className, extraClass)
 		return (
 			<RichText.Content
 				tagName="p"
 				style={{textAlign: align}}
-				className={ className ? className : null }
+				className={ classes }
 				value={ content }
 			/>
 		);
