@@ -1,6 +1,7 @@
 // mark our disallowed blocks
 var disallowedBlocks = [
-	'core/paragraph'
+	'core/paragraph',
+	'core/button'
 ];
 
 // check if blocks are loaded and if so, remove them

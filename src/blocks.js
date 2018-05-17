@@ -10,3 +10,4 @@
  */
 
 import './paragraph/block.js';
+import './button/block.js';
