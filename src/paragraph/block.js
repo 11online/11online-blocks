@@ -6,11 +6,8 @@ import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const AlignmentToolbar = wp.blocks.AlignmentToolbar;
-const BlockControls = wp.blocks.BlockControls;
+const { AlignmentToolbar, BlockControls, RichText, InspectorControls } = wp.editor;
 const Fragment = wp.element.Fragment;
-const RichText = wp.blocks.RichText;
-const InspectorControls = wp.blocks.InspectorControls;
 const SelectControl = wp.components.SelectControl;
 
 registerBlockType( 'eleven-online/block-paragraph', {
