@@ -55,8 +55,8 @@ registerBlockType( 'eleven-online/block-button', {
 					options={[
 						{ value: 'primary', label: 'Primary'},
 						{ value: 'secondary', label: 'Secondary'},
-						{ value: 'primary', label: 'Primary Border Only'},
-						{ value: 'secondary', label: 'Secondary Border Only'},
+						{ value: 'primary-border', label: 'Primary Border Only'},
+						{ value: 'secondary-border', label: 'Secondary Border Only'},
 					]}
 					onChange={ (value) => setAttributes( { extraClass: value } ) }
 				/>
