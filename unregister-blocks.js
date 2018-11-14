@@ -1,6 +1,6 @@
 // mark our disallowed blocks
 var disallowedBlocks = [
-	'core/paragraph',
+	//'core/paragraph',
 	'core/button'
 ];
 
