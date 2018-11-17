@@ -17,19 +17,18 @@ const { registerBlockType } = wp.blocks;
  */
 registerBlockType( 
     // block unique name (namespaced)
-    'eleven-online/block-action', 
+    'eleven-online/block-call-to-action', 
     {
         // Localize title using wp.i18n.__()
-        title: __( '', '' ),
+        title: __( 'Call To Action Block' ),
         // Add a description for the block
-        description: __( '', '' ),
-        // Category Options: common, formatting, layout, widgets, embed
+        description: __( 'A \'call to action\' block prompts a user to visit a specified link by clicking a button' ),
         category: 'common',
         // Dashicons Options - https://goo.gl/aTM1DQ
         // Customize background color
         icon: {
-          background: '',
-          src: ''
+          background: '#F04848',
+          src: 'dashicons-megaphone'
         },                
         // Limit to 3 Keywords / Phrases
         keywords: [
@@ -46,7 +45,12 @@ registerBlockType(
             setting: {
                 type: '',
                 default: '',
-            }
+            },
+            content: {
+                type: 'array',
+                source: 'children',
+                selector: 'div.call-to-action-container',
+            },
         },
         // Determines what is displayed in the editor
         edit: props => {},

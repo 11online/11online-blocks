@@ -12,4 +12,4 @@
 import './paragraph/block.js';
 import './button/block.js';
 import './checkerboard/block.js';
-import './action/block.js';
+import './call-to-action/block.js';
