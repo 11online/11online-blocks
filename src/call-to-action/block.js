@@ -28,7 +28,7 @@ registerBlockType(
         // Customize background color
         icon: {
           background: '#F04848',
-          src: 'dashicons-megaphone'
+          src: 'megaphone'
         },                
         // Limit to 3 Keywords / Phrases
         keywords: [
