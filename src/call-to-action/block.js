@@ -46,17 +46,17 @@ registerBlockType(
                 type: 'array',
                 source: 'query',
                 default: [],
-                selector: 'div .wrap',
+                selector: 'div .call-to-action-container',
                 query: {
                     headline: {
                         type: 'string',
                         selector: 'h3',
-                        source: 'html',
+                        source: 'text',
                       },
                     description: {
                         type: 'string',
                         selector: 'p',
-                        source: 'html',      
+                        source: 'text',      
                 },
                     link: {
                         type: 'string',
@@ -65,7 +65,8 @@ registerBlockType(
                     },
                     buttonText: {
                         type: 'string',
-                        source: 'html',
+                        source: 'text',
+                        selector: '.button',
                 }
             },
         },
