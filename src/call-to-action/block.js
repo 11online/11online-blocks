@@ -71,7 +71,30 @@ registerBlockType(
             },
         },
         // Determines what is displayed in the editor
-        edit: props => {},
+        edit: props => {
+            // Deconstructing needed properties and methods from props
+            const { attributes: { content }, className, setAttributes } = props;
+            const onChangeContent = value => {
+                props.setAttributes({ content: value });
+            };
+            return (
+                <div className={ props.className }>
+                    <div className='wrap'
+                        onChange={ onChangeContent }>
+                        <h3>{ content.query.headline.source.value }</h3>
+                        <p>{ content.query.description.source.value }</p>
+                        <p>
+                            <a
+                                className="button"
+                                href={ content.query.link.attribute.value }  
+                            >
+                                { content.query.buttonText.source.value }
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            );
+        },
         // Determines what is displayed on the frontend
         save: props => {},
     },
