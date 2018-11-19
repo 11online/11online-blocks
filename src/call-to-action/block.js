@@ -32,9 +32,9 @@ registerBlockType(
         },                
         // Limit to 3 Keywords / Phrases
         keywords: [
-            __( '', '' ),
-            __( '', '' ),
-            __( '', '' ),
+            __( '11 Online'),
+            __( 'Call to Action' ),
+            __( 'Eleven Online' ),
         ],
         // Enable or disable support for features
         supports: {
@@ -42,14 +42,31 @@ registerBlockType(
         },
         // Set for each piece of dynamic data used in your block
         attributes: {
-            setting: {
-                type: '',
-                default: '',
-            },
             content: {
                 type: 'array',
-                source: 'children',
-                selector: 'div.call-to-action-container',
+                source: 'query',
+                default: [],
+                selector: 'div .wrap',
+                query: {
+                    headline: {
+                        type: 'string',
+                        selector: 'h3',
+                        source: 'html',
+                      },
+                    description: {
+                        type: 'string',
+                        selector: 'p',
+                        source: 'html',      
+                },
+                    link: {
+                        type: 'string',
+                        source: 'attribute',
+                        attribute: 'href',
+                    },
+                    buttonText: {
+                        type: 'string',
+                        source: 'html',
+                }
             },
         },
         // Determines what is displayed in the editor
