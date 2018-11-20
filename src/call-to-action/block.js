@@ -1,4 +1,6 @@
-//  Import CSS.
+/**
+ * Block dependencies
+ */
 import './style.scss';
 import './editor.scss';
 
@@ -6,11 +8,14 @@ import classnames from 'classnames';
 
 // Get custom components for this block
 
-// Get just the __() localization function from wp.i18n
-const { __ } = wp.i18n;
 
-// Get components from from wp.blocks
+/**
+ * Internal block libraries
+ */
+const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { RichText, UrlInput } = wp.editor;
+const { Fragment } = wp.element;
 
 /**
  * Register action block
@@ -42,61 +47,126 @@ registerBlockType(
         },
         // Set for each piece of dynamic data used in your block
         attributes: {
-            content: {
-                type: 'array',
-                source: 'query',
-                default: [],
-                selector: 'div .call-to-action-container',
-                query: {
-                    headline: {
-                        type: 'string',
-                        selector: 'h3',
-                        source: 'text',
-                      },
-                    description: {
-                        type: 'string',
-                        selector: 'p',
-                        source: 'text',      
-                },
-                    link: {
-                        type: 'string',
-                        source: 'attribute',
-                        attribute: 'href',
-                    },
-                    buttonText: {
-                        type: 'string',
-                        source: 'text',
-                        selector: '.button',
-                }
+            headline: {
+                type: 'string',
+                source: 'text',
+                selector: 'h3',
             },
+            message: {
+                type: 'array',
+                source: 'children',
+                selector: 'p',
+            },
+            text: {
+                type: 'string',
+                source: 'text',
+                selector: 'a',
+            },
+            url: {
+                type: 'string',
+                source: 'attribute',
+                attribute: 'href',
+                selector: 'a',               
+            },
+        }
+
+            // content: {
+            //     type: 'array',
+            //     source: 'query',
+            //     default: [],
+            //     selector: '.block-call-to-action',
+            //     query: {
+            //         headline: {
+            //             type: 'string',
+            //             selector: 'h3',
+            //             source: 'text',
+            //           },
+            //         description: {
+            //             type: 'string',
+            //             selector: 'p',
+            //             source: 'text',      
+            //     },
+            //         link: {
+            //             type: 'string',
+            //             source: 'attribute',
+            //             attribute: 'href',
+            //         },
+            //         buttonText: {
+            //             type: 'string',
+            //             source: 'text',
+            //             selector: '.button',
+            //     }
+            // },
         },
         // Determines what is displayed in the editor
         edit: props => {
             // Deconstructing needed properties and methods from props
-            const { attributes: { content }, className, setAttributes } = props;
-            const onChangeContent = value => {
-                props.setAttributes({ content: value });
-            };
+            const { attributes: { message, text, url }, className, isSelected, setAttributes } = props;
+            const onChangeMessage = message => { setAttributes( { message } ) };
+            // const onChangeContent = value => {
+            //     props.setAttributes({ content: value });
+            // };
             return (
-                <div className={ props.className }>
-                    <div className='wrap'
-                        onChange={ onChangeContent }>
-                        <h3>{ content.query.headline.source.value }</h3>
-                        <p>{ content.query.description.source.value }</p>
-                        <p>
-                            <a
-                                className="button"
-                                href={ content.query.link.attribute.value }  
-                            >
-                                { content.query.buttonText.source.value }
+                <div className={ className }>
+                    <h3>{ headline }</h3>
+                    <RichText
+                        tagName="p"
+                        placeholder={ __( 'Add your custom message' ) }
+                  		onChange={ onChangeMessage }
+                  		value={ message }
+              		/>
+                      <p>
+                            <a className="button" href={ url }>
+                                { text }
                             </a>
-                        </p>
-                    </div>
+                        </p>            
                 </div>
+                // <div className={ props.className }>
+                //     <div className='wrap'
+                //         onChange={ onChangeContent }>
+                //         <h3>{ content.query.headline.source.value }</h3>
+                //         <p>{ content.query.description.source.value }</p>
+                //         <p>
+                //             <a
+                //                 className="button"
+                //                 href={ content.query.link.attribute.value }  
+                //             >
+                //                 { content.query.buttonText.source.value }
+                //             </a>
+                //         </p>
+                //     </div>
+                // </div>
             );
         },
         // Determines what is displayed on the frontend
-        save: props => {},
+        save: props => {
+            const { attributes: { message} } = props;
+            return (  
+                <div className={ className }>
+                    <div className="wrap">
+                        <h3>'Call to Action'</h3>
+                        { message }    
+                        <p>
+                            <a className="button" href={ url }>
+                                { text }
+                            </a>
+                        </p>                   
+                    </div>
+                </div>            
+                // <div className="wrap">
+                //     <h3>{ content.query.headline.source.value }</h3>
+                //     <p>{ content.query.description.source.value }</p>
+                //     <p>
+                //         <a
+                //             className="button"
+                //             href={ content.query.link.attribute.value }  
+                //         >
+                //             { content.query.buttonText.source.value }
+                //         </a>
+                //     </p>
+                // </div>               
+            );
+        },
     },
-    );
+);
 
