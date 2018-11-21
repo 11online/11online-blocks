@@ -1,9 +1,6 @@
-$black: #000;
 
-.wp-block-call-to-action {
-    &.high-contrast {
-        background: $black;
-        border-color: $black;
-        color: white;
-    }
+.high-contrast {
+    background: black;
+    border-color: black;
+    color: white;
 }
