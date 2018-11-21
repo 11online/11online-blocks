@@ -11,15 +11,15 @@ import classnames from 'classnames';
  * Internal block libraries
  */
 const { __ } = wp.i18n;
-const {
-    registerBlockType,
+const { 
+    registerBlockType
 } = wp.blocks;
-const {
+const { 
+    RichText, 
     URLInput,
-    RichText,
-    BlockControls,
     AlignmentToolbar,
-    //InspectorControls,   
+    //InspectorControls, 
+    BlockControls,
 } = wp.editor;
 const {
     Toolbar,
@@ -34,9 +34,9 @@ const { Fragment } = wp.element;
 /**
  * Register action block
  */
-registerBlockType(
+registerBlockType( 
     // block unique name (namespaced)
-    'eleven-online/call-to-action',
+    'eleven-online/call-to-action', 
     {
         // Localize title using wp.i18n.__()
         title: __( 'Call To Action Block' ),
@@ -46,9 +46,9 @@ registerBlockType(
         // Dashicons Options - https://goo.gl/aTM1DQ
         // Customize background color
         icon: {
-            background: 'rgba(240,72,72,0.2)',
-            src: 'megaphone'
-        },
+          background: '#F04848',
+          src: 'megaphone'
+        },                
         // Limit to 3 Keywords / Phrases
         keywords: [
             __( '11 Online'),
@@ -78,7 +78,7 @@ registerBlockType(
                 type: 'string',
                 source: 'attribute',
                 attribute: 'href',
-                selector: 'a',
+                selector: 'a',               
             },
             textAlignment: {
                 type: 'string',
@@ -99,7 +99,7 @@ registerBlockType(
             );
             //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
-                <div className={ classes }>
+                <div className={ classes } >
                     <Fragment>
                         <BlockControls>
                             <AlignmentToolbar
@@ -123,17 +123,24 @@ registerBlockType(
                         </BlockControls>
                         <RichText
                             tagName="h3"
+                            className={ classnames(
+                                { 'high-contrast': highContrast }
+                            ) }
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment } }
                             onChange={ headline => setAttributes( { headline }) }
+                            
                         />
                         <RichText
                             tagName="p"
+                            className={ classnames(
+                                { 'high-contrast': highContrast }
+                            ) }
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
                             style={ { textAlign: textAlignment } }
-                            onChange={ message => setAttributes( { message } ) }
+                            onChange={ message => setAttributes( { message } ) }                 		
                         />
                         <p>
                             <URLInput
@@ -142,35 +149,39 @@ registerBlockType(
                                 value={ url }
                                 onChange={ ( url ) => setAttributes( { url } ) }
                             />
-                        </p>
-                    </Fragment>
+                        </p> 
+                    </Fragment> 
                 </div>
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
             const { attributes: { headline, message, text, url, textAlignment, highContrast }, className } = props;
-            const classes = classnames(
-                className,
-                { 'high-contrast': highContrast },
-            );
-            return (
+            // const classes = classnames(
+            //     className,
+            //     { 'high-contrast': highContrast },
+            // );
+            const classes = (highContrast ? 'call-to-action high-contrast': 'call-to-action' );
+            return (  
                 <div className={ classes }>
-                    <div className="wrap" style={ { textAlign: textAlignment } }>
-                        <RichText.Content tagName="h3" value={ headline } />
-                        <RichText.Content tagName="p" value={ message } />
+                    <div class="wrap" style={ { textAlign: textAlignment } }>
+                        <RichText.Content 
+                            tagName="h3" 
+                            value={ headline } 
+                        />
+                        <RichText.Content 
+                            tagName="p" 
+                            value={ message } 
+                        /> 
                         <p>
-                            <a
-                                className="button"
-                                href={ url }
-                            >
-                                { text }
+                            <a 
+                                className="button" 
+                                href={ url }>{ text }
                             </a>
-                        </p>
+                        </p>                   
                     </div>
-                </div>
+                </div>                     
             );
         },
     },
 );
-
