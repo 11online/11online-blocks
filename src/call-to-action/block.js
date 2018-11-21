@@ -1,14 +1,11 @@
 /**
  * Block dependencies
  */
-import icons from './icons';
+//import icons from './icons';
 import './style.scss';
 import './editor.scss';
 
 import classnames from 'classnames';
-
-// Get custom components for this block
-
 
 /**
  * Internal block libraries
@@ -19,18 +16,19 @@ const {
 } = wp.blocks;
 const { 
     RichText, 
-    UrlInput, 
-    InspectorControls, 
+    URLInput,
+    AlignmentToolbar,
+    //InspectorControls, 
     BlockControls,
 } = wp.editor;
-const {
-    Toolbar,
-    Button,
-    Tooltip,
-    PanelBody,
-    PanelRow,
-    FormToggle,
-} = wp.components;
+// const {
+//     Toolbar,
+//     Button,
+//     Tooltip,
+//     PanelBody,
+//     PanelRow,
+//     FormToggle,
+// } = wp.components;
 // const { Fragment } = wp.element;
 
 /**
@@ -57,10 +55,6 @@ registerBlockType(
             __( 'Call to Action' ),
             __( 'Eleven Online' ),
         ],
-        // Enable or disable support for features
-        supports: {
-          html: false
-        },
         // Set for each piece of dynamic data used in your block
         attributes: {
             headline: {
@@ -82,66 +76,42 @@ registerBlockType(
                 attribute: 'href',
                 selector: 'a',               
             },
-            highContrast: {
-                type: 'boolean',
-                default: false,
+            textAlignment: {
+                type: 'string',
             },
         },
         // Determines what is displayed in the editor
         edit: props => {
             // Deconstructing needed properties and methods from props
-            const { attributes: { headline, message, text, url, highContrast }, 
-            className, focus, setAttributes } = props;
-            const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
+            const { attributes: { headline, message, text, url, textAlignment }, 
+            className, isSelected, setAttributes } = props;
+            //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
-                <InspectorControls>
-                    <PanelBody
-                        title={ __( 'High Contrast' ) }
-                    >
-                        <PanelRow>
-                            <label
-                                htmlFor="high-contrast-form-toggle"
-                            >
-                                { __( 'High Contrast' ) }
-                            </label>
-                            <FormToggle
-                                id="high-contrast-form-toggle"
-                                label={ __( 'High Contrast' ) }
-                                checked={ highContrast }
-                                onChange={ toggleHighContrast }
-                            />
-                        </PanelRow>
-                    </PanelBody>
-                </InspectorControls>,
-                <BlockControls>
-                    <Toolbar>
-                        <Tooltip text={ __( 'High Contrast' )  }>
-                            <Button
-                                className={ classnames(
-                                    'components-icon-button',
-                                    'components-toolbar__control',
-                                    { 'is-active': highContrast },
-                                ) }
-                                onClick={ toggleHighContrast }
-                            >
-                                {icons.contrast}
-                            </Button>
-                        </Tooltip>
-                    </Toolbar>
-                </BlockControls>,
-                <div className={ classnames(className, { 'high-contrast': highContrast }, ) }>
-                 <RichText
+                <div className={ className } >
+                    {
+                        isSelected && (
+                            <BlockControls>
+                                <AlignmentToolbar
+                                    value={ textAlignment }
+                                    onChange={ textAlignment => setAttributes( { textAlignment } ) }
+                                />
+                            </BlockControls>
+                        )
+                    }
+                    <RichText
                         tagName="h3"
                         placeholder={ __( 'Add your custom heading' ) }
+                        value={ headline }
+                        style={ { textAlign: textAlignment } }
                   		onChange={ headline => setAttributes( { headline }) }
-                  		value={ headline }
+                  		
               		/>
                     <RichText
                         tagName="p"
                         placeholder={ __( 'Add your custom message' ) }
-                        onChange={ message => setAttributes( { message }) }
-
-                  		value={ message }
+                        value={ message }
+                        style={ { textAlign: textAlignment } }
+                        onChange={ message => setAttributes( { message } ) }                 		
               		/>
                     <p>
                         <URLInput
@@ -151,19 +121,22 @@ registerBlockType(
                             onChange={ ( url ) => setAttributes( { url } ) }
                         />
                     </p>  
-              </div>
+                </div>
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { attributes: { headline, message, text, url, highContrast }, className } = props;
+            const { attributes: { headline, message, text, url, textAlignment }, className } = props;
             return (  
-                <div className={ classnames(className, { 'high-contrast': highContrast }, ) }>
-                    <div className="wrap">
+                <div className={ className }>
+                    <div className="wrap" style={ { textAlign: textAlignment } }>
                         <RichText.Content tagName="h3" value={ headline } />
                         <RichText.Content tagName="p" value={ message } /> 
                         <p>
-                            <a className="button" href={ url }>{ text }</a>
+                            <a 
+                                className="button" 
+                                href={ url }>{ text }
+                            </a>
                         </p>                   
                     </div>
                 </div>                     
