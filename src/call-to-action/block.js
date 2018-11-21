@@ -29,7 +29,7 @@ const {
 //     PanelRow,
 //     FormToggle,
 // } = wp.components;
-// const { Fragment } = wp.element;
+const { Fragment } = wp.element;
 
 /**
  * Register action block
@@ -88,39 +88,37 @@ registerBlockType(
             //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
                 <div className={ className } >
-                    {
-                        isSelected && (
-                            <BlockControls>
-                                <AlignmentToolbar
-                                    value={ textAlignment }
-                                    onChange={ textAlignment => setAttributes( { textAlignment } ) }
-                                />
-                            </BlockControls>
-                        )
-                    }
-                    <RichText
-                        tagName="h3"
-                        placeholder={ __( 'Add your custom heading' ) }
-                        value={ headline }
-                        style={ { textAlign: textAlignment } }
-                  		onChange={ headline => setAttributes( { headline }) }
-                  		
-              		/>
-                    <RichText
-                        tagName="p"
-                        placeholder={ __( 'Add your custom message' ) }
-                        value={ message }
-                        style={ { textAlign: textAlignment } }
-                        onChange={ message => setAttributes( { message } ) }                 		
-              		/>
-                    <p>
-                        <URLInput
-                            className="button"
-                            placeholder={ text }
-                            value={ url }
-                            onChange={ ( url ) => setAttributes( { url } ) }
+                    <Fragment>
+                        <BlockControls>
+                            <AlignmentToolbar
+                                value={ textAlignment }
+                                onChange={ textAlignment => setAttributes( { textAlignment } ) }
+                            />
+                        </BlockControls>
+                        <RichText
+                            tagName="h3"
+                            placeholder={ __( 'Add your custom heading' ) }
+                            value={ headline }
+                            style={ { textAlign: textAlignment } }
+                            onChange={ headline => setAttributes( { headline }) }
+                            
                         />
-                    </p>  
+                        <RichText
+                            tagName="p"
+                            placeholder={ __( 'Add your custom message' ) }
+                            value={ message }
+                            style={ { textAlign: textAlignment } }
+                            onChange={ message => setAttributes( { message } ) }                 		
+                        />
+                        <p>
+                            <URLInput
+                                className="button"
+                                placeholder={ text }
+                                value={ url }
+                                onChange={ ( url ) => setAttributes( { url } ) }
+                            />
+                        </p> 
+                    </Fragment> 
                 </div>
             );
         },
