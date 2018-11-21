@@ -1,7 +1,7 @@
 /**
  * Block dependencies
  */
-//import icons from './icons';
+import icons from './icons';
 import './style.scss';
 import './editor.scss';
 
@@ -21,14 +21,14 @@ const {
     //InspectorControls, 
     BlockControls,
 } = wp.editor;
-// const {
-//     Toolbar,
-//     Button,
-//     Tooltip,
-//     PanelBody,
-//     PanelRow,
-//     FormToggle,
-// } = wp.components;
+const {
+    Toolbar,
+    Button,
+    Tooltip,
+    //PanelBody,
+    //PanelRow,
+    //FormToggle,
+} = wp.components;
 const { Fragment } = wp.element;
 
 /**
@@ -55,6 +55,10 @@ registerBlockType(
             __( 'Call to Action' ),
             __( 'Eleven Online' ),
         ],
+        // add support for wide and full block alignment
+        supports: {
+            align: true
+        },
         // Set for each piece of dynamic data used in your block
         attributes: {
             headline: {
@@ -78,6 +82,10 @@ registerBlockType(
             },
             textAlignment: {
                 type: 'string',
+            },
+            highContrast: {
+                type: 'boolean',
+                default: false,
             },
         },
         // Determines what is displayed in the editor
