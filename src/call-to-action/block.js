@@ -18,16 +18,16 @@ const {
     RichText, 
     URLInput,
     AlignmentToolbar,
-    //InspectorControls, 
+    InspectorControls, 
     BlockControls,
 } = wp.editor;
 const {
     Toolbar,
     Button,
     Tooltip,
-    //PanelBody,
-    //PanelRow,
-    //FormToggle,
+    PanelBody,
+    PanelRow,
+    FormToggle,
 } = wp.components;
 const { Fragment } = wp.element;
 
@@ -97,10 +97,26 @@ registerBlockType(
                 className,
                 { 'high-contrast': highContrast },
             );
+            const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
                 <div className={ classes } >
                     <Fragment>
+                        <InspectorControls>
+                            <PanelBody title={ __( 'High Contrast' ) }>
+                                <PanelRow>
+                                    <label htmlFor="high-contrast-form-toggle">
+                                    { __( 'High Contrast' ) }
+                                    </label>
+                                    <FormToggle 
+                                        id="high-contrast-form-toggle"
+                                        label={ __( 'High Contrast' ) }
+                                        checked={ highContrast }
+                                        onChange={ toggleHighContrast }
+                                    />
+                               </PanelRow>
+                            </PanelBody>
+                        </InspectorControls>
                         <BlockControls>
                             <AlignmentToolbar
                                 value={ textAlignment }
