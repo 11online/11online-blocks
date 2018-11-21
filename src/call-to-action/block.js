@@ -1,6 +1,7 @@
 /**
  * Block dependencies
  */
+import icons from './icons';
 import './style.scss';
 import './editor.scss';
 
@@ -13,9 +14,24 @@ import classnames from 'classnames';
  * Internal block libraries
  */
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { RichText, UrlInput } = wp.editor;
-const { Fragment } = wp.element;
+const { 
+    registerBlockType
+} = wp.blocks;
+const { 
+    RichText, 
+    UrlInput, 
+    InspectorControls, 
+    BlockControls,
+} = wp.editor;
+const {
+    Toolbar,
+    Button,
+    Tooltip,
+    PanelBody,
+    PanelRow,
+    FormToggle,
+} = wp.components;
+// const { Fragment } = wp.element;
 
 /**
  * Register action block
@@ -48,13 +64,11 @@ registerBlockType(
         // Set for each piece of dynamic data used in your block
         attributes: {
             headline: {
-                type: 'string',
-                source: 'text',
+                source: 'html',
                 selector: 'h3',
             },
             message: {
-                type: 'array',
-                source: 'children',
+                source: 'html',
                 selector: 'p',
             },
             text: {
@@ -68,103 +82,91 @@ registerBlockType(
                 attribute: 'href',
                 selector: 'a',               
             },
-        }
-
-            // content: {
-            //     type: 'array',
-            //     source: 'query',
-            //     default: [],
-            //     selector: '.block-call-to-action',
-            //     query: {
-            //         headline: {
-            //             type: 'string',
-            //             selector: 'h3',
-            //             source: 'text',
-            //           },
-            //         description: {
-            //             type: 'string',
-            //             selector: 'p',
-            //             source: 'text',      
-            //     },
-            //         link: {
-            //             type: 'string',
-            //             source: 'attribute',
-            //             attribute: 'href',
-            //         },
-            //         buttonText: {
-            //             type: 'string',
-            //             source: 'text',
-            //             selector: '.button',
-            //     }
-            // },
+            highContrast: {
+                type: 'boolean',
+                default: false,
+            },
         },
         // Determines what is displayed in the editor
         edit: props => {
             // Deconstructing needed properties and methods from props
-            const { attributes: { message, text, url }, className, isSelected, setAttributes } = props;
-            const onChangeMessage = message => { setAttributes( { message } ) };
-            // const onChangeContent = value => {
-            //     props.setAttributes({ content: value });
-            // };
+            const { attributes: { headline, message, text, url, highContrast }, 
+            className, focus, setAttributes } = props;
+            const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
-                <div className={ className }>
-                    <h3>{ headline }</h3>
+                <InspectorControls>
+                    <PanelBody
+                        title={ __( 'High Contrast' ) }
+                    >
+                        <PanelRow>
+                            <label
+                                htmlFor="high-contrast-form-toggle"
+                            >
+                                { __( 'High Contrast' ) }
+                            </label>
+                            <FormToggle
+                                id="high-contrast-form-toggle"
+                                label={ __( 'High Contrast' ) }
+                                checked={ highContrast }
+                                onChange={ toggleHighContrast }
+                            />
+                        </PanelRow>
+                    </PanelBody>
+                </InspectorControls>,
+                <BlockControls>
+                    <Toolbar>
+                        <Tooltip text={ __( 'High Contrast' )  }>
+                            <Button
+                                className={ classnames(
+                                    'components-icon-button',
+                                    'components-toolbar__control',
+                                    { 'is-active': highContrast },
+                                ) }
+                                onClick={ toggleHighContrast }
+                            >
+                                {icons.contrast}
+                            </Button>
+                        </Tooltip>
+                    </Toolbar>
+                </BlockControls>,
+                <div className={ classnames(className, { 'high-contrast': highContrast }, ) }>
+                 <RichText
+                        tagName="h3"
+                        placeholder={ __( 'Add your custom heading' ) }
+                  		onChange={ headline => setAttributes( { headline }) }
+                  		value={ headline }
+              		/>
                     <RichText
                         tagName="p"
                         placeholder={ __( 'Add your custom message' ) }
-                  		onChange={ onChangeMessage }
+                        onChange={ message => setAttributes( { message }) }
+
                   		value={ message }
               		/>
-                      <p>
-                            <a className="button" href={ url }>
-                                { text }
-                            </a>
-                        </p>            
-                </div>
-                // <div className={ props.className }>
-                //     <div className='wrap'
-                //         onChange={ onChangeContent }>
-                //         <h3>{ content.query.headline.source.value }</h3>
-                //         <p>{ content.query.description.source.value }</p>
-                //         <p>
-                //             <a
-                //                 className="button"
-                //                 href={ content.query.link.attribute.value }  
-                //             >
-                //                 { content.query.buttonText.source.value }
-                //             </a>
-                //         </p>
-                //     </div>
-                // </div>
+                    <p>
+                        <URLInput
+                            className="button"
+                            placeholder={ text }
+                            value={ url }
+                            onChange={ ( url ) => setAttributes( { url } ) }
+                        />
+                    </p>  
+              </div>
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { attributes: { message} } = props;
+            const { attributes: { headline, message, text, url, highContrast }, className } = props;
             return (  
-                <div className={ className }>
+                <div className={ classnames(className, { 'high-contrast': highContrast }, ) }>
                     <div className="wrap">
-                        <h3>'Call to Action'</h3>
-                        { message }    
+                        <RichText.Content tagName="h3" value={ headline } />
+                        <RichText.Content tagName="p" value={ message } /> 
                         <p>
-                            <a className="button" href={ url }>
-                                { text }
-                            </a>
+                            <a className="button" href={ url }>{ text }</a>
                         </p>                   
                     </div>
-                </div>            
-                // <div className="wrap">
-                //     <h3>{ content.query.headline.source.value }</h3>
-                //     <p>{ content.query.description.source.value }</p>
-                //     <p>
-                //         <a
-                //             className="button"
-                //             href={ content.query.link.attribute.value }  
-                //         >
-                //             { content.query.buttonText.source.value }
-                //         </a>
-                //     </p>
-                // </div>               
+                </div>                     
             );
         },
     },
