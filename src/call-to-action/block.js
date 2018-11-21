@@ -36,7 +36,7 @@ const { Fragment } = wp.element;
  */
 registerBlockType( 
     // block unique name (namespaced)
-    'eleven-online/block-call-to-action', 
+    'eleven-online/call-to-action', 
     {
         // Localize title using wp.i18n.__()
         title: __( 'Call To Action Block' ),
@@ -156,12 +156,23 @@ registerBlockType(
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { attributes: { headline, message, text, url, textAlignment }, className } = props;
+            const { attributes: { headline, message, text, url, textAlignment, highContrast }, className } = props;
+            // const classes = classnames(
+            //     className,
+            //     { 'high-contrast': highContrast },
+            // );
+            const classes = (highContrast ? 'call-to-action high-contrast': 'call-to-action' );
             return (  
-                <div className={ className }>
-                    <div className="wrap" style={ { textAlign: textAlignment } }>
-                        <RichText.Content tagName="h3" value={ headline } />
-                        <RichText.Content tagName="p" value={ message } /> 
+                <div className={ classes }>
+                    <div class="wrap" style={ { textAlign: textAlignment } }>
+                        <RichText.Content 
+                            tagName="h3" 
+                            value={ headline } 
+                        />
+                        <RichText.Content 
+                            tagName="p" 
+                            value={ message } 
+                        /> 
                         <p>
                             <a 
                                 className="button" 
