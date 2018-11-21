@@ -91,20 +91,41 @@ registerBlockType(
         // Determines what is displayed in the editor
         edit: props => {
             // Deconstructing needed properties and methods from props
-            const { attributes: { headline, message, text, url, textAlignment }, 
-            className, isSelected, setAttributes } = props;
+            const { attributes: { headline, message, text, url, textAlignment, highContrast },
+                className, setAttributes } = props;
+            const classes = classnames(
+                className,
+                { 'high-contrast': highContrast },
+            );
             //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             return (
-                <div className={ className } >
+                <div className={ classes } >
                     <Fragment>
                         <BlockControls>
                             <AlignmentToolbar
                                 value={ textAlignment }
                                 onChange={ textAlignment => setAttributes( { textAlignment } ) }
                             />
+                            <Toolbar>
+                                <Tooltip text={ __( 'High Contrast' ) }>
+                                    <Button
+                                        className={ classnames(
+                                            'components-icon-button',
+                                            'components-toolbar__control',
+                                        { 'is-active': highContrast },
+                                    ) }
+                                        onClick={ () => setAttributes( { highContrast: ! highContrast } ) }
+                                    >
+                                        { icons.contrast }
+                                    </Button>
+                                </Tooltip>
+                            </Toolbar>
                         </BlockControls>
                         <RichText
                             tagName="h3"
+                            className={ classnames(
+                                { 'high-contrast': highContrast }
+                            ) }
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment } }
@@ -113,6 +134,9 @@ registerBlockType(
                         />
                         <RichText
                             tagName="p"
+                            className={ classnames(
+                                { 'high-contrast': highContrast }
+                            ) }
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
                             style={ { textAlign: textAlignment } }
