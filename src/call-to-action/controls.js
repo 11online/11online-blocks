@@ -2,6 +2,7 @@
  * Toolbar Controls Dependencies
  */
 import classnames from 'classnames';
+//import attributes from "./attributes";
 import icons from './icons';
 
 /**
@@ -29,7 +30,13 @@ export default class Controls extends Component {
     }
     render() {
         const {
-            attributes: { textAlignment, highContrast },
+            attributes: { 
+                textAlignment, 
+                highContrast,
+                imgID, 
+                imgURL, 
+                imgAlt,
+             },
             className,
             setAttributes
           } = this.props;
@@ -37,6 +44,13 @@ export default class Controls extends Component {
             className,
             { 'high-contrast': highContrast },
         );
+        const onRemoveImage = () => {
+            setAttributes({
+                imgID: null,
+                imgURL: null,
+                imgAlt: null,
+            } );
+        };
 
         return (
             <BlockControls>
@@ -55,6 +69,19 @@ export default class Controls extends Component {
                             onClick={ () => setAttributes( { highContrast: ! highContrast } ) }
                         >
                             { icons.contrast }
+                        </Button>
+                    </Tooltip>
+                    {/* {} */}
+                    <Tooltip text={ __( 'Remove Image' ) }>
+                        <Button
+                            className={ classnames(
+                                'components-icon-button',
+                                'components-toolbar__control',
+                                'remove-image',
+                            ) }
+                            onClick={ onRemoveImage }
+                        >
+                            { icons.remove }
                         </Button>
                     </Tooltip>
                 </Toolbar>
