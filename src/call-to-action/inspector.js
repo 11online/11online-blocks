@@ -44,8 +44,8 @@ export default class Inspector extends Component {
                     label={ __( "Option Control" ) }
                     selected={ radioControl }
                     options={[
-                    { label: "Primary Option", value: "a" },
-                    { label: "Secondary Option", value: "b" },
+                    { label: "Primary Option", value: "1" },
+                    { label: "Secondary Option", value: "2" },
                     ]}
                     onChange={radioControl => setAttributes({ radioControl })}
                 />
@@ -75,9 +75,9 @@ export default class Inspector extends Component {
                     label={ __( "Select Control" ) }
                     value={ selectControl }
                     options={[
-                    { value: "a", label: __( "Option A" ) },
-                    { value: "b", label: __( "Option B" ) },
-                    { value: "c", label: __( "Option C" ) }
+                    { value: "A", label: __( "Option A" ) },
+                    { value: "B", label: __( "Option B" ) },
+                    { value: "C", label: __( "Option C" ) }
                     ]}
                     onChange={selectControl => setAttributes({ selectControl })}
                 />
