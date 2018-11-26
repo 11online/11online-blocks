@@ -47,6 +47,7 @@ const attributes = {
     },
     imgID: {
         type: 'number',
+        default: null,
     },
     imgAlt: {
         type: 'string',
