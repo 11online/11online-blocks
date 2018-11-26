@@ -12,6 +12,7 @@ const {
   PanelBody,
   PanelRow,
   RadioControl,
+  FormToggle,
   ToggleControl,
   SelectControl
 } = wp.components;
@@ -28,17 +29,19 @@ export default class Inspector extends Component {
       const {
         attributes: {
           radioControl,
+          highContrast,
           toggleControl,
           selectControl
         },
         setAttributes
       } = this.props;
+      const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
 
       return (
         <InspectorControls>
             <PanelBody>
                 <RadioControl
-                    label={ __( "Template Control" ) }
+                    label={ __( "Option Control" ) }
                     selected={ radioControl }
                     options={[
                     { label: "Primary Option", value: "a" },
