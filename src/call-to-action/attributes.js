@@ -27,13 +27,14 @@ const attributes = {
     },
     radioControl: {
         type: "string",
-        default: "a"
+        default: "1",
     },
     toggleControl: {
-        type: "boolean"
+        type: "boolean",
     },
     selectControl: {
-        type: "string"
+        type: "string",
+        default: "A",
     },
 };
 
