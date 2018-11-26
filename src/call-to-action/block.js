@@ -1,7 +1,6 @@
 /**
  * Block dependencies
  */
-import icons from './icons';
 import './style.scss';
 import './editor.scss';
 
@@ -20,14 +19,7 @@ const {
 const { 
     RichText, 
     URLInput,
-    AlignmentToolbar,
-    BlockControls,
 } = wp.editor;
-const {
-    Toolbar,
-    Button,
-    Tooltip,
-} = wp.components;
 const { Fragment } = wp.element;
 
 function getSettings(attributes) {
@@ -96,27 +88,8 @@ registerBlockType(
             return (
                 <div className={ classes } >
                     <Fragment>
-                        <Inspector {...{ setAttributes, ...props }} />,
-                        <BlockControls>
-                            <AlignmentToolbar
-                                value={ textAlignment }
-                                onChange={ textAlignment => setAttributes( { textAlignment } ) }
-                            />
-                            <Toolbar>
-                                <Tooltip text={ __( 'High Contrast' ) }>
-                                    <Button
-                                        className={ classnames(
-                                            'components-icon-button',
-                                            'components-toolbar__control',
-                                        { 'is-active': highContrast },
-                                    ) }
-                                        onClick={ () => setAttributes( { highContrast: ! highContrast } ) }
-                                    >
-                                        { icons.contrast }
-                                    </Button>
-                                </Tooltip>
-                            </Toolbar>
-                        </BlockControls>
+                        <Inspector {...{ setAttributes, ...props }} />
+                        <Controls {...{ setAttributes, ...props }} />
                         <RichText
                             tagName="h3"
                             className={ classnames(
