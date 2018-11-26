@@ -12,3 +12,7 @@
 .list {
     padding-left: 20px;
 }
+
+.list > ul {
+    display: inline-block;
+}
