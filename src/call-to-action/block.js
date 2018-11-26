@@ -6,6 +6,9 @@ import './style.scss';
 import './editor.scss';
 
 import classnames from 'classnames';
+import Inspector from "./inspector";
+import Controls from "./controls";
+import attributes from "./attributes";
 
 /**
  * Internal block libraries
@@ -18,18 +21,31 @@ const {
     RichText, 
     URLInput,
     AlignmentToolbar,
-    InspectorControls, 
     BlockControls,
 } = wp.editor;
 const {
     Toolbar,
     Button,
     Tooltip,
-    PanelBody,
-    PanelRow,
-    FormToggle,
 } = wp.components;
 const { Fragment } = wp.element;
+
+function getSettings(attributes) {
+    let settings = [];
+    for (let attribute in attributes) {
+      let value = attributes[attribute];
+      if ("boolean" === typeof attributes[attribute]) {
+        value = value.toString();
+      }
+      settings.push(
+        <li>
+          {attribute}: {value}
+        </li>
+      );
+    }
+    return settings;
+  }
+  
 
 /**
  * Register action block
@@ -60,63 +76,27 @@ registerBlockType(
             align: true
         },
         // Set for each piece of dynamic data used in your block
-        attributes: {
-            headline: {
-                source: 'html',
-                selector: 'h3',
-            },
-            message: {
-                source: 'html',
-                selector: 'p',
-            },
-            text: {
-                type: 'string',
-                source: 'text',
-                selector: 'a',
-            },
-            url: {
-                type: 'string',
-                source: 'attribute',
-                attribute: 'href',
-                selector: 'a',               
-            },
-            textAlignment: {
-                type: 'string',
-            },
-            highContrast: {
-                type: 'boolean',
-                default: false,
-            },
-        },
+        attributes,
         // Determines what is displayed in the editor
         edit: props => {
             // Deconstructing needed properties and methods from props
-            const { attributes: { headline, message, text, url, textAlignment, highContrast },
-                className, setAttributes } = props;
+            const {
+                attributes: { headline, message, text, url, textAlignment, highContrast },
+                attributes,
+                className,
+                setAttributes
+              } = props;
             const classes = classnames(
                 className,
                 { 'high-contrast': highContrast },
             );
             const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
-            //const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
+            let settings = getSettings( attributes );
+
             return (
                 <div className={ classes } >
                     <Fragment>
-                        <InspectorControls>
-                            <PanelBody title={ __( 'High Contrast' ) }>
-                                <PanelRow>
-                                    <label htmlFor="high-contrast-form-toggle">
-                                    { __( 'High Contrast' ) }
-                                    </label>
-                                    <FormToggle 
-                                        id="high-contrast-form-toggle"
-                                        label={ __( 'High Contrast' ) }
-                                        checked={ highContrast }
-                                        onChange={ toggleHighContrast }
-                                    />
-                               </PanelRow>
-                            </PanelBody>
-                        </InspectorControls>
+                        <Inspector {...{ setAttributes, ...props }} />,
                         <BlockControls>
                             <AlignmentToolbar
                                 value={ textAlignment }
@@ -165,7 +145,10 @@ registerBlockType(
                                 value={ url }
                                 onChange={ ( url ) => setAttributes( { url } ) }
                             />
-                        </p> 
+                        </p>
+                        <div className="list" style={{ textAlign: textAlignment }}>
+                            <ul>{settings}</ul>
+                        </div>
                     </Fragment> 
                 </div>
             );
