@@ -21,6 +21,9 @@ const attributes = {
     textAlignment: {
         type: 'string',
     },
+    align: {
+        type: 'string',
+    },
     highContrast: {
         type: 'boolean',
         default: false,
@@ -35,6 +38,21 @@ const attributes = {
     selectControl: {
         type: "string",
         default: "A",
+    },
+    imgURL: {
+        type: 'string',
+        source: 'attribute',
+        attribute: 'src',
+        selector: 'img',
+    },
+    imgID: {
+        type: 'number',
+    },
+    imgAlt: {
+        type: 'string',
+        source: 'attribute',
+        attribute: 'alt',
+        selector: 'img',
     },
 };
 
