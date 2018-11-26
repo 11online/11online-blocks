@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import Inspector from "./inspector";
 import Controls from "./controls";
 import attributes from "./attributes";
+import icons from './icons';
 
 /**
  * Internal block libraries
@@ -16,11 +17,20 @@ const { __ } = wp.i18n;
 const { 
     registerBlockType
 } = wp.blocks;
+// To make sure the current user has Upload permissions, 
+// you need to wrap the MediaUpload component into the MediaUploadCheck one.
 const { 
     RichText, 
     URLInput,
+    MediaUpload,
+    MediaUploadCheck,
+    Editable,
 } = wp.editor;
+const {
+    Button,
+} = wp.components;
 const { Fragment } = wp.element;
+
 
 function getSettings(attributes) {
     let settings = [];
@@ -52,9 +62,10 @@ registerBlockType(
         description: __( 'A \'call to action\' block prompts a user to visit a specified link by clicking a button' ),
         category: 'common',
         // Dashicons Options - https://goo.gl/aTM1DQ
-        // Customize background color
+        // Customize background & foreground color
         icon: {
           background: '#F04848',
+          foreground: '#FFFFFF',
           src: 'megaphone'
         },                
         // Limit to 3 Keywords / Phrases
@@ -65,7 +76,8 @@ registerBlockType(
         ],
         // add support for wide and full block alignment
         supports: {
-            align: true
+            align: true,
+            //align: [ 'left', 'center', 'right', 'full' ],
         },
         // Set for each piece of dynamic data used in your block
         attributes,
@@ -73,7 +85,16 @@ registerBlockType(
         edit: props => {
             // Deconstructing needed properties and methods from props
             const {
-                attributes: { headline, message, text, url, textAlignment, highContrast },
+                attributes: { headline, 
+                    message, 
+                    text, 
+                    url, 
+                    textAlignment, 
+                    highContrast,
+                    imgID, 
+                    imgURL, 
+                    imgAlt,
+                 },
                 attributes,
                 className,
                 setAttributes
@@ -84,6 +105,20 @@ registerBlockType(
             );
             const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
             let settings = getSettings( attributes );
+            const onSelectImage = img => {
+                setAttributes( {
+                    imgID: img.id,
+                    imgURL: img.url,
+                    imgAlt: img.alt,
+                } );
+            };
+            const onRemoveImage = () => {
+                setAttributes({
+                    imgID: null,
+                    imgURL: null,
+                    imgAlt: null,
+                } );
+            };
 
             return (
                 <div className={ classes } >
@@ -119,20 +154,47 @@ registerBlockType(
                                 onChange={ ( url ) => setAttributes( { url } ) }
                             />
                         </p>
+                        <div>
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    onSelect={ onSelectImage }
+                                    //onSelect={ ( media ) => console.log( 'selected ' + media.length ) }
+                                    type="image"
+                                    value={ imgID }
+                                    render={ ( { open } ) => (
+                                        <Button
+                                            className={ "components-button button button-large" }
+                                            onClick={ open }
+                                        >
+                                            {/* { icons.upload } */}
+                                            { __( ' Upload Image' ) }
+                                        </Button>
+                                    ) }
+                                >
+                                </MediaUpload>
+                            </MediaUploadCheck>
+                        </div>
                         <div className="list" style={{ textAlign: textAlignment }}>
                             <ul>{settings}</ul>
-                        </div>
+                        </div>                
                     </Fragment> 
                 </div>
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { attributes: { headline, message, text, url, textAlignment, highContrast }, className } = props;
-            // const classes = classnames(
-            //     className,
-            //     { 'high-contrast': highContrast },
-            // );
+            const { attributes: { headline, 
+                        message, 
+                        text, 
+                        url, 
+                        textAlignment, 
+                        highContrast,
+                        imgURL, 
+                        imgAlt, 
+                    }, 
+                    className 
+                } = props;
+
             const classes = (highContrast ? 'call-to-action high-contrast': 'call-to-action' );
             return (  
                 <div className={ classes }>
@@ -145,12 +207,18 @@ registerBlockType(
                             tagName="p" 
                             value={ message } 
                         /> 
+                        {/* <div>
+                            <img
+                                src={ imgURL }
+                                alt={ imgAlt }
+                            />
+                        </div>      */}
                         <p>
                             <a 
                                 className="button" 
                                 href={ url }>{ text }
                             </a>
-                        </p>                   
+                        </p>             
                     </div>
                 </div>                     
             );
