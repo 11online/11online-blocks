@@ -155,6 +155,7 @@ registerBlockType(
                             />
                         </p>
                         <div>
+                        { ! imgID ? (
                             <MediaUploadCheck>
                                 <MediaUpload
                                     onSelect={ onSelectImage }
@@ -173,6 +174,23 @@ registerBlockType(
                                 >
                                 </MediaUpload>
                             </MediaUploadCheck>
+                            ) : (
+                                <Fragment>
+                                    <p class="image-wrapper">
+                                        <img
+                                            src={ imgURL }
+                                            alt={ imgAlt }
+                                        />
+                                    </p>
+                                    <Button
+                                        className="remove-image"
+                                        onClick={ onRemoveImage }
+                                    >
+                                        { icons.remove }
+                                    </Button>
+                                </Fragment>
+                            ) 
+                        }
                         </div>
                         <div className="list" style={{ textAlign: textAlignment }}>
                             <ul>{settings}</ul>
@@ -189,6 +207,7 @@ registerBlockType(
                         url, 
                         textAlignment, 
                         highContrast,
+                        imgID,
                         imgURL, 
                         imgAlt, 
                     }, 
@@ -208,11 +227,23 @@ registerBlockType(
                             value={ message } 
                         /> 
                         {/* <div>
+                            { imgID ? (
+                                <img
+                                    src={ imgURL }
+                                    alt={ imgAlt }
+                                />
+                                ) : (
+                                    Nothing to display!
+                                )
+                            }
+                        </div> */}
+                        {/* <p>
                             <img
                                 src={ imgURL }
                                 alt={ imgAlt }
                             />
-                        </div>      */}
+                        </p> */}
+                             
                         <p>
                             <a 
                                 className="button" 
