@@ -31,7 +31,6 @@ const {
 } = wp.components;
 const { Fragment } = wp.element;
 
-
 function getSettings(attributes) {
     let settings = [];
     for (let attribute in attributes) {
@@ -167,7 +166,7 @@ registerBlockType(
                                             className={ "components-button button button-large" }
                                             onClick={ open }
                                         >
-                                            {/* { icons.upload } */}
+                                            { icons.upload }
                                             { __( ' Upload Image' ) }
                                         </Button>
                                     ) }
