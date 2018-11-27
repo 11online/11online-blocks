@@ -161,43 +161,6 @@ registerBlockType(
                                 />
                             </p>
                         ) : '' }
-                        
-                        {/* { ! imgID ? (
-                            <MediaUploadCheck>
-                                <MediaUpload
-                                    onSelect={ onSelectImage }
-                                    //onSelect={ ( media ) => console.log( 'selected ' + media.length ) }
-                                    type="image"
-                                    value={ imgID }
-                                    render={ ( { open } ) => (
-                                        <Button
-                                            className={ "components-button button button-large" }
-                                            onClick={ open }
-                                        >
-                                            { icons.upload }
-                                            { __( ' Upload Image' ) }
-                                        </Button>
-                                    ) }
-                                >
-                                </MediaUpload>
-                            </MediaUploadCheck>
-                            ) : (
-                                <Fragment>
-                                    <p class="image-wrapper">
-                                        <img
-                                            src={ imgURL }
-                                            alt={ imgAlt }
-                                        />
-                                    </p>
-                                    <Button
-                                        className="remove-image"
-                                        onClick={ onRemoveImage }
-                                    >
-                                        { icons.remove }
-                                    </Button>
-                                </Fragment>
-                            ) 
-                        } */}
                         <div className="list" style={{ textAlign: textAlignment }}>
                             <ul>{settings}</ul>
                         </div>                
@@ -207,19 +170,15 @@ registerBlockType(
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { attributes: { headline, 
-                        message, 
-                        text, 
-                        url, 
-                        textAlignment, 
-                        highContrast,
-                        imgID,
-                        imgURL, 
-                        imgAlt, 
-                    }, 
-                    className 
-                } = props;
-
+            const { headline, 
+                    message, 
+                    text, 
+                    url, 
+                    textAlignment, 
+                    highContrast,
+                    imgURL, 
+                    imgAlt, 
+                } = props.attributes;
             const classes = (highContrast ? 'call-to-action high-contrast': 'call-to-action' );
             return (  
                 <div className={ classes }>
@@ -232,24 +191,12 @@ registerBlockType(
                             tagName="p" 
                             value={ message } 
                         /> 
-                        {/* <div>
-                            { imgID ? (
-                                <img
-                                    src={ imgURL }
-                                    alt={ imgAlt }
-                                />
-                                ) : (
-                                    Nothing to display!
-                                )
-                            }
-                        </div> */}
-                        {/* <p>
+                        <p>
                             <img
                                 src={ imgURL }
                                 alt={ imgAlt }
                             />
-                        </p> */}
-                             
+                        </p>
                         <p>
                             <a 
                                 className="button" 
