@@ -22,5 +22,4 @@ icons.remove = <svg width='20px' height='20px' viewBox='0 0 100 100' xmlns='http
     />
 </svg>;
 
-
 export default icons;
