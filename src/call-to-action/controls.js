@@ -13,6 +13,8 @@ const { Component } = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
+    MediaUpload,
+    MediaUploadCheck,
 } = wp.editor;
 const {
     Toolbar,
@@ -44,6 +46,13 @@ export default class Controls extends Component {
             className,
             { 'high-contrast': highContrast },
         );
+        const onSelectImage = img => {
+            setAttributes( {
+                imgID: img.id,
+                imgURL: img.url,
+                imgAlt: img.alt,
+            } );
+        };
         const onRemoveImage = () => {
             setAttributes({
                 imgID: null,
@@ -71,19 +80,41 @@ export default class Controls extends Component {
                             { icons.contrast }
                         </Button>
                     </Tooltip>
-                    {/* {} */}
-                    <Tooltip text={ __( 'Remove Image' ) }>
-                        <Button
-                            className={ classnames(
-                                'components-icon-button',
-                                'components-toolbar__control',
-                                'remove-image',
-                            ) }
-                            onClick={ onRemoveImage }
-                        >
-                            { icons.remove }
-                        </Button>
-                    </Tooltip>
+                    {! imgID ? (
+                        <MediaUploadCheck>
+                            <MediaUpload
+                                onSelect={ onSelectImage }
+                                //onSelect={ ( media ) => console.log( 'selected ' + media.length ) }
+                                type="image"
+                                value={ imgID }
+                                render={ ( { open } ) => (
+                                    <Tooltip text={ __( 'Upload Image' ) }>
+                                        <Button
+                                            className={ "components-button button button-large" }
+                                            onClick={ open }
+                                        >
+                                            { icons.upload }
+                                            {/* { __( ' Upload Image' ) } */}
+                                        </Button>
+                                    </Tooltip>
+                                ) }
+                            >
+                            </MediaUpload>
+                        </MediaUploadCheck>
+                    ) : (
+                        <Tooltip text={ __( 'Remove Image' ) }>
+                            <Button
+                                className={ classnames(
+                                    'components-icon-button',
+                                    'components-toolbar__control',
+                                    'remove-image',
+                                ) }
+                                onClick={ onRemoveImage }
+                            >
+                                { icons.remove }
+                            </Button>
+                        </Tooltip>
+                    ) }  
                 </Toolbar>
             </BlockControls>
         );
