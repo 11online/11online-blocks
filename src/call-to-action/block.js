@@ -15,19 +15,19 @@ import icons from './icons';
  */
 const { __ } = wp.i18n;
 const { 
-    registerBlockType
+    registerBlockType,   
 } = wp.blocks;
 // To make sure the current user has Upload permissions, 
 // you need to wrap the MediaUpload component into the MediaUploadCheck one.
 const { 
     RichText, 
     URLInput,
-    MediaUpload,
-    MediaUploadCheck,
-    Editable,
 } = wp.editor;
 const {
     Button,
+    IconButton,
+    Tooltip,
+    TextControl,
 } = wp.components;
 const { Fragment } = wp.element;
 
@@ -73,7 +73,7 @@ registerBlockType(
             __( 'Call to Action' ),
             __( 'Eleven Online' ),
         ],
-        // add support for wide and full block alignment
+        // add support for the block alignment as a whole
         supports: {
             align: true,
             //align: [ 'left', 'center', 'right', 'full' ],
@@ -96,6 +96,7 @@ registerBlockType(
                  },
                 attributes,
                 className,
+                isSelected,
                 setAttributes
               } = props;
             const classes = classnames(
@@ -132,8 +133,7 @@ registerBlockType(
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment } }
-                            onChange={ headline => setAttributes( { headline }) }
-                            
+                            onChange={ headline => setAttributes( { headline } ) }                           
                         />
                         <RichText
                             tagName="p"
@@ -145,14 +145,40 @@ registerBlockType(
                             style={ { textAlign: textAlignment } }
                             onChange={ message => setAttributes( { message } ) }                 		
                         />
-                        <p>
-                            <URLInput
-                                className="button"
-                                placeholder={ text }
-                                value={ url }
-                                onChange={ ( url ) => setAttributes( { url } ) }
+                        { isSelected ? (
+                        <Fragment>
+                            <Tooltip text={ __( 'Add or Edit Link Text' ) }>
+                                <label>{ __( 'Link Text' ) }</label>
+                            </Tooltip>
+                            <TextControl
+                                id="link-text-input-field"
+                                value={ text }
+                                onChange={ text => setAttributes( { text } ) }
                             />
+                            <form
+                                className="blocks-format-toolbar__link-modal-line"
+                                onSubmit={ event => event.preventDefault() }
+                            >
+                                <Tooltip text={ __( 'Add or Edit Link URL' ) }>
+                                    { icons.url }
+                                </Tooltip>
+                                <label>{ __( ' Link URL' ) }</label>
+                                <URLInput
+                                    className="url"
+                                    value={ url }
+                                    onChange={ url => setAttributes( { url } ) }
+                                />
+                            </form>
+                        </Fragment>
+                    ) : (
+                        <p>
+                            <Tooltip text={ __( 'Edit Link' ) }>
+                                <a href={ url }>
+                                    { text || __( 'Edit link' ) }
+                                </a>
+                            </Tooltip>
                         </p>
+                    )}
                         { imgID ? (
                             <p class="image-wrapper">
                                 <img
@@ -200,7 +226,9 @@ registerBlockType(
                         <p>
                             <a 
                                 className="button" 
-                                href={ url }>{ text }
+                                href={ url }
+                            >
+                                { text }
                             </a>
                         </p>             
                     </div>
