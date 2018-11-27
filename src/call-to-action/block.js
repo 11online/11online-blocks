@@ -153,8 +153,16 @@ registerBlockType(
                                 onChange={ ( url ) => setAttributes( { url } ) }
                             />
                         </p>
-                        <div>
-                        { ! imgID ? (
+                        { imgID ? (
+                            <p class="image-wrapper">
+                                <img
+                                    src={ imgURL }
+                                    alt={ imgAlt }
+                                />
+                            </p>
+                        ) : '' }
+                        
+                        {/* { ! imgID ? (
                             <MediaUploadCheck>
                                 <MediaUpload
                                     onSelect={ onSelectImage }
@@ -189,8 +197,7 @@ registerBlockType(
                                     </Button>
                                 </Fragment>
                             ) 
-                        }
-                        </div>
+                        } */}
                         <div className="list" style={{ textAlign: textAlignment }}>
                             <ul>{settings}</ul>
                         </div>                
