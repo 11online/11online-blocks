@@ -223,3 +223,40 @@ registerBlockType(
         },
     },
 );
+
+{/* { ! imgID ? (
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    onSelect={ onSelectImage }
+                                    //onSelect={ ( media ) => console.log( 'selected ' + media.length ) }
+                                    type="image"
+                                    value={ imgID }
+                                    render={ ( { open } ) => (
+                                        <Button
+                                            className={ "components-button button button-large" }
+                                            onClick={ open }
+                                        >
+                                            { icons.upload }
+                                            { __( ' Upload Image' ) }
+                                        </Button>
+                                    ) }
+                                >
+                                </MediaUpload>
+                            </MediaUploadCheck>
+                            ) : (
+                                <Fragment>
+                                    <p class="image-wrapper">
+                                        <img
+                                            src={ imgURL }
+                                            alt={ imgAlt }
+                                        />
+                                    </p>
+                                    <Button
+                                        className="remove-image"
+                                        onClick={ onRemoveImage }
+                                    >
+                                        { icons.remove }
+                                    </Button>
+                                </Fragment>
+                            ) 
+                        } */}
