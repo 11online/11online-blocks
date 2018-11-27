@@ -44,6 +44,7 @@ const attributes = {
         source: 'attribute',
         attribute: 'src',
         selector: 'img',
+        default: null,
     },
     imgID: {
         type: 'number',
@@ -54,6 +55,7 @@ const attributes = {
         source: 'attribute',
         attribute: 'alt',
         selector: 'img',
+        default: null, 
     },
 };
 
