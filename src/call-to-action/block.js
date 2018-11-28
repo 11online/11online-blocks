@@ -18,7 +18,7 @@ const {
     registerBlockType,   
 } = wp.blocks;
 // To make sure the current user has Upload permissions, 
-// you need to wrap the MediaUpload component into the MediaUploadCheck one.
+// we need to wrap the MediaUpload component into the MediaUploadCheck one.
 const { 
     RichText, 
     URLInput,
