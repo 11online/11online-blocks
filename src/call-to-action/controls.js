@@ -36,8 +36,7 @@ export default class Controls extends Component {
                 textAlignment, 
                 highContrast,
                 imgID, 
-                imgURL, 
-                imgAlt,
+                imgURL,
              },
             className,
             setAttributes
@@ -50,14 +49,12 @@ export default class Controls extends Component {
             setAttributes( {
                 imgID: img.id,
                 imgURL: img.url,
-                imgAlt: img.alt,
             } );
         };
         const onRemoveImage = () => {
             setAttributes({
                 imgID: null,
                 imgURL: null,
-                imgAlt: null,
             } );
         };
 
@@ -68,19 +65,7 @@ export default class Controls extends Component {
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
                 <Toolbar>
-                    <Tooltip text={ __( 'High Contrast' ) }>
-                        <Button
-                            className={ classnames(
-                                'components-icon-button',
-                                'components-toolbar__control',
-                                { 'is-active': highContrast },
-                            ) }
-                            onClick={ () => setAttributes( { highContrast: ! highContrast } ) }
-                        >
-                            { icons.contrast }
-                        </Button>
-                    </Tooltip>
-                    {! imgID ? (
+                    { ! imgID ? (
                         <MediaUploadCheck>
                             <MediaUpload
                                 onSelect={ onSelectImage }
