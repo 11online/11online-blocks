@@ -24,16 +24,9 @@ const attributes = {
     align: {
         type: 'string',
     },
-    highContrast: {
-        type: 'boolean',
-        default: false,
-    },
     radioControl: {
         type: "string",
         default: "1",
-    },
-    toggleControl: {
-        type: "boolean",
     },
     selectControl: {
         type: "string",
@@ -41,22 +34,20 @@ const attributes = {
     },
     imgURL: {
         type: 'string',
-        source: 'attribute',
-        attribute: 'src',
-        selector: 'img',
         default: null,
     },
     imgID: {
         type: 'number',
         default: null,
     },
-    imgAlt: {
-        type: 'string',
-        source: 'attribute',
-        attribute: 'alt',
-        selector: 'img',
-        default: null, 
+    imgOpacity: {
+        type: 'number',
+        default: "10", 
     },
+    newTab: {
+        type: 'boolean',
+        default: true,
+    }
 };
 
 export default attributes;
