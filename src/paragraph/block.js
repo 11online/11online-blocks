@@ -7,12 +7,16 @@ import classnames from 'classnames';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { AlignmentToolbar, BlockControls, RichText, InspectorControls } = wp.editor;
+const { SelectControl, Tooltip }  = wp.components;
 const Fragment = wp.element.Fragment;
-const SelectControl = wp.components.SelectControl;
 
 registerBlockType( 'eleven-online/block-paragraph', {
 	title: __( 'Paragraph' ),
-	icon: 'editor-paragraph',
+	icon: {
+		background: '#F04848',
+		foreground: '#FFFFFF',
+		src: 'editor-paragraph'
+	},   
 	category: 'common',
 	keywords: [
 		__( '11 Online' ),
@@ -42,7 +46,7 @@ registerBlockType( 'eleven-online/block-paragraph', {
 		const { align, content, placeholder, extraClass } = attributes;
 		
 		const controls = isSelected ? 
-			<InspectorControls>
+			<InspectorControls>		
 				<SelectControl
 					label={ __( 'Style' ) }
 					value={ extraClass }
@@ -80,7 +84,6 @@ registerBlockType( 'eleven-online/block-paragraph', {
 					} }
 					placeholder={ placeholder || __( 'Add text or type / to add content' ) }
 				/>
-
 			</Fragment>
 
 		);
