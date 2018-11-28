@@ -1,12 +1,10 @@
-
-.high-contrast {
-    background: black;
-    border-color: black;
-    color: white;
-}
-
-.high-contrast h3 {
-    color: white;
+.img-background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .list {
