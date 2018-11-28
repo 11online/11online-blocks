@@ -200,14 +200,20 @@ registerBlockType(
                     message, 
                     text, 
                     url, 
-                    textAlignment, 
-                    highContrast,
+                    textAlignment,
+                    imgID,
                     imgURL, 
-                    imgAlt, 
+                    imgOpacity
                 } = props.attributes;
-            const classes = (highContrast ? 'call-to-action high-contrast': 'call-to-action' );
+
+            const classes = (imgID ? 'call-to-action img-background': 'call-to-action' );
+            const bgr = (imgID ?  'url(' + imgURL + ')' : 'none');
+
             return (  
-                <div className={ classes }>
+                <div 
+                    className={ classes }
+                    style={ { background: bgr, opacity: (imgOpacity*0.1) } }
+                >
                     <div class="wrap" style={ { textAlign: textAlignment } }>
                         <RichText.Content 
                             tagName="h3" 
@@ -217,12 +223,6 @@ registerBlockType(
                             tagName="p" 
                             value={ message } 
                         /> 
-                        <p>
-                            <img
-                                src={ imgURL }
-                                alt={ imgAlt }
-                            />
-                        </p>
                         <p>
                             <a 
                                 className="button" 
