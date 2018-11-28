@@ -5,13 +5,16 @@ import './editor.scss';
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { InspectorControls, InnerBlocks, MediaUpload } = wp.editor;
+const { Button, SelectControl, Tooltip } = wp.components;
 const Fragment = wp.element.Fragment;
-const SelectControl = wp.components.SelectControl;
-const Button = wp.components.Button;
 
 registerBlockType( 'eleven-online/block-checkerboard', {
 	title: __( 'Checkerboard' ),
-	icon: 'grid-view',
+	icon: {
+		background: '#F04848',
+		foreground: '#FFFFFF',
+		src: 'grid-view'
+	  },     
 	category: 'common',
 	keywords: [
 		__( '11 Online' ),
