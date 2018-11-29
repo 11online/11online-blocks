@@ -1,7 +1,7 @@
+
 .call-to-action {
-    display: block;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .img-background {
@@ -12,10 +12,12 @@
     left: 0;
     bottom: 0;
     right: 0;
+    background-image: url(https://picsum.photos/200/300/?random);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;   
     position: absolute;
+    opacity: 0.5;
     z-index: -1; 
 }
 
