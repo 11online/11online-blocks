@@ -212,7 +212,7 @@ registerBlockType(
             return (  
                 <div 
                     className={ classes }
-                    style={ { background: bgr, opacity: (imgOpacity*0.1) } }
+                    style={ { backgroundImage: bgr, opacity: (imgOpacity*0.1) } }
                 >
                     <div class="wrap" style={ { textAlign: textAlignment } }>
                         <RichText.Content 
