@@ -38,8 +38,8 @@ export default class Inspector extends Component {
         <InspectorControls>
             <PanelBody>
                 <ToggleControl
-                    label={ __( "Open in New Tab?" ) }
-                    help={ __( newTab ? 'Open in a New Tab' : 'Open in the Same Window' ) }
+                    label={ __( "Open Link in New Tab?" ) }
+                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
                     checked={ newTab }
                     onChange={ toggleNewTab }
                 />
