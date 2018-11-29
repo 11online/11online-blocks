@@ -206,14 +206,12 @@ registerBlockType(
                     imgOpacity
                 } = props.attributes;
 
-            const classes = (imgID ? 'call-to-action img-background': 'call-to-action' );
+            const classes = (imgID ? 'img-background': null );
             const bgr = (imgID ?  'url(' + imgURL + ')' : 'none');
+            const opacityVal = (imgID ? imgOpacity*0.1 : 0.0 );
 
             return (  
-                <div 
-                    className={ classes }
-                    style={ { backgroundImage: bgr, opacity: (imgOpacity*0.1) } }
-                >
+                <div className="call-to-action">
                     <div class="wrap" style={ { textAlign: textAlignment } }>
                         <RichText.Content 
                             tagName="h3" 
@@ -232,6 +230,10 @@ registerBlockType(
                             </a>
                         </p>             
                     </div>
+                    <div 
+                    className="img-background"
+                    style={ { backgroundImage: bgr, opacity: opacityVal } }
+                    ></div>
                 </div>                     
             );
         },
