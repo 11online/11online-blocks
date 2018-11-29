@@ -78,7 +78,7 @@ registerBlockType(
             align: true,
             //align: [ 'left', 'center', 'right', 'full' ],
         },
-        // Set for each piece of dynamic data used in your block
+        // Set for each piece of dynamic data used in the block
         attributes,
         // Determines what is displayed in the editor
         edit: props => {
@@ -89,10 +89,9 @@ registerBlockType(
                     text, 
                     url, 
                     textAlignment, 
-                    highContrast,
                     imgID, 
                     imgURL, 
-                    imgAlt,
+                    imgOpacity,
                  },
                 attributes,
                 className,
@@ -101,24 +100,10 @@ registerBlockType(
               } = props;
             const classes = classnames(
                 className,
-                { 'high-contrast': highContrast },
+                'call-to-action'
             );
-            const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
+            
             let settings = getSettings( attributes );
-            const onSelectImage = img => {
-                setAttributes( {
-                    imgID: img.id,
-                    imgURL: img.url,
-                    imgAlt: img.alt,
-                } );
-            };
-            const onRemoveImage = () => {
-                setAttributes({
-                    imgID: null,
-                    imgURL: null,
-                    imgAlt: null,
-                } );
-            };
 
             return (
                 <div className={ classes } >
@@ -127,9 +112,6 @@ registerBlockType(
                         <Controls {...{ setAttributes, ...props }} />
                         <RichText
                             tagName="h3"
-                            className={ classnames(
-                                { 'high-contrast': highContrast }
-                            ) }
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment } }
@@ -137,9 +119,6 @@ registerBlockType(
                         />
                         <RichText
                             tagName="p"
-                            className={ classnames(
-                                { 'high-contrast': highContrast }
-                            ) }
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
                             style={ { textAlign: textAlignment } }
@@ -160,9 +139,9 @@ registerBlockType(
                                 onSubmit={ event => event.preventDefault() }
                             >
                                 <Tooltip text={ __( 'Add or Edit Link URL' ) }>
-                                    { icons.url }
+                                    {/* { icons.url } */}
+                                    <label>{ __( ' Link URL' ) }</label>
                                 </Tooltip>
-                                <label>{ __( ' Link URL' ) }</label>
                                 <URLInput
                                     className="url"
                                     value={ url }
@@ -178,19 +157,16 @@ registerBlockType(
                                 </a>
                             </Tooltip>
                         </p>
-                    )}
-                        { imgID ? (
-                            <p class="image-wrapper">
-                                <img
-                                    src={ imgURL }
-                                    alt={ imgAlt }
-                                />
-                            </p>
-                        ) : '' }
-                        <div className="list" style={{ textAlign: textAlignment }}>
-                            <ul>{settings}</ul>
-                        </div>                
+                    )}        
                     </Fragment> 
+                    { ( imgID ) 
+                        ?
+                        <div 
+                            className="img-background"
+                            style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                        ></div>
+                        : ''
+                    }
                 </div>
             );
         },
@@ -205,10 +181,6 @@ registerBlockType(
                     imgURL, 
                     imgOpacity
                 } = props.attributes;
-
-            const classes = (imgID ? 'img-background': null );
-            const bgr = (imgID ?  'url(' + imgURL + ')' : 'none');
-            const opacityVal = (imgID ? imgOpacity*0.1 : 0.0 );
 
             return (  
                 <div className="call-to-action">
@@ -230,10 +202,14 @@ registerBlockType(
                             </a>
                         </p>             
                     </div>
-                    <div 
-                    className="img-background"
-                    style={ { backgroundImage: bgr, opacity: opacityVal } }
-                    ></div>
+                    { ( imgID ) 
+                        ?
+                        <div 
+                            className="img-background"
+                            style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                        ></div>
+                        : ''
+                    }
                 </div>                     
             );
         },
