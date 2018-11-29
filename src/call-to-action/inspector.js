@@ -9,7 +9,6 @@ const {
 } = wp.editor;
 const {
   PanelBody,
-  RadioControl,
   ToggleControl,
   SelectControl,
   RangeControl,
@@ -26,7 +25,6 @@ export default class Inspector extends Component {
     render() {
       const {
         attributes: {
-          radioControl,
           selectControl,
           imgOpacity,
           newTab,
@@ -38,18 +36,6 @@ export default class Inspector extends Component {
 
       return (
         <InspectorControls>
-            <PanelBody>
-                <RadioControl
-                    label={ __( "Option Control" ) }
-                    selected={ radioControl }
-                    options={[
-                    { label: "Primary Option", value: "1" },
-                    { label: "Secondary Option", value: "2" },
-                    ]}
-                    onChange={radioControl => setAttributes({ radioControl })}
-                />
-            </PanelBody>
-            
             <PanelBody>
                 <ToggleControl
                     label={ __( "Open in New Tab?" ) }
@@ -78,10 +64,10 @@ export default class Inspector extends Component {
                     label={ __( "Select Control" ) }
                     value={ selectControl }
                     options={[
-                    { value: "Primary", label: __( "Primary Option" ) },
-                    { value: "Secondary", label: __( "Secondary Option" ) },
+                        { value: "Primary", label: __( "Primary Option" ) },
+                        { value: "Secondary", label: __( "Secondary Option" ) },
                     ]}
-                    onChange={selectControl => setAttributes({ selectControl })}
+                    onChange={ selectControl => setAttributes({ selectControl }) }
                 />
         </PanelBody> 
         </InspectorControls>
