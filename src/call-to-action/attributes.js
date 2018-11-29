@@ -24,20 +24,16 @@ const attributes = {
     align: {
         type: 'string',
     },
-    radioControl: {
-        type: "string",
-        default: "1",
-    },
     selectControl: {
         type: "string",
-        default: "A",
-    },
-    imgURL: {
-        type: 'string',
-        default: null,
+        default: "Primary",
     },
     imgID: {
         type: 'number',
+        default: null,
+    },
+    imgURL: {
+        type: 'string',
         default: null,
     },
     imgOpacity: {
