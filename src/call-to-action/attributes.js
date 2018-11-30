@@ -43,7 +43,11 @@ const attributes = {
     newTab: {
         type: 'boolean',
         default: true,
-    }
+    },
+    colorPaletteControl: {
+        type: "string",
+        default: "#000000"
+    },
 };
 
 export default attributes;
