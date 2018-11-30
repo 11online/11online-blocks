@@ -6,6 +6,7 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
   InspectorControls,
+  PanelColorSettings,
 } = wp.editor;
 const {
   PanelBody,
@@ -28,6 +29,7 @@ export default class Inspector extends Component {
           selectControl,
           imgOpacity,
           newTab,
+          colorPaletteControl,
         },
         setAttributes
       } = this.props;
@@ -37,8 +39,21 @@ export default class Inspector extends Component {
       return (
         <InspectorControls>
             <PanelBody>
+                <SelectControl
+                    label={ __("Theme Option Control") }
+                    help={ __("Select Theme Option") }
+                    value={ selectControl }
+                    options={[
+                        { value: "Primary", label: __("Primary Option") },
+                        { value: "Secondary", label: __("Secondary Option") },
+                    ]}
+                    onChange={ selectControl => setAttributes({ selectControl }) }
+                />
+            </PanelBody>
+
+            <PanelBody>
                 <ToggleControl
-                    label={ __( "Open Link in New Tab?" ) }
+                    label={ __("Open Link in New Tab?") }
                     help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
                     checked={ newTab }
                     onChange={ toggleNewTab }
@@ -59,17 +74,20 @@ export default class Inspector extends Component {
                 />
             </PanelBody>
 
-            <PanelBody>
-                <SelectControl
-                    label={ __( "Select Control" ) }
-                    value={ selectControl }
-                    options={[
-                        { value: "Primary", label: __( "Primary Option" ) },
-                        { value: "Secondary", label: __( "Secondary Option" ) },
-                    ]}
-                    onChange={ selectControl => setAttributes({ selectControl }) }
-                />
-        </PanelBody> 
+            <PanelColorSettings
+                title={__("Font Color Settings")}
+                initialOpen={ false }
+                colorSettings={[
+                    {
+                        label: __("Font Color"),
+                        help: __("Select Font Color"),
+                        value: colorPaletteControl,
+                        onChange: colorPaletteControl => {
+                            setAttributes({ colorPaletteControl });
+                        },
+                    }
+                ]}
+            />
         </InspectorControls>
       );
     }
