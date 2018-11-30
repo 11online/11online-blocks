@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import Inspector from "./inspector";
 import Controls from "./controls";
 import attributes from "./attributes";
-import icons from './icons';
+// import icons from './icons';
 
 /**
  * Internal block libraries
@@ -24,8 +24,6 @@ const {
     URLInput,
 } = wp.editor;
 const {
-    Button,
-    IconButton,
     Tooltip,
     TextControl,
 } = wp.components;
@@ -45,8 +43,7 @@ function getSettings(attributes) {
       );
     }
     return settings;
-  }
-  
+  } 
 
 /**
  * Register action block
@@ -92,6 +89,7 @@ registerBlockType(
                     imgID, 
                     imgURL, 
                     imgOpacity,
+                    colorPaletteControl,
                  },
                 attributes,
                 className,
@@ -114,14 +112,14 @@ registerBlockType(
                             tagName="h3"
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
-                            style={ { textAlign: textAlignment } }
+                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
                             onChange={ headline => setAttributes( { headline } ) }                           
                         />
                         <RichText
                             tagName="p"
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
-                            style={ { textAlign: textAlignment } }
+                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
                             onChange={ message => setAttributes( { message } ) }                 		
                         />
                         { isSelected ? (
@@ -150,7 +148,7 @@ registerBlockType(
                             </form>
                         </Fragment>
                     ) : (
-                        <p>
+                        <p style={ { textAlign: textAlignment } }>
                             <Tooltip text={ __( 'Edit Link' ) }>
                                 <a href={ url }>
                                     { text || __( 'Edit link' ) }
@@ -179,19 +177,25 @@ registerBlockType(
                     textAlignment,
                     imgID,
                     imgURL, 
-                    imgOpacity
+                    imgOpacity,
+                    colorPaletteControl,
                 } = props.attributes;
 
             return (  
                 <div className="call-to-action">
                     <div class="wrap" style={ { textAlign: textAlignment } }>
+                        {/* <h3 style={ { color: colorPaletteControl } }>
+                            { headline } 
+                        </h3> */}
                         <RichText.Content 
                             tagName="h3" 
-                            value={ headline } 
+                            value={ headline }
+                            style={ { color: colorPaletteControl } } 
                         />
                         <RichText.Content 
                             tagName="p" 
-                            value={ message } 
+                            value={ message }
+                            style={ { color: colorPaletteControl } }
                         /> 
                         <p>
                             <a 
