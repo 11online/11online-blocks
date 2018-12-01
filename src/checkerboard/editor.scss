@@ -5,6 +5,18 @@
  * which makes it higher in priority.
  */
 
-.eleven-online-checkerboard  {
-  
+.checkerboard-image  {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	.components-button {
+		background: white;
+		color: black;
+		border: 1px solid black;
+		&:hover {
+			background: black;
+			color: white;
+			border: 1px solid white;
+		}
+	}
 }

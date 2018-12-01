@@ -19,7 +19,7 @@ registerBlockType( 'eleven-online/block-checkerboard', {
 		__( 'Eleven Online' ),
 	],
 	attributes: {
-		align: {
+		checkerboardAlign: {
 			type: 'string',
 			default: 'right'
 		},
@@ -27,51 +27,50 @@ registerBlockType( 'eleven-online/block-checkerboard', {
 			type: 'string'
 		}
 	},
+	supports: {
+	    align: true
+	},
 
 	edit: function( {attributes, setAttributes, className, isSelected} ) {
-		const { align, backgroundImage } = attributes;
+		const { checkerboardAlign, backgroundImage } = attributes;
 		
 		const controls = isSelected ? 
 			<InspectorControls>
 				<SelectControl
 					label={ __( 'Left or Right' ) }
-					value={ align }
+					value={ checkerboardAlign }
 					options={[
-						{ value: 'left', label: 'Left'},
-						{ value: 'right', label: 'Right'}
+						{ value: 'right', label: 'Image First'},
+						{ value: 'left', label: 'Image Second'}
 					]}
-					onChange={ (value) => setAttributes( { align: value } ) }
+					onChange={ (value) => setAttributes( { checkerboardAlign: value } ) }
 				/>
 			</InspectorControls>
 			: null;
 
+		const mediaClassName = backgroundImage ? 'checkerboard-image' : 'checkerboard-image dashicons dashicons-format-image';
+
 		const media = isSelected ?
-			<MediaUpload
-				onSelect={media => setAttributes({backgroundImage: media.url})}
-				render={ ( { open } ) => (
-					<Button onClick={ open }>
-						Open Media Library
-					</Button>
-				) }
-			/>
-			: <div className='checkerboard-image' style={{background : 'url(' + backgroundImage + ')'}}></div>;
+			<div className='checkerboard-image' style={{background : 'url(' + backgroundImage + ')'}}>
+				<MediaUpload
+					onSelect={media => setAttributes({backgroundImage: media.url})}
+					render={ ( { open } ) => (
+						<p>
+							<Button onClick={ open }>
+								Open Media Library
+							</Button>
+						</p>
+					) }
+				/>
+			</div>
+			: <div className={mediaClassName} style={{background : 'url(' + backgroundImage + ')'}}></div>;
 
 		return (
 			<Fragment>
 				{controls}
-				<div className={'checkerboard-container ' + align + ' ' + className}>
-					{ align === 'right' 
-						?
-							[
-								media,
-								<div className='checkerboard-text'><InnerBlocks/></div>
-							]
-						:
-							[
-								<div className='checkerboard-text'><InnerBlocks/></div>,
-								media
-							]
-					}
+				<div className={'checkerboard-container ' + checkerboardAlign + ' ' + className}>
+					{media}
+					<div className='checkerboard-text'><InnerBlocks/></div>
 				</div>
 			</Fragment>
 
@@ -79,21 +78,11 @@ registerBlockType( 'eleven-online/block-checkerboard', {
 	},
 
 	save: function({attributes, className}) {
-		const { align, backgroundImage } = attributes;
+		const { checkerboardAlign, backgroundImage } = attributes;
 		return (
-			<div className={'checkerboard-container ' + align + ' ' + className}>
-				{ align === 'right' 
-					?
-						[
-							<div className='checkerboard-image' style={{background : 'url(' + backgroundImage + ')'}}></div>,
-							<div className='checkerboard-text'><InnerBlocks.Content /></div>
-						]
-					:
-						[
-							<div className='checkerboard-text'><InnerBlocks.Content /></div>,
-							<div className='checkerboard-image' style={{background : 'url(' + backgroundImage + ')'}}></div>
-						]
-				}
+			<div className={'checkerboard-container ' + checkerboardAlign + ' ' + className}>
+				<div className='checkerboard-image' style={{background : 'url(' + backgroundImage + ')'}}></div>
+				<div className='checkerboard-text'><InnerBlocks.Content /></div>
 			</div>
 		);
 	},
