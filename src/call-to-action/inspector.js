@@ -26,10 +26,10 @@ export default class Inspector extends Component {
     render() {
       const {
         attributes: {
-          selectControl,
-          imgOpacity,
-          newTab,
-          colorPaletteControl,
+            styleClass,
+            imgOpacity,
+            newTab,
+            colorPaletteControl,
         },
         setAttributes
       } = this.props;
@@ -40,14 +40,14 @@ export default class Inspector extends Component {
         <InspectorControls>
             <PanelBody>
                 <SelectControl
-                    label={ __("Theme Option Control") }
-                    help={ __("Select Theme Option") }
-                    value={ selectControl }
+                    label={ __("Style Option Control") }
+                    help={ __("Select Style Option") }
+                    value={ styleClass }
                     options={[
                         { value: "Primary", label: __("Primary Option") },
                         { value: "Secondary", label: __("Secondary Option") },
                     ]}
-                    onChange={ selectControl => setAttributes({ selectControl }) }
+                    onChange={ styleClass => setAttributes({ styleClass }) }
                 />
             </PanelBody>
 
