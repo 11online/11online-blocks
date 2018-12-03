@@ -90,6 +90,7 @@ registerBlockType(
                     imgURL, 
                     imgOpacity,
                     colorPaletteControl,
+                    styleClass,
                  },
                 attributes,
                 className,
@@ -98,6 +99,7 @@ registerBlockType(
               } = props;
             const classes = classnames(
                 className,
+                styleClass,
                 'call-to-action'
             );
             
@@ -179,14 +181,13 @@ registerBlockType(
                     imgURL, 
                     imgOpacity,
                     colorPaletteControl,
+                    newTab,
+                    // styleClass,
                 } = props.attributes;
 
             return (  
-                <div className="call-to-action">
+                <div className="call-to-action styleClass">
                     <div class="wrap" style={ { textAlign: textAlignment } }>
-                        {/* <h3 style={ { color: colorPaletteControl } }>
-                            { headline } 
-                        </h3> */}
                         <RichText.Content 
                             tagName="h3" 
                             value={ headline }
@@ -201,6 +202,7 @@ registerBlockType(
                             <a 
                                 className="button" 
                                 href={ url }
+                                { ...newTab ? {target: '_blank'} : null }
                             >
                                 { text }
                             </a>
