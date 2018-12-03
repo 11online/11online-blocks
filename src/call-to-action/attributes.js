@@ -24,7 +24,7 @@ const attributes = {
     align: {
         type: 'string',
     },
-    selectControl: {
+    styleClass: {
         type: "string",
         default: "Primary",
     },
