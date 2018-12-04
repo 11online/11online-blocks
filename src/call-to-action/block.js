@@ -7,6 +7,7 @@ import './editor.scss';
 import classnames from 'classnames';
 import Inspector from "./inspector";
 import Controls from "./controls";
+import Edit from './edit';
 import attributes from "./attributes";
 // import icons from './icons';
 
@@ -79,151 +80,9 @@ registerBlockType(
         attributes,
         // Determines what is displayed in the editor
         edit: props => {
-            // Deconstructing needed properties and methods from props
-            const {
-                attributes: { headline, 
-                    message, 
-                    text, 
-                    url, 
-                    textAlignment, 
-                    imgID, 
-                    imgURL, 
-                    imgOpacity,
-                    colorPaletteControl,
-                    styleClass,
-                 },
-                attributes,
-                className,
-                isSelected,
-                setAttributes
-              } = props;
-            const classes = classnames(
-                className,
-                styleClass,
-                'call-to-action'
-            );
-            
-            let settings = getSettings( attributes );
-
-            const ButtonControls = (
-                <div className='button-box' style={{padding: '10px'}}>
-                    <Fragment>
-                        <Tooltip text={ __( 'Add or Edit Button Text' ) }>
-                            <label>{ __( 'Button Text' ) }</label>
-                        </Tooltip>
-                        <TextControl
-                            value={ text }
-                            onChange={ text => setAttributes( { text } ) }
-                        />
-                    </Fragment>
-
-
-
-                    <TextControl
-                        label={ __( "Button Text:" ) }
-                        value={ text }
-                        onChange={ value => { setAttributes( { text: value } ) } }
-                        placeholder={ __("Button Text") }
-                    />
-                    <TextControl
-                        label={ __( "Link:" ) }
-                        value={link}
-                        onChange={ value => { setAttributes( { link: value } ) } }
-                        placeholder={ __("https://example.com") }
-                    />
-                    <ToggleControl
-                        label={ __("Open in New Tab?") }
-                        checked={ !! newTab }
-                        onChange={ value => { setAttributes( { newTab: !newTab } ) } }
-                    />
-                </div>
-            )
-
-            const renderButton = () => {
-                return (
-                    <div style={ { width: '100%', float: align === 'center' ? 'none' : align } }>
-                        <Dropdown
-                            renderToggle={ ( { isOpen, onToggle } ) => (
-                                <a className={classes}  onClick={ onToggle }>
-                                    { text }
-                                </a>
-                            ) }
-                            renderContent={ () => ButtonControls }
-                        />
-                    </div>
-                )
-            }
-
+            const { setAttributes } = props;
             return (
-                <div className={ classes } >
-                    <Fragment>
-                        <Inspector {...{ setAttributes, ...props }} />
-                        <Controls {...{ setAttributes, ...props }} />
-                        <RichText
-                            tagName="h3"
-                            placeholder={ __( 'Add your custom heading' ) }
-                            value={ headline }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
-                            onChange={ headline => setAttributes( { headline } ) }                           
-                        />
-                        <RichText
-                            tagName="p"
-                            placeholder={ __( 'Add your custom message' ) }
-                            value={ message }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
-                            onChange={ message => setAttributes( { message } ) }                 		
-                        />
-                        <div>
-                            <div>
-                                <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                    {renderButton()}
-                                </Tooltip>
-                            </div>
-                        </div>
-                        { isSelected ? (
-                        <Fragment>
-                            <Tooltip text={ __( 'Add or Edit Link Text' ) }>
-                                <label>{ __( 'Link Text' ) }</label>
-                            </Tooltip>
-                            <TextControl
-                                id="link-text-input-field"
-                                value={ text }
-                                onChange={ text => setAttributes( { text } ) }
-                            />
-                            <form
-                                className="blocks-format-toolbar__link-modal-line"
-                                onSubmit={ event => event.preventDefault() }
-                            >
-                                <Tooltip text={ __( 'Add or Edit Link URL' ) }>
-                                    {/* { icons.url } */}
-                                    <label>{ __( ' Link URL' ) }</label>
-                                </Tooltip>
-                                <URLInput
-                                    className="url"
-                                    value={ url }
-                                    onChange={ url => setAttributes( { url } ) }
-                                />
-                            </form>
-                        </Fragment>
-                    ) : (
-                        <p style={ { textAlign: textAlignment } }>
-                            <Tooltip text={ __( 'Edit Link' ) }>
-                                <a href={ url }>
-                                    { text || __( 'Edit link' ) }
-                                </a>
-                            </Tooltip>
-                        </p>
-                    )}        
-                    </Fragment> 
-                    { ( imgID ) 
-                        ?
-                        <div 
-                            className="img-background"
-                            style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
-                        ></div>
-                        : ''
-                    }
-                </div>
+                <Edit {...{ setAttributes, ...props }} />
             );
         },
         // Determines what is displayed on the frontend
