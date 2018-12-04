@@ -1,21 +1,8 @@
-.image-wrapper {
-    position: relative;
-}
+// stylyihg rules for the floating content modal
+// .my-popover-content {
+    
+// }
 
-button {
-    &.remove-image {
-        background-color: red;
-        border: 2px red solid;
-        padding: 5px 5px 0;
-        opacity: .9;
-
-        svg {
-            background: red;
-            fill: white;
-        }
-        
-        &:hover {
-            opacity: 1;
-        }
-    }
+.my-popover-content > .button-box {
+    padding: '10px';
 }
