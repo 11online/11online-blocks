@@ -1,6 +1,11 @@
 // mark our disallowed blocks
 var disallowedBlocks = [
+<<<<<<< HEAD
 	//'core/paragraph',
+=======
+	// TODO need to test in the future if we can remove paragraph, for some reason, this causes issues now
+	// 'core/paragraph',
+>>>>>>> 831470673caae19ac04e754a8ddfc9ebf0491d48
 	'core/button'
 ];
 
@@ -11,7 +16,7 @@ function checkIfBlocksAreLoadedAndRemoveThem() {
 	// go through the blocks we have, if we find a match, set our blocks loaded to true and remove them
 	wp.blocks.getBlockTypes().forEach( function( blockType ) {
 		// check if core blocks are loaded
-		if(!blocksLoaded && blockType.name.indexOf('core') > -1) {
+		if(!blocksLoaded && typeof blockType.name !== 'undefined' && blockType.name.indexOf('core') > -1) {
 			blocksLoaded = true;
 		}
 		// remove our blocks
