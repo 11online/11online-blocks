@@ -11,12 +11,14 @@ const attributes = {
         type: 'string',
         source: 'text',
         selector: 'a',
+        default: 'Click here',
     },
     url: {
         type: 'string',
         source: 'attribute',
         attribute: 'href',
-        selector: 'a',               
+        selector: 'a',
+        default: 'http://'              
     },
     textAlignment: {
         type: 'string',
