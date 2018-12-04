@@ -5,7 +5,6 @@ import './style.scss';
 import './editor.scss';
 
 import classnames from 'classnames';
-//import attributes from "./attributes";
 import Inspector from "./inspector";
 import Controls from "./controls";
 
@@ -16,11 +15,11 @@ const { __ } = wp.i18n;
 const { Component } = wp.element; 
 const { 
     RichText, 
-    URLInput,
 } = wp.editor;
 const {
     Tooltip,
     TextControl,
+    Button,
     Dropdown,
     ToggleControl,
 } = wp.components;
@@ -51,7 +50,6 @@ export default class Edit extends Component {
                 newTab,
                 styleClass,
             },
-                attributes,
                 className,
                 setAttributes
             } = this.props;
@@ -68,52 +66,43 @@ export default class Edit extends Component {
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
         const ButtonControls = (
-			<div className='button-box'>
-                <Fragment>
-                    <Tooltip text={ __( 'Add or Edit Button Text' ) }>
-                        <label>{ __( 'Button Text' ) }</label>
-                    </Tooltip>
-                    <TextControl
-                        value={ text }
-                        onChange={ text => setAttributes( { text } ) }
-                    />
-                    <Tooltip text={ __( 'Add or Edit Link URL' ) }>
-                        <label>{ __( ' Link URL' ) }</label>
-                    </Tooltip>
-                    <URLInput
-                        className="url"
-                        value={ url }
-                        onChange={ url => setAttributes( { url } ) }
-                    />
-                    <ToggleControl
-                        label={ __("Open Link in New Tab?") }
-                        help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
-                        checked={ newTab }
-                        onChange={ toggleNewTab }
-                    />
-                </Fragment>
-			</div>
+            <Fragment>
+                <TextControl
+                    label={ __( 'Button Text' ) }
+                    value={ text }
+                    onChange={ text => setAttributes( { text } ) }
+                />
+                <TextControl
+                    label={ __( 'Link URL' ) }
+                    value={ url }
+                    onChange={ url => setAttributes( { url } ) }
+                />
+                <ToggleControl
+                    label={ __("Open Link in New Tab?") }
+                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
+                    checked={ newTab }
+                    onChange={ toggleNewTab }
+                />
+            </Fragment>
 		);
 
         const renderButton = () => (
             <div style={ { width: '100%', float: textAlignment === 'center' ? 'none' : textAlignment } }>
                 <Dropdown
-                    // className="my-container-class-name"
+                    className="my-popover-container"
                     contentClassName="my-popover-content"
-                    position="top right"
+                    // position="top left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
-                        <p style={ { textAlign: textAlignment } }>
-                            <Tooltip text={ __( 'Edit Link' ) }>
-                                <a 
-                                    className={ classes2 } 
-                                    href={ url }
-                                    onClick={ onToggle }
-                                    aria-expanded={ isOpen }
-                                >
-                                    { text }
-                                </a>
-                            </Tooltip>
-                        </p>  
+                        <div style={ { textAlign: textAlignment, color: colorPaletteControl } }>
+                            <a 
+                                className="button" 
+                                href="#0"
+                                onClick={ onToggle } 
+                                aria-expanded={ isOpen }
+                            >
+                                { text }
+                            </a>
+                        </div>       
                     ) }
                     renderContent={ () => ButtonControls }
                 />
