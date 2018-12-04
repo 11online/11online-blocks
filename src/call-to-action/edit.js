@@ -53,20 +53,15 @@ export default class Edit extends Component {
                 className,
                 setAttributes
             } = this.props;
-        const classes1 = classnames(
+        const classes = classnames(
             className,
             styleClass,
             'call-to-action'
         );
-        const classes2 = classnames(
-            className,
-            styleClass,
-            'button'
-        );
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
         const ButtonControls = (
-            <Fragment>
+            <div className='button-box'>
                 <TextControl
                     label={ __( 'Button Text' ) }
                     value={ text }
@@ -83,15 +78,13 @@ export default class Edit extends Component {
                     checked={ newTab }
                     onChange={ toggleNewTab }
                 />
-            </Fragment>
+            </div>
 		);
 
         const renderButton = () => (
             <div style={ { width: '100%', float: textAlignment === 'center' ? 'none' : textAlignment } }>
                 <Dropdown
-                    className="my-popover-container"
-                    contentClassName="my-popover-content"
-                    // position="top left"
+                    position="bottom left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
                         <div style={ { textAlign: textAlignment, color: colorPaletteControl } }>
                             <a 
@@ -110,7 +103,7 @@ export default class Edit extends Component {
         );
 
         return (
-            <div className={ classes1 }>
+            <div className={ classes }>
                 <Fragment>
                     <Inspector {...{ setAttributes, ...this.props }} />
                     <Controls {...{ setAttributes, ...this.props }} />
@@ -144,6 +137,5 @@ export default class Edit extends Component {
                 }
             </div>
         );
-
     }
 }
