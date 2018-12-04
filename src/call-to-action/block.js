@@ -105,6 +105,55 @@ registerBlockType(
             
             let settings = getSettings( attributes );
 
+            const ButtonControls = (
+                <div className='button-box' style={{padding: '10px'}}>
+                    <Fragment>
+                        <Tooltip text={ __( 'Add or Edit Button Text' ) }>
+                            <label>{ __( 'Button Text' ) }</label>
+                        </Tooltip>
+                        <TextControl
+                            value={ text }
+                            onChange={ text => setAttributes( { text } ) }
+                        />
+                    </Fragment>
+
+
+
+                    <TextControl
+                        label={ __( "Button Text:" ) }
+                        value={ text }
+                        onChange={ value => { setAttributes( { text: value } ) } }
+                        placeholder={ __("Button Text") }
+                    />
+                    <TextControl
+                        label={ __( "Link:" ) }
+                        value={link}
+                        onChange={ value => { setAttributes( { link: value } ) } }
+                        placeholder={ __("https://example.com") }
+                    />
+                    <ToggleControl
+                        label={ __("Open in New Tab?") }
+                        checked={ !! newTab }
+                        onChange={ value => { setAttributes( { newTab: !newTab } ) } }
+                    />
+                </div>
+            )
+
+            const renderButton = () => {
+                return (
+                    <div style={ { width: '100%', float: align === 'center' ? 'none' : align } }>
+                        <Dropdown
+                            renderToggle={ ( { isOpen, onToggle } ) => (
+                                <a className={classes}  onClick={ onToggle }>
+                                    { text }
+                                </a>
+                            ) }
+                            renderContent={ () => ButtonControls }
+                        />
+                    </div>
+                )
+            }
+
             return (
                 <div className={ classes } >
                     <Fragment>
@@ -124,6 +173,13 @@ registerBlockType(
                             style={ { textAlign: textAlignment, color: colorPaletteControl } }
                             onChange={ message => setAttributes( { message } ) }                 		
                         />
+                        <div>
+                            <div>
+                                <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                                    {renderButton()}
+                                </Tooltip>
+                            </div>
+                        </div>
                         { isSelected ? (
                         <Fragment>
                             <Tooltip text={ __( 'Add or Edit Link Text' ) }>
