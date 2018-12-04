@@ -13,13 +13,10 @@ import Controls from "./controls";
  */
 const { __ } = wp.i18n;
 const { Component } = wp.element; 
-const { 
-    RichText, 
-} = wp.editor;
+const { RichText } = wp.editor;
 const {
     Tooltip,
     TextControl,
-    Button,
     Dropdown,
     ToggleControl,
 } = wp.components;
@@ -82,7 +79,7 @@ export default class Edit extends Component {
 		);
 
         const renderButton = () => (
-            <div style={ { width: '100%', float: textAlignment === 'center' ? 'none' : textAlignment } }>
+            <div style={ { width: '100%' } }>
                 <Dropdown
                     position="bottom left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
