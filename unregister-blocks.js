@@ -1,11 +1,6 @@
 // mark our disallowed blocks
 var disallowedBlocks = [
-<<<<<<< HEAD
 	//'core/paragraph',
-=======
-	// TODO need to test in the future if we can remove paragraph, for some reason, this causes issues now
-	// 'core/paragraph',
->>>>>>> 831470673caae19ac04e754a8ddfc9ebf0491d48
 	'core/button'
 ];
 
