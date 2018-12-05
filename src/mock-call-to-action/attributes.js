@@ -11,12 +11,14 @@ const attributes = {
         type: 'string',
         source: 'text',
         selector: 'a',
+        default: 'Click here',
     },
     url: {
         type: 'string',
         source: 'attribute',
         attribute: 'href',
-        selector: 'a',               
+        selector: 'a',
+        default: 'http://'              
     },
     textAlignment: {
         type: 'string',
@@ -24,38 +26,29 @@ const attributes = {
     align: {
         type: 'string',
     },
-    highContrast: {
-        type: 'boolean',
-        default: false,
-    },
-    radioControl: {
+    styleClass: {
         type: "string",
-        default: "1",
-    },
-    toggleControl: {
-        type: "boolean",
-    },
-    selectControl: {
-        type: "string",
-        default: "A",
-    },
-    imgURL: {
-        type: 'string',
-        source: 'attribute',
-        attribute: 'src',
-        selector: 'img',
-        default: null,
+        default: "Primary",
     },
     imgID: {
         type: 'number',
         default: null,
     },
-    imgAlt: {
+    imgURL: {
         type: 'string',
-        source: 'attribute',
-        attribute: 'alt',
-        selector: 'img',
-        default: null, 
+        default: null,
+    },
+    imgOpacity: {
+        type: 'number',
+        default: "10", 
+    },
+    newTab: {
+        type: 'boolean',
+        default: true,
+    },
+    colorPaletteControl: {
+        type: "string",
+        default: "#000000"
     },
 };
 

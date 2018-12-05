@@ -34,30 +34,22 @@ export default class Controls extends Component {
         const {
             attributes: { 
                 textAlignment, 
-                highContrast,
                 imgID, 
-                imgURL, 
-                imgAlt,
              },
-            className,
             setAttributes
           } = this.props;
-        const classes = classnames(
-            className,
-            { 'high-contrast': highContrast },
-        );
+
         const onSelectImage = img => {
             setAttributes( {
                 imgID: img.id,
                 imgURL: img.url,
-                imgAlt: img.alt,
             } );
         };
+
         const onRemoveImage = () => {
             setAttributes({
                 imgID: null,
                 imgURL: null,
-                imgAlt: null,
             } );
         };
 
@@ -68,33 +60,20 @@ export default class Controls extends Component {
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
                 <Toolbar>
-                    <Tooltip text={ __( 'High Contrast' ) }>
-                        <Button
-                            className={ classnames(
-                                'components-icon-button',
-                                'components-toolbar__control',
-                                { 'is-active': highContrast },
-                            ) }
-                            onClick={ () => setAttributes( { highContrast: ! highContrast } ) }
-                        >
-                            { icons.contrast }
-                        </Button>
-                    </Tooltip>
-                    {! imgID ? (
+                    { ! imgID ? (
                         <MediaUploadCheck>
                             <MediaUpload
                                 onSelect={ onSelectImage }
-                                //onSelect={ ( media ) => console.log( 'selected ' + media.length ) }
                                 type="image"
                                 value={ imgID }
                                 render={ ( { open } ) => (
-                                    <Tooltip text={ __( 'Upload Image' ) }>
+                                    <Tooltip text={ __( 'Click to Upload Image' ) }>
                                         <Button
                                             className={ "components-button button button-large" }
                                             onClick={ open }
                                         >
-                                            { icons.upload }
-                                            {/* { __( ' Upload Image' ) } */}
+                                            {/* { icons.upload } */}
+                                            { __( 'Upload Image' ) }
                                         </Button>
                                     </Tooltip>
                                 ) }
@@ -102,16 +81,13 @@ export default class Controls extends Component {
                             </MediaUpload>
                         </MediaUploadCheck>
                     ) : (
-                        <Tooltip text={ __( 'Remove Image' ) }>
+                        <Tooltip text={ __( 'Click to Remove Image' ) }>
                             <Button
-                                className={ classnames(
-                                    'components-icon-button',
-                                    'components-toolbar__control',
-                                    'remove-image',
-                                ) }
+                                className={ "components-button button button-large" }
                                 onClick={ onRemoveImage }
                             >
-                                { icons.remove }
+                                {/* { icons.remove } */}
+                                { __( 'Remove Image' ) }
                             </Button>
                         </Tooltip>
                     ) }  

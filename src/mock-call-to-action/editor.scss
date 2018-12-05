@@ -1,21 +1,10 @@
-.image-wrapper {
-    position: relative;
-}
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
 
-button {
-    &.remove-image {
-        background-color: red;
-        border: 2px red solid;
-        padding: 5px 5px 0;
-        opacity: .9;
-
-        svg {
-            background: red;
-            fill: white;
-        }
-        
-        &:hover {
-            opacity: 1;
-        }
-    }
+.button-box {
+    padding: 10px;
 }

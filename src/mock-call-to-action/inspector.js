@@ -6,15 +6,13 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
   InspectorControls,
+  PanelColorSettings,
 } = wp.editor;
-
 const {
   PanelBody,
-  PanelRow,
-  RadioControl,
-  FormToggle,
   ToggleControl,
-  SelectControl
+  SelectControl,
+  RangeControl,
 } = wp.components;
 
 /**
@@ -28,60 +26,68 @@ export default class Inspector extends Component {
     render() {
       const {
         attributes: {
-          radioControl,
-          highContrast,
-          toggleControl,
-          selectControl
+            styleClass,
+            imgOpacity,
+            newTab,
+            colorPaletteControl,
         },
         setAttributes
       } = this.props;
-      const toggleHighContrast = () => setAttributes( { highContrast: ! highContrast } );
+
+      const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
       return (
         <InspectorControls>
             <PanelBody>
-                <RadioControl
-                    label={ __( "Option Control" ) }
-                    selected={ radioControl }
+                <SelectControl
+                    label={ __("Style Option Control") }
+                    help={ __("Select Style Option") }
+                    value={ styleClass }
                     options={[
-                    { label: "Primary Option", value: "1" },
-                    { label: "Secondary Option", value: "2" },
+                        { value: "Primary", label: __("Primary Option") },
+                        { value: "Secondary", label: __("Secondary Option") },
                     ]}
-                    onChange={radioControl => setAttributes({ radioControl })}
+                    onChange={ styleClass => setAttributes({ styleClass }) }
                 />
             </PanelBody>
-            <PanelBody title={ __( 'High Contrast' ) }>
-                    <PanelRow>
-                        <label htmlFor="high-contrast-form-toggle">
-                            { __( 'High Contrast' ) }
-                         </label>
-                        <FormToggle 
-                            id="high-contrast-form-toggle"
-                            label={ __( 'High Contrast' ) }
-                            checked={ highContrast }
-                            onChange={ toggleHighContrast }
-                        />
-                    </PanelRow>
-            </PanelBody>
+
             <PanelBody>
                 <ToggleControl
-                    label={ __( "Toggle Control" ) }
-                    checked={ toggleControl }
-                    onChange={ toggleControl => setAttributes( { toggleControl } ) }
+                    label={ __("Open Link in New Tab?") }
+                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
+                    checked={ newTab }
+                    onChange={ toggleNewTab }
                 />
             </PanelBody>
+
             <PanelBody>
-                <SelectControl
-                    label={ __( "Select Control" ) }
-                    value={ selectControl }
-                    options={[
-                    { value: "A", label: __( "Option A" ) },
-                    { value: "B", label: __( "Option B" ) },
-                    { value: "C", label: __( "Option C" ) }
-                    ]}
-                    onChange={selectControl => setAttributes({ selectControl })}
+                <RangeControl
+                    beforeIcon="arrow-left-alt2"
+                    afterIcon="arrow-right-alt2"
+                    label={ __("Background Image Opacity" ) }
+                    help={ __("Use the slider to change the background image opacity on the scale from 1 to 10") }
+                    value={ imgOpacity }
+                    onChange={ imgOpacity => setAttributes( { imgOpacity } ) }
+                    initialPosition={ 10 }
+                    min={ 1 }
+                    max={ 10 }
                 />
-        </PanelBody> 
+            </PanelBody>
+
+            <PanelColorSettings
+                title={__("Font Color Settings")}
+                initialOpen={ false }
+                colorSettings={[
+                    {
+                        label: __("Font Color"),
+                        help: __("Select Font Color"),
+                        value: colorPaletteControl,
+                        onChange: colorPaletteControl => {
+                            setAttributes({ colorPaletteControl });
+                        },
+                    }
+                ]}
+            />
         </InspectorControls>
       );
     }
