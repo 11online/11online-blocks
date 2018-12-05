@@ -32,7 +32,8 @@ export default class Save extends Component {
                 imgID,
                 imgURL, 
                 imgOpacity,
-                colorPaletteControl,
+                colorFontControl,
+                colorBackgroundControl,
                 styleClass,
                 newTab,
             }, 
@@ -49,12 +50,12 @@ export default class Save extends Component {
                     <RichText.Content 
                         tagName="h3" 
                         value={ headline }
-                        style={ { color: colorPaletteControl } } 
+                        style={ { color: colorFontControl } } 
                     />
                     <RichText.Content 
                         tagName="p" 
                         value={ message }
-                        style={ { color: colorPaletteControl } }
+                        style={ { color: colorFontControl } }
                     /> 
                     <p>
                         <a 
