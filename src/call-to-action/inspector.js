@@ -29,7 +29,8 @@ export default class Inspector extends Component {
             styleClass,
             imgOpacity,
             newTab,
-            colorPaletteControl,
+            colorFontControl,
+            colorBackgroundControl,
         },
         setAttributes
       } = this.props;
@@ -53,10 +54,10 @@ export default class Inspector extends Component {
 
             <PanelBody>
                 <ToggleControl
-                    label={ __("Open Link in New Tab?") }
-                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
-                    checked={ newTab }
-                    onChange={ toggleNewTab }
+                    label={ __("Use Background Image?") }
+                    help={ __( bgrImg ? 'Use Background Image' : 'Use Background Color' ) }
+                    checked={ bgrImg }
+                    onChange={ toggleBgrImg }
                 />
             </PanelBody>
 
@@ -81,9 +82,24 @@ export default class Inspector extends Component {
                     {
                         label: __("Font Color"),
                         help: __("Select Font Color"),
-                        value: colorPaletteControl,
-                        onChange: colorPaletteControl => {
-                            setAttributes({ colorPaletteControl });
+                        value: colorFontControl,
+                        onChange: colorFontControl => {
+                            setAttributes({ colorFontControl });
+                        },
+                    }
+                ]}
+            />
+
+            <PanelColorSettings
+                title={__("Background Color Settings")}
+                initialOpen={ false }
+                colorSettings={[
+                    {
+                        label: __("Background Color"),
+                        help: __("Select Background Color"),
+                        value: colorBackgroundControl,
+                        onChange: colorBackgroundControl => {
+                            setAttributes({ colorBackgroundControl });
                         },
                     }
                 ]}
