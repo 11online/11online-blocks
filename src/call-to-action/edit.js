@@ -43,7 +43,8 @@ export default class Edit extends Component {
                 imgID, 
                 imgURL, 
                 imgOpacity,
-                colorPaletteControl,
+                colorFontControl,
+                colorBackgroundControl,
                 newTab,
                 styleClass,
             },
@@ -83,7 +84,7 @@ export default class Edit extends Component {
                 <Dropdown
                     //position="bottom left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
-                        <div style={ { textAlign: textAlignment, color: colorPaletteControl } }>
+                        <div style={ { textAlign: textAlignment, color: colorFontControl } }>
                             <a 
                                 className="button" 
                                 href="#0"
@@ -109,14 +110,14 @@ export default class Edit extends Component {
                             tagName="h3"
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            style={ { textAlign: textAlignment, color: colorFontControl } }
                             onChange={ headline => setAttributes( { headline } ) }                           
                         />
                         <RichText
                             tagName="p"
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            style={ { textAlign: textAlignment, color: colorFontControl } }
                             onChange={ message => setAttributes( { message } ) }                 		
                         />
                         <Fragment>
