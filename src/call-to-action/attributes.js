@@ -46,9 +46,13 @@ const attributes = {
         type: 'boolean',
         default: true,
     },
-    colorPaletteControl: {
+    colorFontControl: {
         type: "string",
         default: "#000000"
+    },
+    colorBackgroundControl: {
+        type: "string",
+        default: "#FFFFFF"
     },
 };
 
