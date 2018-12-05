@@ -33,7 +33,7 @@ registerBlockType(
         // add support for the block alignment as a whole
         supports: {
             //align: true,
-            align: [ 'left', 'center', 'right', 'wide' ],
+            align: [ 'center', 'wide', 'full' ],
         },
         attributes,
         // Determines what is displayed in the editor
