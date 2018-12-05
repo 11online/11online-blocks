@@ -81,7 +81,7 @@ export default class Edit extends Component {
         const renderButton = () => (
             <div style={ { width: '100%' } }>
                 <Dropdown
-                    position="bottom left"
+                    //position="bottom left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
                         <div style={ { textAlign: textAlignment, color: colorPaletteControl } }>
                             <a 
@@ -101,29 +101,31 @@ export default class Edit extends Component {
 
         return (
             <div className={ classes }>
-                <Fragment>
-                    <Inspector {...{ setAttributes, ...this.props }} />
-                    <Controls {...{ setAttributes, ...this.props }} />
-                    <RichText
-                        tagName="h3"
-                        placeholder={ __( 'Add your custom heading' ) }
-                        value={ headline }
-                        style={ { textAlign: textAlignment, color: colorPaletteControl } }
-                        onChange={ headline => setAttributes( { headline } ) }                           
-                    />
-                    <RichText
-                        tagName="p"
-                        placeholder={ __( 'Add your custom message' ) }
-                        value={ message }
-                        style={ { textAlign: textAlignment, color: colorPaletteControl } }
-                        onChange={ message => setAttributes( { message } ) }                 		
-                    />
+                <div className="wrap">
                     <Fragment>
-                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                            {renderButton()}
-                        </Tooltip>
+                        <Inspector {...{ setAttributes, ...this.props }} />
+                        <Controls {...{ setAttributes, ...this.props }} />
+                        <RichText
+                            tagName="h3"
+                            placeholder={ __( 'Add your custom heading' ) }
+                            value={ headline }
+                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            onChange={ headline => setAttributes( { headline } ) }                           
+                        />
+                        <RichText
+                            tagName="p"
+                            placeholder={ __( 'Add your custom message' ) }
+                            value={ message }
+                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            onChange={ message => setAttributes( { message } ) }                 		
+                        />
+                        <Fragment>
+                            <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                                {renderButton()}
+                            </Tooltip>
+                        </Fragment>
                     </Fragment>
-                </Fragment>
+                </div>
                 { ( imgID ) 
                     ?
                     <div 
