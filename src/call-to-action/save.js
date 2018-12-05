@@ -45,25 +45,27 @@ export default class Save extends Component {
         );
         return (  
             <div className={ classes } style={ { textAlign: textAlignment } }>
-                <RichText.Content 
-                    tagName="h3" 
-                    value={ headline }
-                    style={ { color: colorPaletteControl } } 
-                />
-                <RichText.Content 
-                    tagName="p" 
-                    value={ message }
-                    style={ { color: colorPaletteControl } }
-                /> 
-                <p>
-                    <a 
-                        className="button" 
-                        href={ url }
-                        { ...newTab ? {target: '_blank'} : null }
-                    >
-                        { text }
-                    </a>
-                </p>             
+                <div className="wrap">
+                    <RichText.Content 
+                        tagName="h3" 
+                        value={ headline }
+                        style={ { color: colorPaletteControl } } 
+                    />
+                    <RichText.Content 
+                        tagName="p" 
+                        value={ message }
+                        style={ { color: colorPaletteControl } }
+                    /> 
+                    <p>
+                        <a 
+                            className="button" 
+                            href={ url }
+                            { ...newTab ? {target: '_blank'} : null }
+                        >
+                            { text }
+                        </a>
+                    </p> 
+                </div>            
                 { ( imgID ) 
                     ?
                     <div 
@@ -72,6 +74,7 @@ export default class Save extends Component {
                     ></div>
                     : ''
                 }
+
             </div>                     
         );
     }
