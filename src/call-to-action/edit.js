@@ -39,7 +39,8 @@ export default class Edit extends Component {
                 message, 
                 text, 
                 url, 
-                textAlignment, 
+                textAlignment,
+                bgrOption,
                 imgID, 
                 imgURL, 
                 imgOpacity,
@@ -55,6 +56,10 @@ export default class Edit extends Component {
             className,
             styleClass,
             'call-to-action'
+        );
+        const divStyle = (
+            bgrOption === 'bgrColor' &&
+            { backgroundColor: colorBackgroundControl }
         );
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
@@ -101,7 +106,7 @@ export default class Edit extends Component {
         );
 
         return (
-            <div className={ classes }>
+            <div className={ classes } style={ divStyle }>
                 <div className="wrap">
                     <Fragment>
                         <Inspector {...{ setAttributes, ...this.props }} />
@@ -127,14 +132,6 @@ export default class Edit extends Component {
                         </Fragment>
                     </Fragment>
                 </div>
-                {/* { ( imgID ) 
-                    ?
-                    <div 
-                        className="img-background"
-                        style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
-                    ></div>
-                    : ''
-                } */}
                 { imgID &&
                     <div 
                         className="img-background"
