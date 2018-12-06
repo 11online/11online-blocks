@@ -29,6 +29,7 @@ export default class Save extends Component {
                 text, 
                 url, 
                 textAlignment,
+                bgrOption,
                 imgID,
                 imgURL, 
                 imgOpacity,
@@ -44,8 +45,14 @@ export default class Save extends Component {
             styleClass,
             'call-to-action'
         );
+        const divStyle = (
+            bgrOption === 'bgrColor' ?
+            { textAlign: textAlignment, backgroundColor: colorBackgroundControl }
+            :
+            { textAlign: textAlignment }
+        );
         return (  
-            <div className={ classes } style={ { textAlign: textAlignment } }>
+            <div className={ classes } style={ divStyle }>
                 <div className="wrap">
                     <RichText.Content 
                         tagName="h3" 
