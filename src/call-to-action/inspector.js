@@ -10,7 +10,6 @@ const {
 } = wp.editor;
 const {
   PanelBody,
-  ToggleControl,
   SelectControl,
   RangeControl,
 } = wp.components;
