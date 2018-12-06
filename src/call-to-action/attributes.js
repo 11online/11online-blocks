@@ -30,6 +30,10 @@ const attributes = {
         type: "string",
         default: "Primary",
     },
+    bgrOption: {
+        type: "string",
+        default: "bgrImage",
+    },
     imgID: {
         type: 'number',
         default: null,
