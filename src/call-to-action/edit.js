@@ -127,13 +127,19 @@ export default class Edit extends Component {
                         </Fragment>
                     </Fragment>
                 </div>
-                { ( imgID ) 
+                {/* { ( imgID ) 
                     ?
                     <div 
                         className="img-background"
                         style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
                     ></div>
                     : ''
+                } */}
+                { imgID &&
+                    <div 
+                        className="img-background"
+                        style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                    ></div>
                 }
             </div>
         );
