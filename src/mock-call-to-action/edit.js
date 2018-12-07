@@ -39,11 +39,13 @@ export default class Edit extends Component {
                 message, 
                 text, 
                 url, 
-                textAlignment, 
+                textAlignment,
+                bgrOption,
                 imgID, 
                 imgURL, 
                 imgOpacity,
-                colorPaletteControl,
+                colorFontControl,
+                colorBackgroundControl,
                 newTab,
                 styleClass,
             },
@@ -54,6 +56,10 @@ export default class Edit extends Component {
             className,
             styleClass,
             'call-to-action'
+        );
+        const divStyle = (
+            bgrOption === 'bgrColor' &&
+            { backgroundColor: colorBackgroundControl }
         );
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
@@ -83,7 +89,7 @@ export default class Edit extends Component {
                 <Dropdown
                     //position="bottom left"
                     renderToggle={ ( { isOpen, onToggle } ) => (
-                        <div style={ { textAlign: textAlignment, color: colorPaletteControl } }>
+                        <div style={ { textAlign: textAlignment, color: colorFontControl } }>
                             <a 
                                 className="button" 
                                 href="#0"
@@ -100,7 +106,7 @@ export default class Edit extends Component {
         );
 
         return (
-            <div className={ classes }>
+            <div className={ classes } style={ divStyle }>
                 <div className="wrap">
                     <Fragment>
                         <Inspector {...{ setAttributes, ...this.props }} />
@@ -109,14 +115,14 @@ export default class Edit extends Component {
                             tagName="h3"
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            style={ { textAlign: textAlignment, color: colorFontControl } }
                             onChange={ headline => setAttributes( { headline } ) }                           
                         />
                         <RichText
                             tagName="p"
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
-                            style={ { textAlign: textAlignment, color: colorPaletteControl } }
+                            style={ { textAlign: textAlignment, color: colorFontControl } }
                             onChange={ message => setAttributes( { message } ) }                 		
                         />
                         <Fragment>
@@ -126,13 +132,11 @@ export default class Edit extends Component {
                         </Fragment>
                     </Fragment>
                 </div>
-                { ( imgID ) 
-                    ?
+                { imgID &&
                     <div 
                         className="img-background"
                         style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
                     ></div>
-                    : ''
                 }
             </div>
         );

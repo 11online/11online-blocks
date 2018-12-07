@@ -30,6 +30,10 @@ const attributes = {
         type: "string",
         default: "Primary",
     },
+    bgrOption: {
+        type: "string",
+        default: "bgrImage",
+    },
     imgID: {
         type: 'number',
         default: null,
@@ -46,9 +50,13 @@ const attributes = {
         type: 'boolean',
         default: true,
     },
-    colorPaletteControl: {
+    colorFontControl: {
         type: "string",
         default: "#000000"
+    },
+    colorBackgroundControl: {
+        type: "string",
+        default: "#FFFFFF"
     },
 };
 

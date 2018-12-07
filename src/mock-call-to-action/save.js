@@ -29,10 +29,12 @@ export default class Save extends Component {
                 text, 
                 url, 
                 textAlignment,
+                bgrOption,
                 imgID,
                 imgURL, 
                 imgOpacity,
-                colorPaletteControl,
+                colorFontControl,
+                colorBackgroundControl,
                 styleClass,
                 newTab,
             }, 
@@ -43,18 +45,24 @@ export default class Save extends Component {
             styleClass,
             'call-to-action'
         );
+        const divStyle = (
+            bgrOption === 'bgrColor' ?
+            { textAlign: textAlignment, backgroundColor: colorBackgroundControl }
+            :
+            { textAlign: textAlignment }
+        );
         return (  
-            <div className={ classes } style={ { textAlign: textAlignment } }>
+            <div className={ classes } style={ divStyle }>
                 <div className="wrap">
                     <RichText.Content 
                         tagName="h3" 
                         value={ headline }
-                        style={ { color: colorPaletteControl } } 
+                        style={ { color: colorFontControl } } 
                     />
                     <RichText.Content 
                         tagName="p" 
                         value={ message }
-                        style={ { color: colorPaletteControl } }
+                        style={ { color: colorFontControl } }
                     /> 
                     <p>
                         <a 
@@ -66,13 +74,11 @@ export default class Save extends Component {
                         </a>
                     </p> 
                 </div>            
-                { ( imgID ) 
-                    ?
+                { imgID &&
                     <div 
                         className="img-background"
                         style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
                     ></div>
-                    : ''
                 }
 
             </div>                     
