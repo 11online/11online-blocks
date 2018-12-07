@@ -6,16 +6,28 @@ import classnames from 'classnames';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { AlignmentToolbar, BlockControls, InspectorControls, RichText } = wp.editor;
+const { 
+	AlignmentToolbar, 
+	BlockControls, 
+	InspectorControls, 
+	RichText 
+} = wp.editor;
+const {
+    SelectControl,
+	TextControl,
+	Dropdown,
+	ToggleControl,
+    Tooltip,
+} = wp.components;
 const Fragment = wp.element.Fragment;
-const SelectControl = wp.components.SelectControl;
-const TextControl = wp.components.TextControl;
-const Dropdown = wp.components.Dropdown;
-const ToggleControl = wp.components.ToggleControl;
 
 registerBlockType( 'eleven-online/block-button', {
 	title: __( 'Button' ),
-	icon: 'admin-links',
+	icon: {
+		background: '#F04848',
+		foreground: '#FFFFFF',
+		src: 'admin-links',
+	  },       
 	category: 'common',
 	keywords: [
 		__( '11 Online' ),
@@ -115,7 +127,9 @@ registerBlockType( 'eleven-online/block-button', {
 				</BlockControls>
 				<div style={{clear: 'both', overflow: 'auto', padding: 5}}>
 					<div style={{textAlign: align, float: align === 'center' ? 'none' : align, position: 'relative'}}>
+					<Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
 						{renderButton()}
+					</Tooltip>
 					</div>
 				</div>
 			</Fragment>

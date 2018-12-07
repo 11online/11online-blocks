@@ -1,0 +1,18 @@
+
+.high-contrast {
+    background: black;
+    border-color: black;
+    color: white;
+}
+
+.high-contrast h3 {
+    color: white;
+}
+
+.list {
+    padding: 20px;
+}
+
+.list > ul {
+    display: inline-block;
+}

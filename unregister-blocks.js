@@ -1,7 +1,6 @@
 // mark our disallowed blocks
 var disallowedBlocks = [
-	// TODO need to test in the future if we can remove paragraph, for some reason, this causes issues now
-	// 'core/paragraph',
+	//'core/paragraph',
 	'core/button'
 ];
 
