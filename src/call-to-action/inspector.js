@@ -55,12 +55,14 @@ export default class Inspector extends Component {
         <InspectorControls>
             <PanelBody>
                 <SelectControl
-                    label={ __("Style Settings") }
-                    help={ __("Select Style Option") }
+                    label={ __("Button Style Settings") }
+                    help={ __("Select Button Style Option") }
                     value={ styleClass }
                     options={[
-                        { value: "Primary", label: __("Primary Option") },
-                        { value: "Secondary", label: __("Secondary Option") },
+                        { value: 'primary', label: __("Primary") },
+                        { value: 'secondary', label: __("Secondary") },
+                        { value: 'primary-border', label: __("Primary Border Only") },
+                        { value: 'secondary-border', label: __("Secondary Border Only") },
                     ]}
                     onChange={ styleClass => setAttributes({ styleClass }) }
                 />
