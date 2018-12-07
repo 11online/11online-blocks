@@ -40,10 +40,14 @@ export default class Save extends Component {
             }, 
             className,
         } = this.props;
-        const classes = classnames(
+        const classes1 = classnames(
             className,
             styleClass,
             'call-to-action'
+        );
+        const classes2 = classnames(
+            styleClass,
+            'button'
         );
         const divStyle = (
             bgrOption === 'bgrColor' ?
@@ -52,7 +56,7 @@ export default class Save extends Component {
             { textAlign: textAlignment }
         );
         return (  
-            <div className={ classes } style={ divStyle }>
+            <div className={ classes1 } style={ divStyle }>
                 <div className="wrap">
                     <RichText.Content 
                         tagName="h3" 
@@ -66,7 +70,7 @@ export default class Save extends Component {
                     /> 
                     <p>
                         <a 
-                            className="button" 
+                            className={ classes2 } 
                             href={ url }
                             { ...newTab ? {target: '_blank'} : null }
                         >
