@@ -2,3 +2,6 @@ node_modules/*
 dist/*
 .DS_Store
 .idea
+src/call-to-action-copy/*
+src/mock-call-to-action/*
+src/mock-call-to-action2/*
