@@ -27,12 +27,12 @@ const attributes = {
         type: 'string',
     },
     styleClass: {
-        type: "string",
-        default: "Primary",
+        type: 'string',
+        default: 'primary',
     },
     bgrOption: {
-        type: "string",
-        default: "bgrImage",
+        type: 'string',
+        default: 'bgrImage',
     },
     imgID: {
         type: 'number',
@@ -51,12 +51,12 @@ const attributes = {
         default: true,
     },
     colorFontControl: {
-        type: "string",
-        default: "#000000"
+        type: 'string',
+        default: '#000000'
     },
     colorBackgroundControl: {
-        type: "string",
-        default: "#FFFFFF"
+        type: 'string',
+        default: '#FFFFFF'
     },
 };
 
