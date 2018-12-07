@@ -15,13 +15,13 @@ const { registerBlockType } = wp.blocks;
  * Register action block
  */
 registerBlockType( 
-    'eleven-online/call-to-action', 
+    'eleven-online/mock-call-to-action', 
     {
-        title: __( 'Call To Action Block' ),
+        title: __( 'Mock Call To Action Block' ),
         description: __( 'A \'call to action\' block prompts a user to visit a specified link by clicking a button' ),
         category: 'common',
         icon: {
-          background: '#F04848',
+          background: '#CD2990',
           foreground: '#FFFFFF',
           src: 'megaphone'
         },                
