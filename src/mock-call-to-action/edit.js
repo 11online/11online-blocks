@@ -58,8 +58,10 @@ export default class Edit extends Component {
             'call-to-action'
         );
         const divStyle = (
-            bgrOption === 'bgrColor' &&
+            bgrOption === 'bgrColor' ?
             { backgroundColor: colorBackgroundControl }
+            :
+            null
         );
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
