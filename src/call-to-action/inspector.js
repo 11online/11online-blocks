@@ -34,6 +34,23 @@ export default class Inspector extends Component {
         setAttributes
       } = this.props;
 
+        const onChangeBgrOption = (value) => {
+            if (value === 'bgrImage' || value === 'bgrNone') {
+                setAttributes({
+                    colorBackgroundControl: 'transparent'
+                });
+            }
+
+            if (value === 'bgrColor' || value === 'bgrNone') {
+                setAttributes({
+                    imgID: null,
+                    imgURL: null,
+                } );
+            }
+
+            setAttributes({ bgrOption: value });
+        };
+
       return (
         <InspectorControls>
             <PanelBody>
@@ -59,7 +76,7 @@ export default class Inspector extends Component {
                         { value: "bgrColor", label: __("Background Color") },
                         { value: "bgrNone", label: __("None") },
                     ]}
-                    onChange={ bgrOption => setAttributes({ bgrOption }) }
+                    onChange={ onChangeBgrOption }
                 />
             </PanelBody>
 
