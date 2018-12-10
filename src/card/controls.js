@@ -1,4 +1,12 @@
 /**
+ * Control Component dependencies
+ */
+import icons from './icons';
+import './editor.scss';
+
+import classnames from 'classnames';
+
+/**
  * Internal Toolbar Controls Libraries
  */
 const { __ } = wp.i18n;
@@ -13,6 +21,8 @@ const {
     Toolbar,
     Button,
     Tooltip,
+    Dropdown,
+    DropdownMenu,
 } = wp.components;
 
 /**
@@ -27,9 +37,9 @@ export default class Controls extends Component {
         const {
             attributes: { 
                 textAlignment,
-                bgrOption, 
-                imgID, 
+                columnClass,
              },
+            className,
             setAttributes
           } = this.props;
 
@@ -47,14 +57,56 @@ export default class Controls extends Component {
             } );
         };
 
-        <BlockControls>
-            <AlignmentToolbar
-                value={ textAlignment }
-                onChange={ textAlignment => setAttributes( { textAlignment } ) }
+        const MyDropdownMenu = () => (
+            <DropdownMenu
+                icon={ icons.columns }
+                label="Select a Column Class"
+                controls={ [
+                    {
+                        title: 'Column Class: one-half',
+                        icon: icons.half,
+                        onClick: () => {
+                            setAttributes( { columnClass: 'one-half' } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-third',
+                        icon: icons.third,
+                        onClick: () => {
+                            setAttributes( { columnClass: 'one-third' } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-fourth',
+                        icon: icons.fourth,
+                        onClick: () => {
+                            setAttributes( { columnClass: 'one-fourth' } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-sixth',
+                        icon: icons.sixth,
+                        onClick: () => {
+                            setAttributes( { columnClass: 'one-sixth' } );
+                        }
+                    },
+                ] }
             />
-            <Toolbar>
+        );
 
-            </Toolbar>
-        </BlockControls>
+        return (
+            <BlockControls>
+                <AlignmentToolbar
+                    value={ textAlignment }
+                    onChange={ textAlignment => setAttributes( { textAlignment } ) }
+                />
+                <Toolbar>
+                    { MyDropdownMenu() }
+                    {/* { columnClass === 'one-third' && 
+                        oneHalfMenu()
+                    }, */}
+                </Toolbar>
+            </BlockControls>
+        );
     }
 }
