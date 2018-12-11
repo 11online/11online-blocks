@@ -7,6 +7,7 @@ import './editor.scss';
 import classnames from 'classnames';
 import Inspector from "./inspector";
 import Controls from "./controls";
+import Card from "./card";
 
 /**
  * Internal block libraries
@@ -37,28 +38,39 @@ export default class Edit extends Component {
                 message,
                 textAlignment,
                 styleClass,
+                columnClass,
             },
                 className,
                 setAttributes
         } = this.props;
+
+        const firstClass = classnames(
+            columnClass,
+            'first'
+        );
+
+        const cards = [];
 
         return (
             <div className={ className } style={ { textAlign: textAlignment } }>
                 <Fragment>
                     <Inspector {...{ setAttributes, ...this.props }} />
                     <Controls {...{ setAttributes, ...this.props }} />
-                    <RichText
-                        tagName="h3"
-                        placeholder={ __( 'Add your custom title' ) }
-                        value={ title }
-                        onChange={ title => setAttributes( { title } ) }                           
-                    />
-                    <RichText
-                        tagName="p"
-                        placeholder={ __( 'Add your custom message' ) }
-                        value={ message }
-                        onChange={ message => setAttributes( { message } ) }                 		
-                    />
+                    { columnClass === 'none' &&
+                        <p>Please select a column class first</p>
+                    }
+                    { columnClass === 'one-half' ? 
+                        <Fragment>
+                            <div className={ firstClass }>
+                                <Card {...{ setAttributes, ...this.props }} />
+                            </div>
+                            <div className={ columnClass }>
+                                <Card {...{ setAttributes, ...this.props }} />
+                            </div>
+                            <div className="clearfix"></div>
+                        </Fragment>
+                        : ''
+                    }
                 </Fragment>
             </div>
         );
