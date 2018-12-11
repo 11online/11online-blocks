@@ -36,10 +36,10 @@ export default class Inspector extends Component {
                   help={ __("Select Button Style Option") }
                   value={ styleClass }
                   options={[
-                      { value: 'primary', label: __("Primary") },
-                      { value: 'secondary', label: __("Secondary") },
-                      { value: 'primary-border', label: __("Primary Border Only") },
-                      { value: 'secondary-border', label: __("Secondary Border Only") },
+                      { value: 'card-primary', label: __("Primary") },
+                      { value: 'card-secondary', label: __("Secondary") },
+                      { value: 'card-primary-border', label: __("Primary Border Only") },
+                      { value: 'card-secondary-border', label: __("Secondary Border Only") },
                   ]}
                   onChange={ styleClass => setAttributes({ styleClass }) }
               />
