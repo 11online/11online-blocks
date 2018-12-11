@@ -6,12 +6,10 @@ const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
   InspectorControls,
-  PanelColorSettings,
 } = wp.editor;
 const {
   PanelBody,
   SelectControl,
-  RangeControl,
 } = wp.components;
 
 /**
@@ -23,6 +21,30 @@ export default class Inspector extends Component {
     }
   
     render() {
+      const {
+        attributes: {
+            styleClass,
+        },
+        setAttributes
+      } = this.props;
 
+      return (
+        <InspectorControls>
+          <PanelBody>
+              <SelectControl
+                  label={ __("Button Style Settings") }
+                  help={ __("Select Button Style Option") }
+                  value={ styleClass }
+                  options={[
+                      { value: 'primary', label: __("Primary") },
+                      { value: 'secondary', label: __("Secondary") },
+                      { value: 'primary-border', label: __("Primary Border Only") },
+                      { value: 'secondary-border', label: __("Secondary Border Only") },
+                  ]}
+                  onChange={ styleClass => setAttributes({ styleClass }) }
+              />
+          </PanelBody>
+        </InspectorControls>
+      );
     }
 }
