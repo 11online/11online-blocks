@@ -14,6 +14,14 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
+    styleClass: {
+        type: 'string',
+        default: 'primary',
+    },
+    numCards: {
+        type: 'number',
+        default: 1,
+    }
 
     /*
     title: {
