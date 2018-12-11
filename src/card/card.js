@@ -35,8 +35,15 @@ export default class Card extends Component {
                 setAttributes
         } = this.props;
 
+        /*
+        const classes = classnames(
+            className,
+            'card-block'
+        );
+        */
+
         return (
-            <div className={ className } style={ { textAlign: textAlignment } }>
+            <div className={ styleClass } style={ { textAlign: textAlignment } }>
                 <RichText
                     tagName="h3"
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
