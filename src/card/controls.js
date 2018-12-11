@@ -57,7 +57,7 @@ export default class Controls extends Component {
             } );
         };
 
-        const MyDropdownMenu = () => (
+        const myDropdownMenu = () => (
             <DropdownMenu
                 icon={ icons.columns }
                 label="Select a Column Class"
@@ -94,6 +94,17 @@ export default class Controls extends Component {
             />
         );
 
+        const renderAddCardBtn = () => (
+            <Tooltip text={ __( 'Add a New Card' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ open }
+                >
+                    { __( 'Add Card' ) }
+                </Button>
+            </Tooltip>
+        );
+
         return (
             <BlockControls>
                 <AlignmentToolbar
@@ -101,10 +112,11 @@ export default class Controls extends Component {
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
                 <Toolbar>
-                    { MyDropdownMenu() }
-                    {/* { columnClass === 'one-third' && 
-                        oneHalfMenu()
-                    }, */}
+                    { columnClass === 'none' ?
+                        myDropdownMenu()
+                        : 
+                        renderAddCardBtn()
+                    }                    
                 </Toolbar>
             </BlockControls>
         );
