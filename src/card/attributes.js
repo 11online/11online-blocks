@@ -3,10 +3,12 @@ const attributes = {
         type: 'string',
     },
     title: {
+        // type: 'array',
         source: 'html',
         selector: 'h3',
     },
     message: {
+        // type: 'array',
         source: 'html',
         selector: 'p',
     },
@@ -16,11 +18,11 @@ const attributes = {
     },
     styleClass: {
         type: 'string',
-        default: 'primary',
+        default: 'card-primary',
     },
-    numCards: {
+    cardInd: {
         type: 'number',
-        default: 1,
+        default: 0,
     }
 
     /*
