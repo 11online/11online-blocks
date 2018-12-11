@@ -36,6 +36,7 @@ export default class Edit extends Component {
                 title,
                 message,
                 textAlignment,
+                styleClass,
             },
                 className,
                 setAttributes
@@ -44,7 +45,7 @@ export default class Edit extends Component {
         return (
             <div className={ className } style={ { textAlign: textAlignment } }>
                 <Fragment>
-                    {/* <Inspector {...{ setAttributes, ...this.props }} /> */}
+                    <Inspector {...{ setAttributes, ...this.props }} />
                     <Controls {...{ setAttributes, ...this.props }} />
                     <RichText
                         tagName="h3"
