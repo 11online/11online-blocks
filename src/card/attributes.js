@@ -40,6 +40,35 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
+    cards: {
+        type: 'array',
+        source: 'query',
+        selector: '.card-eleven',
+        query: {
+            cardTitle: {
+                type: 'string',
+                source: 'html',
+                selector: 'h3',
+            },
+            cardText: {
+                type: 'string',
+                source: 'html',
+                selector: 'p',
+            },
+            cardImgID: {
+                type: 'number',
+                default: null,
+            },
+            cardImgURL: {
+                type: 'string',
+                default: null,
+            },
+            cardImgAlt: {
+                type: 'string',
+                default: null,
+            },
+        },
+    },
 
     /*
     title: {
