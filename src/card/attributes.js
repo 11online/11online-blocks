@@ -23,7 +23,23 @@ const attributes = {
     cardInd: {
         type: 'number',
         default: 0,
-    }
+    },
+    cardCount: {
+        type: 'number',
+        default: 0,
+    },
+    imgID: {
+        type: 'number',
+        default: null,
+    },
+    imgURL: {
+        type: 'string',
+        default: null,
+    },
+    cardSelected: {
+        type: 'boolean',
+        default: false,
+    },
 
     /*
     title: {
