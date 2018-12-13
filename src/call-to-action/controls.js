@@ -67,24 +67,24 @@ export default class Controls extends Component {
                     }
                     { (bgrOption === 'bgrImage') && !imgID &&
                         <MediaUploadCheck>
-                        <MediaUpload
-                            onSelect={ onSelectImage }
-                            type="image"
-                            value={ imgID }
-                            render={ ( { open } ) => (
-                                <Tooltip text={ __( 'Click to Upload Image' ) }>
-                                    <Button
-                                        className={ "components-button button button-large" }
-                                        onClick={ open }
-                                    >
-                                        {/* { icons.upload } */}
-                                        { __( 'Upload Image' ) }
-                                    </Button>
-                                </Tooltip>
-                            ) }
-                        >
-                        </MediaUpload>
-                    </MediaUploadCheck>
+                            <MediaUpload
+                                onSelect={ onSelectImage }
+                                type="image"
+                                value={ imgID }
+                                render={ ( { open } ) => (
+                                    <Tooltip text={ __( 'Click to Upload Image' ) }>
+                                        <Button
+                                            className={ "components-button button button-large" }
+                                            onClick={ open }
+                                        >
+                                            {/* { icons.upload } */}
+                                            { __( 'Upload Image' ) }
+                                        </Button>
+                                    </Tooltip>
+                                ) }
+                            >
+                            </MediaUpload>
+                        </MediaUploadCheck>
                     }
                 </Toolbar>
             </BlockControls>
