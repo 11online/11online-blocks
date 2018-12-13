@@ -51,17 +51,17 @@ export default class Save extends Component {
         );
         const divStyle = (
             bgrOption === 'bgrColor' ?
-            { textAlign: textAlignment, backgroundColor: colorBackgroundControl }
+            { backgroundColor: colorBackgroundControl }
             :
-            { textAlign: textAlignment }
+            ''
         );
         return (  
             <div className={ classes1 } style={ divStyle }>
-                <div className="wrap">
+                <div className="wrap" style={ { textAlign: textAlignment } }>
                     <RichText.Content 
                         tagName="h3" 
                         value={ headline }
-                        style={ { color: colorFontControl } } 
+                        style={ { color: colorFontControl } }
                     />
                     <RichText.Content 
                         tagName="p" 
