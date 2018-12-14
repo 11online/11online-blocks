@@ -10,6 +10,10 @@ const attributes = {
         type: 'number',
         default: 0,
     },
+    cards: {
+        type: 'array',
+        default: [],
+    },
     titles: {
         type: 'array',
         source: 'html',
