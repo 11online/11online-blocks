@@ -2,10 +2,28 @@ const attributes = {
     textAlignment: {
         type: 'string',
     },
+    cardCount: {
+        type: 'number',
+        default: 0,
+    },
+    cardInd: {
+        type: 'number',
+        default: 0,
+    },
+    titles: {
+        type: 'array',
+        source: 'html',
+        selector: 'h3',
+    },
     title: {
         // type: 'array',
         source: 'html',
         selector: 'h3',
+    },
+    messages: {
+        type: 'array',
+        source: 'html',
+        selector: 'p',
     },
     message: {
         // type: 'array',
@@ -20,10 +38,6 @@ const attributes = {
         type: 'string',
         default: 'card-primary',
     },
-    cardCount: {
-        type: 'number',
-        default: 0,
-    },
     imgID: {
         type: 'number',
         default: null,
@@ -36,10 +50,7 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
-    cardInd: {
-        type: 'number',
-        default: 0,
-    },
+    
     // cards: {
     //     type: 'array',
     //     source: 'query',

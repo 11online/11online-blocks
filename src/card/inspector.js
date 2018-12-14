@@ -16,8 +16,9 @@ const {
  * Create an Inspector Controls wrapper Component
  */
 export default class Inspector extends Component {
-    constructor() {
+    constructor(props) {
       super(...arguments);
+      this.props = props;
     }
   
     render() {

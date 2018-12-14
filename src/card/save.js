@@ -17,8 +17,9 @@ const { RichText } = wp.editor;
  */
 export default class Save extends Component {
 
-    constructor() {
+    constructor(props) {
         super( ...arguments );
+        this.props = props;
     }
 
     render() {

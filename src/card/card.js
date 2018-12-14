@@ -20,12 +20,17 @@ const {
  */
 export default class Card extends Component {
 
-    constructor() {
+    constructor(props) {
         super( ...arguments );
+        this.props = props;
     }
     render() {
         const {
             attributes: { 
+                cardCount,
+                cardInd,
+                titles,
+                messages,
                 title,
                 message,
                 textAlignment,
@@ -49,7 +54,9 @@ export default class Card extends Component {
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                     placeholder={ __( 'Add your custom title' ) }
                     value={ title }
-                    onChange={ title => setAttributes( { title } ) }                           
+                    // value={ titles[cardInd] }
+                    onChange={ title => setAttributes( { title } ) }  
+                    // onChange={ (value, cardInd) => setAttributes( { titles[cardInd]: value } ) }                          
                 />
                 <RichText
                     tagName="p"

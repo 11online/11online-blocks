@@ -27,8 +27,9 @@ const { Fragment } = wp.element;
  */
 export default class Edit extends Component {
 
-    constructor() {
+    constructor(props) {
         super( ...arguments );
+        this.props = props;
     }
 
     render() {

@@ -30,8 +30,9 @@ const {
  */
 export default class Controls extends Component {
 
-    constructor() {
+    constructor(props) {
         super( ...arguments );
+        this.props = props;
     }
     render() {
         const {
