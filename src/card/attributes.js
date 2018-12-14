@@ -20,10 +20,6 @@ const attributes = {
         type: 'string',
         default: 'card-primary',
     },
-    cardInd: {
-        type: 'number',
-        default: 0,
-    },
     cardCount: {
         type: 'number',
         default: 0,
@@ -40,35 +36,39 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
-    cards: {
-        type: 'array',
-        source: 'query',
-        selector: '.card-eleven',
-        query: {
-            cardTitle: {
-                type: 'string',
-                source: 'html',
-                selector: 'h3',
-            },
-            cardText: {
-                type: 'string',
-                source: 'html',
-                selector: 'p',
-            },
-            cardImgID: {
-                type: 'number',
-                default: null,
-            },
-            cardImgURL: {
-                type: 'string',
-                default: null,
-            },
-            cardImgAlt: {
-                type: 'string',
-                default: null,
-            },
-        },
+    cardInd: {
+        type: 'number',
+        default: 0,
     },
+    // cards: {
+    //     type: 'array',
+    //     source: 'query',
+    //     selector: '.card-eleven',
+    //     query: {
+    //         cardTitle: {
+    //             type: 'string',
+    //             source: 'html',
+    //             selector: 'h3',
+    //         },
+    //         cardText: {
+    //             type: 'string',
+    //             source: 'html',
+    //             selector: 'p',
+    //         },
+    //         cardImgID: {
+    //             type: 'number',
+    //             default: null,
+    //         },
+    //         cardImgURL: {
+    //             type: 'string',
+    //             default: null,
+    //         },
+    //         cardImgAlt: {
+    //             type: 'string',
+    //             default: null,
+    //         },
+    //     },
+    // },
 
     /*
     title: {
