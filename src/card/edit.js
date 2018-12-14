@@ -39,37 +39,59 @@ export default class Edit extends Component {
                 textAlignment,
                 styleClass,
                 columnClass,
+                cardCount,
             },
                 className,
                 setAttributes
         } = this.props;
 
-        const firstClass = classnames(
-            columnClass,
-            'first'
-        );
+        const firstClass = classnames( columnClass, 'first' );
 
-        const cards = [];
+        const isRightSpot = (colClass, pos) => {
+            return
+            (
+                (colClass === 'one-half' && (pos+1) % 2 === 0) ||
+                (colClass === 'one-third' && (pos+1) % 3 === 0) ||
+                (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
+                (colClass === 'one-sixth' && (pos+1) % 6 === 0)
+            )  ?  true
+                
+           : false;
+        }
+
+        const renderCards = () => {
+            let cards = [];
+            cards.push( 
+                <div className={ firstClass }>                 
+                    <Card {...{ setAttributes, ...this.props }} />
+                </div> 
+            ); 
+            for (let i = 1; i < cardCount; i++) {
+                if ( isRightSpot(columnClass, i) )
+                    cards.push( <div className="clearfix"></div> );
+                cards.push( 
+                    <div className={ columnClass }>                 
+                        <Card {...{ setAttributes, ...this.props }} />
+                    </div> 
+                ); 
+            }
+            if ( !isRightSpot(columnClass, cardCount-1) )
+                    cards.push( <div className="clearfix"></div> );
+            return cards;
+        }
 
         return (
             <div className={ className } style={ { textAlign: textAlignment } }>
                 <Fragment>
                     <Inspector {...{ setAttributes, ...this.props }} />
                     <Controls {...{ setAttributes, ...this.props }} />
-                    { columnClass === 'none' &&
-                        <p>Please select a column class first</p>
-                    }
-                    { columnClass === 'one-half' ? 
+
+                    { ( columnClass !== 'none' ) ?
                         <Fragment>
-                            <div className={ firstClass }>
-                                <Card {...{ setAttributes, ...this.props }} />
-                            </div>
-                            <div className={ columnClass }>
-                                <Card {...{ setAttributes, ...this.props }} />
-                            </div>
-                            <div className="clearfix"></div>
+                            { renderCards() }
                         </Fragment>
-                        : ''
+                        :
+                        <p>Please select a column class first</p>
                     }
                 </Fragment>
             </div>
