@@ -66,28 +66,40 @@ export default class Controls extends Component {
                         title: 'Column Class: one-half',
                         icon: icons.half,
                         onClick: () => {
-                            setAttributes( { columnClass: 'one-half' } );
+                            setAttributes( { 
+                                columnClass: 'one-half',
+                                cardCount: 1
+                              } );
                         }
                     },
                     {
                         title: 'Column Class: one-third',
                         icon: icons.third,
                         onClick: () => {
-                            setAttributes( { columnClass: 'one-third' } );
+                            setAttributes( { 
+                                columnClass: 'one-third',
+                                cardCount: 1
+                             } );
                         }
                     },
                     {
                         title: 'Column Class: one-fourth',
                         icon: icons.fourth,
                         onClick: () => {
-                            setAttributes( { columnClass: 'one-fourth' } );
+                            setAttributes( { 
+                                columnClass: 'one-fourth',
+                                cardCount: 1
+                             } );
                         }
                     },
                     {
                         title: 'Column Class: one-sixth',
                         icon: icons.sixth,
                         onClick: () => {
-                            setAttributes( { columnClass: 'one-sixth' } );
+                            setAttributes( { 
+                                columnClass: 'one-sixth',
+                                cardCount: 1
+                             } );
                         }
                     },
                 ] }
