@@ -36,18 +36,28 @@ const attributes = {
     },
     columnClass: {
         type: 'string',
-        default: 'none',
+        default: 'one-half',
     },
     styleClass: {
         type: 'string',
         default: 'card-primary',
     },
-    imgID: {
+    cardImgID: {
         type: 'number',
         default: null,
     },
-    imgURL: {
+    cardImgURL: {
         type: 'string',
+        source: 'attribute',
+        attribute: 'src',
+        selector: 'img',
+        default: null,
+    },
+    cardImgAlt: {
+        type: 'string',
+        source: 'attribute',
+        attribute: 'alt',
+        selector: 'img',
         default: null,
     },
     cardSelected: {
