@@ -35,9 +35,12 @@ export default class Card extends Component {
                 message,
                 textAlignment,
                 styleClass,
+                cardSelected,
             },
                 className,
-                setAttributes
+                setAttributes,
+                isSelected,
+
         } = this.props;
 
         /*
@@ -47,6 +50,12 @@ export default class Card extends Component {
         );
         */
 
+        { this.isSelected ?
+            setAttributes( { cardSelected: true } )
+            :
+            setAttributes( { cardSelected: false } )
+        }
+  
         return (
             <div className={ styleClass } style={ { textAlign: textAlignment } }>
                 <RichText
