@@ -38,6 +38,7 @@ export default class Controls extends Component {
         const {
             attributes: { 
                 textAlignment,
+                cardSelected,
                 columnClass,
              },
             className,
@@ -46,17 +47,19 @@ export default class Controls extends Component {
 
         const onSelectImage = img => {
             setAttributes( {
-                imgID: img.id,
-                imgURL: img.url,
+                cardImgID: img.id,
+                cardImgURL: img.url,
+                cardImgAlt: img.alt,
             } );
         };
 
         const onRemoveImage = () => {
             setAttributes({
-                imgID: null,
-                imgURL: null,
-            } );
-        };
+                cardImgID: null,
+                cardImgURL: null,
+                cardImgAlt: null,
+            });
+        }
 
         const myDropdownMenu = () => (
             <DropdownMenu
@@ -69,7 +72,6 @@ export default class Controls extends Component {
                         onClick: () => {
                             setAttributes( { 
                                 columnClass: 'one-half',
-                                cardCount: 1
                               } );
                         }
                     },
@@ -79,7 +81,6 @@ export default class Controls extends Component {
                         onClick: () => {
                             setAttributes( { 
                                 columnClass: 'one-third',
-                                cardCount: 1
                              } );
                         }
                     },
@@ -89,7 +90,6 @@ export default class Controls extends Component {
                         onClick: () => {
                             setAttributes( { 
                                 columnClass: 'one-fourth',
-                                cardCount: 1
                              } );
                         }
                     },
@@ -99,7 +99,6 @@ export default class Controls extends Component {
                         onClick: () => {
                             setAttributes( { 
                                 columnClass: 'one-sixth',
-                                cardCount: 1
                              } );
                         }
                     },
@@ -118,6 +117,17 @@ export default class Controls extends Component {
             </Tooltip>
         );
 
+        const renderRemoveCardBtn = () => (
+            <Tooltip text={ __( 'Remove the Selected Card' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ open }
+                >
+                    { __( 'Remove Card' ) }
+                </Button>
+            </Tooltip>
+        );
+
         return (
             <BlockControls>
                 <AlignmentToolbar
@@ -125,11 +135,9 @@ export default class Controls extends Component {
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
                 <Toolbar>
-                    { columnClass === 'none' ?
-                        myDropdownMenu()
-                        : 
-                        renderAddCardBtn()
-                    }                    
+                    { myDropdownMenu() }
+                    { renderAddCardBtn() }  
+                    { cardSelected && renderRemoveCardBtn() }                
                 </Toolbar>
             </BlockControls>
         );

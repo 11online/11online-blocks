@@ -50,7 +50,7 @@ export default class Card extends Component {
         );
         */
 
-        { this.isSelected ?
+        { isSelected ?
             setAttributes( { cardSelected: true } )
             :
             setAttributes( { cardSelected: false } )
