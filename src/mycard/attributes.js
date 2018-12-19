@@ -1,15 +1,15 @@
 const attributes = {
-    columnClass: {
-        type: 'string',
-        default: 'one-half',
-    },
     styleClass: {
         type: 'string',
         default: 'card-primary',
     },
+    newTab: {
+        type: 'boolean',
+        default: true,
+    },
     cardID: {
         type: 'number',
-        default: 0,
+        default: null,
     },
     cardImgID: {
         type: 'number',
@@ -27,7 +27,7 @@ const attributes = {
         source: 'attribute',
         attribute: 'alt',
         selector: 'img',
-        default: '',
+        default: null,
     },
     cardTitle: {
         type: 'string',
@@ -38,6 +38,10 @@ const attributes = {
         type: 'string',
         source: 'html',
         selector: 'p',
+    },
+    cardBtnPresent: {
+        type: 'boolean',
+        default: false,
     },
     cardBtnURL: {
         type: 'string',
