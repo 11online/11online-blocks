@@ -10,7 +10,7 @@ import classnames from 'classnames';
  * Internal Libraries
  */
 const { __ } = wp.i18n;
-const { Component } = wp.element;
+const { Component, Fragment } = wp.element;
 const { RichText } = wp.editor;
 const {
 } = wp.components;
@@ -20,62 +20,82 @@ const {
  */
 export default class Card extends Component {
 
-    constructor(props) {
+    constructor(currCardId) {
         super( ...arguments );
-        this.props = props;
+        this.props.card.cardID = currCardId;
+        this.state = {
+            isEditing: false
+        }
     }
     render() {
         const {
             attributes: { 
-                cardCount,
-                cardInd,
-                titles,
-                messages,
-                title,
-                message,
-                textAlignment,
-                styleClass,
-                cardSelected,
+                card: {
+                    cardID,
+                    cardImgID,
+                    cardImgURL,
+                    cardImgAlt,
+                    cardTitle,
+                    cardMessage,
+                    cardBtnURL,
+                    cardBtnText,
+                    cardTextAlignment,
+                },
             },
-                className,
                 setAttributes,
                 isSelected,
 
         } = this.props;
 
-        /*
-        const classes = classnames(
-            className,
-            'card-block'
-        );
-        */
+        const setStateToTrue = () => {
+            this.setState(() => 
+              this.state.isEditing = true
+            );
+        }
 
-        { isSelected ?
-            setAttributes( { cardSelected: true } )
-            :
-            setAttributes( { cardSelected: false } )
+        const setStateToFalse = () => {
+            this.setState(() => 
+              this.state.isEditing = true
+            );
+        }
+
+        const changeState = () => {
+            this.setState((prevState, props) => 
+              this.state.isEditing = ! prevState.isEditing
+            );
         }
   
         return (
-            <div className={ styleClass } style={ { textAlign: textAlignment } }>
+            <Fragment>
+            {  () => setAttributes( { cardID: this.props.card.cardID } ) }
+            <div className={ styleClass } style={ { textAlign: card.cardTextAlignment } }>
                 <RichText
-                    tagName="h3"
-                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                    placeholder={ __( 'Add your custom title' ) }
-                    value={ title }
-                    // value={ titles[cardInd] }
-                    onChange={ title => setAttributes( { title } ) }  
-                    // onChange={ (value, cardInd) => setAttributes( { titles[cardInd]: value } ) }                          
-                />
+                        tagName="h3"
+                        formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                        placeholder={ __( 'Add card title' ) }
+                        value={ card.cardTitle }
+                        // onClick={(event) => { event.preventDefault(); setStateToTrue();} }  
+                        // onChange={ () => { title => setAttributes( { title } ); setStateToFalse();} }  
+                        onChange={ () => { (value) => setAttributes( { cardTitle: value } )} }  
+                        // onChange={ (value, cardInd) => setAttributes( { titles[cardInd]: value } ) }                          
+                    />
                 <RichText
                     tagName="p"
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                     placeholder={ __( 'Add your custom message' ) }
-                    value={ message }
-                    onChange={ message => setAttributes( { message } ) }                 		
+                    value={ cardMessage }
+                    // onClick={(event) => { event.preventDefault(); setStateToTrue();} }  
+                    // onChange={ () => { message => setAttributes( { message } ); setStateToFalse();} }  
+                    onChange={ () => { (value) => setAttributes( { cardMessage: value } ) } }  
+                    // onChange={ message => setAttributes( { message } ) }                 		
                 />
             </div>
+            {/* { isSelected &&  this.state.isEditing ?
+                <p>Selected and Editing</p>
+                : 
+                <p>Current State: { String(this.state.isEditing.value) }</p>
+            } */}
+            </Fragment>
         );
-
     }
 }

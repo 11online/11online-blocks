@@ -37,8 +37,11 @@ export default class Controls extends Component {
     render() {
         const {
             attributes: { 
-                textAlignment,
-                cardSelected,
+                card: {
+                    cardImgID,
+                    cardImgURL,
+                    cardImgAlt,
+                },
                 columnClass,
              },
             className,
