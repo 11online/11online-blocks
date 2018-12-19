@@ -21,8 +21,6 @@ const {
     Toolbar,
     Button,
     Tooltip,
-    Dropdown,
-    DropdownMenu,
 } = wp.components;
 
 /**
@@ -37,9 +35,10 @@ export default class Controls extends Component {
     render() {
         const {
             attributes: { 
-                textAlignment,
-                cardSelected,
-                columnClass,
+                cardTextAlignment,
+                cardID,
+                cardBtnPresent,
+                cardImgID,
              },
             className,
             setAttributes
@@ -61,56 +60,11 @@ export default class Controls extends Component {
             });
         }
 
-        const myDropdownMenu = () => (
-            <DropdownMenu
-                icon={ icons.columns }
-                label="Select a Column Class"
-                controls={ [
-                    {
-                        title: 'Column Class: one-half',
-                        icon: icons.half,
-                        onClick: () => {
-                            setAttributes( { 
-                                columnClass: 'one-half',
-                              } );
-                        }
-                    },
-                    {
-                        title: 'Column Class: one-third',
-                        icon: icons.third,
-                        onClick: () => {
-                            setAttributes( { 
-                                columnClass: 'one-third',
-                             } );
-                        }
-                    },
-                    {
-                        title: 'Column Class: one-fourth',
-                        icon: icons.fourth,
-                        onClick: () => {
-                            setAttributes( { 
-                                columnClass: 'one-fourth',
-                             } );
-                        }
-                    },
-                    {
-                        title: 'Column Class: one-sixth',
-                        icon: icons.sixth,
-                        onClick: () => {
-                            setAttributes( { 
-                                columnClass: 'one-sixth',
-                             } );
-                        }
-                    },
-                ] }
-            />
-        );
-
         const renderAddCardBtn = () => (
             <Tooltip text={ __( 'Add a New Card' ) }>
                 <Button
                     className={ "components-button button button-large" }
-                    onClick={ open }
+                    onClick={ () => setAttributes( { cardID: 1 } ) }
                 >
                     { __( 'Add Card' ) }
                 </Button>
@@ -118,12 +72,34 @@ export default class Controls extends Component {
         );
 
         const renderRemoveCardBtn = () => (
-            <Tooltip text={ __( 'Remove the Selected Card' ) }>
+            <Tooltip text={ __( 'Remove Selected Card' ) }>
                 <Button
                     className={ "components-button button button-large" }
-                    onClick={ open }
+                    onClick={ () => setAttributes( { cardID: null } ) }
                 >
                     { __( 'Remove Card' ) }
+                </Button>
+            </Tooltip>
+        );
+
+        const renderAddInternalBtn = () => (
+            <Tooltip text={ __( 'Add Action Button' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ () => setAttributes( { cardBtnPresent: true } ) }
+                >
+                    { __( 'Add Button' ) }
+                </Button>
+            </Tooltip>
+        );
+
+        const renderRemoveInternalBtn = () => (
+            <Tooltip text={ __( 'Remove Action Button' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ () => setAttributes( { cardBtnPresent: false} ) }
+                >
+                    { __( 'Remove Button' ) }
                 </Button>
             </Tooltip>
         );
@@ -131,13 +107,47 @@ export default class Controls extends Component {
         return (
             <BlockControls>
                 <AlignmentToolbar
-                    value={ textAlignment }
-                    onChange={ textAlignment => setAttributes( { textAlignment } ) }
+                    value={ cardTextAlignment }
+                    onChange={ cardTextAlignment => setAttributes( { cardTextAlignment } ) }
                 />
                 <Toolbar>
-                    { myDropdownMenu() }
-                    { renderAddCardBtn() }  
-                    { cardSelected && renderRemoveCardBtn() }                
+                    { 
+                        cardID ?
+                        renderRemoveCardBtn()
+                        :
+                        renderAddCardBtn()
+                    } 
+                     { cardID && !cardImgID &&
+                        <MediaUploadCheck>
+                            <MediaUpload
+                                onSelect={ onSelectImage }
+                                type="image"
+                                value={ cardImgID }
+                                render={ ( { open } ) => (
+                                    <Tooltip text={ __( 'Click to Upload Image' ) }>
+                                        <Button
+                                            className={ "components-button button button-large" }
+                                            onClick={ open }
+                                        >
+                                            { __( 'Upload Image' ) }
+                                        </Button>
+                                    </Tooltip>
+                                ) }
+                            >
+                            </MediaUpload>
+                        </MediaUploadCheck>
+                    } 
+                    { cardID && cardImgID &&
+                        <Tooltip text={ __( 'Click to Remove Image' ) }>
+                            <Button
+                                className={ "components-button button button-large" }
+                                onClick={ onRemoveImage }
+                            >
+                                { __( 'Remove Image' ) }
+                            </Button>
+                        </Tooltip>
+                    } 
+                    { cardID && ( cardBtnPresent ? renderRemoveInternalBtn() : renderAddInternalBtn() ) }
                 </Toolbar>
             </BlockControls>
         );
