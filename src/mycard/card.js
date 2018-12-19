@@ -13,6 +13,10 @@ const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { RichText } = wp.editor;
 const {
+    Tooltip,
+    TextControl,
+    Dropdown,
+    ToggleControl,
 } = wp.components;
 
 /**
@@ -20,9 +24,9 @@ const {
  */
 export default class Card extends Component {
 
-    constructor(currCardId) {
+    constructor(props) {
         super( ...arguments );
-        this.props.card.cardID = currCardId;
+        this.props = props;
         this.state = {
             isEditing: false
         }
@@ -30,17 +34,18 @@ export default class Card extends Component {
     render() {
         const {
             attributes: { 
-                card: {
-                    cardID,
-                    cardImgID,
-                    cardImgURL,
-                    cardImgAlt,
-                    cardTitle,
-                    cardMessage,
-                    cardBtnURL,
-                    cardBtnText,
-                    cardTextAlignment,
-                },
+                styleClass,
+                cardTextAlignment,
+                cardID,
+                cardTitle, 
+                cardMessage, 
+                cardImgID, 
+                cardImgURL, 
+                cardImgAlt,
+                cardBtnPresent,
+                cardBtnURL,
+                cardBtnText, 
+                newTab,  
             },
                 setAttributes,
                 isSelected,
@@ -64,37 +69,82 @@ export default class Card extends Component {
               this.state.isEditing = ! prevState.isEditing
             );
         }
+
+        const ButtonControls = (
+            <div className='button-box'>
+                <TextControl
+                    label={ __( 'Button Text' ) }
+                    value={ cardBtnText }
+                    onChange={ cardBtnText => setAttributes( { cardBtnText } ) }
+                />
+                <TextControl
+                    label={ __( 'Link URL' ) }
+                    value={ cardBtnURL }
+                    onChange={ cardBtnURL => setAttributes( { cardBtnURL } ) }
+                />
+                <ToggleControl
+                    label={ __("Open Link in New Tab?") }
+                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
+                    checked={ newTab }
+                    onChange={ () => setAttributes( { newTab: ! newTab } ) }
+                />
+            </div>
+		);
+
+        const renderButton = () => (
+            <div style={ { width: '100%' } }>
+                <Dropdown
+                    //position="bottom left"
+                    renderToggle={ ( { isOpen, onToggle } ) => (
+                        <div style={ { textAlign: cardTextAlignment } }>
+                            <a 
+                                className="button" 
+                                href="#0"
+                                onClick={ onToggle } 
+                                aria-expanded={ isOpen }
+                            >
+                                { cardBtnText }
+                            </a>
+                        </div>       
+                    ) }
+                    renderContent={ () => ButtonControls }
+                />
+            </div>
+        );
   
         return (
             <Fragment>
-            {  () => setAttributes( { cardID: this.props.card.cardID } ) }
-            <div className={ styleClass } style={ { textAlign: card.cardTextAlignment } }>
-                <RichText
-                        tagName="h3"
+                { cardImgID && 
+                    <div className="card-img">
+                        <img
+                            src={ cardImgURL }
+                            alt={ cardImgAlt }
+                        />
+                    </div>
+                }               
+                <div className={ styleClass } style={ { textAlign: cardTextAlignment } }>
+                    <RichText
+                            tagName="h3"
+                            formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                            placeholder={ __( 'Add Card Title' ) }
+                            value={ cardTitle }
+                            onChange={ cardTitle => setAttributes( { cardTitle } ) } 
+                        />
+                    <RichText
+                        tagName="p"
                         formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                        placeholder={ __( 'Add card title' ) }
-                        value={ cardTitle }
-                        // onClick={(event) => { event.preventDefault(); setStateToTrue();} }  
-                        // onChange={ () => { title => setAttributes( { title } ); setStateToFalse();} }  
-                        onChange={ () => { (value) => setAttributes( { cardTitle: value } )} }  
-                        // onChange={ (value, cardInd) => setAttributes( { titles[cardInd]: value } ) }                          
+                        placeholder={ __( 'Add card text message' ) }
+                        value={ cardMessage }
+                        onChange={ cardMessage => setAttributes( { cardMessage } ) } 
                     />
-                <RichText
-                    tagName="p"
-                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                    placeholder={ __( 'Add your custom message' ) }
-                    value={ cardMessage }
-                    // onClick={(event) => { event.preventDefault(); setStateToTrue();} }  
-                    // onChange={ () => { message => setAttributes( { message } ); setStateToFalse();} }  
-                    onChange={ () => { (value) => setAttributes( { cardMessage: value } ) } }  
-                    // onChange={ message => setAttributes( { message } ) }                 		
-                />
-            </div>
-            {/* { isSelected &&  this.state.isEditing ?
-                <p>Selected and Editing</p>
-                : 
-                <p>Current State: { String(this.state.isEditing.value) }</p>
-            } */}
+                </div>
+                { cardBtnPresent && 
+                    // <Fragment>
+                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                            {renderButton()}
+                        </Tooltip>
+                    // </Fragment>
+                }
             </Fragment>
         );
     }
