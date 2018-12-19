@@ -22,7 +22,7 @@ registerBlockType(
         description: __( 'A \'card\' block allows a user to create a varied number of card-like posts with an optional image and link' ),
         category: 'common',
         icon: {
-          background: '#C71585',
+          background: '#458B00',
           foreground: '#FFFFFF',
           src: 'editor-table',
         //   src: icons.columns,
