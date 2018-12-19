@@ -35,66 +35,33 @@ export default class Edit extends Component {
     render() {
         const {
             attributes: { 
-                title,
-                message,
-                textAlignment,
                 styleClass,
-                columnClass,
-                cardCount,
+                cardTextAlignment,
+                cardID,
+                cardTitle, 
+                cardMessage, 
+                cardImgID, 
+                cardImgURL, 
+                cardImgAlt,
+                cardBtnURL,
+                cardBtnText, 
+                newTab,  
             },
                 className,
                 setAttributes
         } = this.props;
 
-        const firstClass = classnames( columnClass, 'first' );
-
-        const isRightSpot = (colClass, pos) => {
-            return
-            (
-                (colClass === 'one-half' && (pos+1) % 2 === 0) ||
-                (colClass === 'one-third' && (pos+1) % 3 === 0) ||
-                (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
-                (colClass === 'one-sixth' && (pos+1) % 6 === 0)
-            )  ?  true
-                
-           : false;
-        }
-
-        const renderCards = () => {
-            let cards = [];
-            cards.push( 
-                <div className={ firstClass }>                 
-                    <Card {...{ setAttributes, ...this.props }} />
-                </div> 
-            ); 
-            for (let i = 1; i < cardCount; i++) {
-                if ( isRightSpot(columnClass, i) )
-                    cards.push( <div className="clearfix"></div> );
-                cards.push( 
-                    <div className={ columnClass }>                 
-                        <Card {...{ setAttributes, ...this.props }} />
-                    </div> 
-                ); 
-            }
-            if ( !isRightSpot(columnClass, cardCount-1) )
-                    cards.push( <div className="clearfix"></div> );
-            return cards;
-        }
+        const randomNumber = () => (
+            Math.floor(Math.random() * 1000000)
+        );
 
         return (
-            <div className={ className } style={ { textAlign: textAlignment } }>
+            <div className={ className } style={ { textAlign: cardTextAlignment } }>
                 <Fragment>
                     <Inspector {...{ setAttributes, ...this.props }} />
                     <Controls {...{ setAttributes, ...this.props }} />
-
-                    { ( columnClass !== 'none' ) ?
-                        <Fragment>
-                            { renderCards() }
-                        </Fragment>
-                        :
-                        <p>Please select a column class first</p>
-                    }
-                </Fragment>
+                    { cardID && <Card {...{ setAttributes, ...this.props }} /> }               
+               </Fragment>
             </div>
         );
     }
