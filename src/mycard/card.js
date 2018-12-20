@@ -47,9 +47,9 @@ export default class Card extends Component {
                 cardBtnText, 
                 newTab,  
             },
-                setAttributes,
-                isSelected,
-
+            className,
+            setAttributes,
+            isSelected,
         } = this.props;
 
         const setStateToTrue = () => {
@@ -111,40 +111,50 @@ export default class Card extends Component {
                 />
             </div>
         );
+
+        const classes = classnames(
+            className,
+            styleClass,
+            'mycard-eleven-online'
+        );
   
         return (
-            <Fragment>
-                { cardImgID && 
-                    <div className="card-img">
-                        <img
-                            src={ cardImgURL }
-                            alt={ cardImgAlt }
-                        />
-                    </div>
-                }               
-                <div className={ styleClass } style={ { textAlign: cardTextAlignment } }>
-                    <RichText
-                            tagName="h3"
+            <Fragment>    
+                <div className={ classes }>
+                    { cardImgID && 
+                        <div className="wrapper-eleven-online">
+                            <div className="img-mycard-eleven-online">
+                                <img
+                                    src={ cardImgURL }
+                                    alt={ cardImgAlt }
+                                />
+                            </div>
+                        </div>
+                    }
+                    <div style={ { textAlign: cardTextAlignment, padding: '10px' } }>
+                        <RichText
+                                tagName="h3"
+                                formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                                placeholder={ __( 'Add Card Title' ) }
+                                value={ cardTitle }
+                                onChange={ cardTitle => setAttributes( { cardTitle } ) } 
+                            />
+                        <RichText
+                            tagName="p"
                             formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                            placeholder={ __( 'Add Card Title' ) }
-                            value={ cardTitle }
-                            onChange={ cardTitle => setAttributes( { cardTitle } ) } 
+                            placeholder={ __( 'Add card text message' ) }
+                            value={ cardMessage }
+                            onChange={ cardMessage => setAttributes( { cardMessage } ) } 
                         />
-                    <RichText
-                        tagName="p"
-                        formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                        placeholder={ __( 'Add card text message' ) }
-                        value={ cardMessage }
-                        onChange={ cardMessage => setAttributes( { cardMessage } ) } 
-                    />
+                        { cardBtnPresent && 
+                        // <Fragment>
+                            <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                                {renderButton()}
+                            </Tooltip>
+                        // </Fragment>
+                        }
+                    </div>              
                 </div>
-                { cardBtnPresent && 
-                    // <Fragment>
-                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                            {renderButton()}
-                        </Tooltip>
-                    // </Fragment>
-                }
             </Fragment>
         );
     }
