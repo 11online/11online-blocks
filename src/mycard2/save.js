@@ -4,13 +4,12 @@
 import './style.scss';
 
 import classnames from 'classnames';
+import Card from "./card";
 
 /**
  * Internal block libraries
  */
-const { __ } = wp.i18n;
 const { Component } = wp.element; 
-const { RichText } = wp.editor;
 
  /**
  * Create a Save Component
@@ -25,23 +24,19 @@ export default class Save extends Component {
     render() {
         const { 
             attributes: {
-                title,
-                message,
-                textAlignment,
+                cardID,
+                cardTextAlignment,
             }, 
             className,
+            setAttributes
         } = this.props;
+
         return (
-            <div className={ className } style={ { textAlign: textAlignment } }>
-                <RichText.Content 
-                    tagName="h3" 
-                    value={ title }
-                />
-                <RichText.Content 
-                    tagName="p" 
-                    value={ message }
-                /> 
+            <div className={ className } style={ { textAlign: cardTextAlignment } }>
+               { cardID && <Card {...{ setAttributes, ...this.props }} /> }
+               <h1>My Title {cardID}</h1>
             </div>
+        //  <div>Something went wrong</div>
         );
 
     }

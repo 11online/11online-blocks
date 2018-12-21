@@ -21,9 +21,9 @@ add_action( 'enqueue_block_assets', 'eleven_online_block_assets' );
 function eleven_online_editor_assets() {
 	// react code
 	wp_enqueue_script(
-		'11online-dev-block-js', plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), true);
+		'11online-dev-block-js', plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-data' ), true);
 	// unregister blocks
-	wp_enqueue_script('11online-unregister-blocks', plugins_url( '/unregister-blocks.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-element', 'wp-editor'), true	);
+	wp_enqueue_script('11online-unregister-blocks', plugins_url( '/unregister-blocks.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-data'), true	);
 
 	// Styles.
 	wp_enqueue_style(

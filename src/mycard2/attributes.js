@@ -9,7 +9,7 @@ const attributes = {
     },
     cardID: {
         type: 'number',
-        default: null,
+        default: 1,
     },
     cardImgID: {
         type: 'number',
@@ -17,27 +17,27 @@ const attributes = {
     },
     cardImgURL: {
         type: 'string',
-        source: 'attribute',
-        attribute: 'src',
-        selector: 'img',
+        // source: 'attribute',
+        // attribute: 'src',
+        // selector: 'img',
         default: null,
     },
     cardImgAlt: {
         type: 'string',
-        source: 'attribute',
-        attribute: 'alt',
-        selector: 'img',
+        // source: 'attribute',
+        // attribute: 'alt',
+        // selector: 'img',
         default: null,
     },
     cardTitle: {
         type: 'string',
-        source: 'html',
-        selector: 'h3',
+        // source: 'html',
+        // selector: 'h3',
     },
     cardMessage: {
         type: 'string',
-        source: 'html',
-        selector: 'p',
+        // source: 'html',
+        // selector: 'p',
     },
     cardBtnPresent: {
         type: 'boolean',
@@ -45,15 +45,15 @@ const attributes = {
     },
     cardBtnURL: {
         type: 'string',
-        source: 'attribute',
-        attribute: 'href',
-        selector: 'a',
+        // source: 'attribute',
+        // attribute: 'href',
+        // selector: 'a',
         default: 'http://'     
     },
     cardBtnText: {
         type: 'string',
-        source: 'text',
-        selector: 'a',
+        // source: 'text',
+        // selector: 'a',
         default: 'Click here',
     },
     cardTextAlignment: {

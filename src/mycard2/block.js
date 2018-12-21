@@ -2,9 +2,11 @@
  * Block dependencies
  */
 //import icons from './icons';
-import Edit from './edit';
+//import Edit from './edit';
 import Save from './save'
 import attributes from "./attributes";
+
+console.log(attributes);
 
 /**
  * Internal block libraries
@@ -41,13 +43,15 @@ registerBlockType(
         edit: props => {
             const { setAttributes } = props;
             return (
-                <Edit {...{ setAttributes, ...props }} />
+                <h1>Task</h1>
+                // <Edit {...{ setAttributes, ...props }} />
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
             const { setAttributes } = props;
             return (
+                // <h1>Task</h1>
                 <Save {...{ setAttributes, ...props }} />
             );
         },
