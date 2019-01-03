@@ -27,6 +27,7 @@ export default class Save extends Component {
             setAttributes,
         } = this.props;
 
+
         return (
             <div className={ className }>
                 { <Card editable={ false } {...{ setAttributes, ...this.props }} /> }
