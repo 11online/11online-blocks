@@ -23,23 +23,12 @@ export default class Save extends Component {
 
     render() {
         const { 
-            attributes: {
-                cardEditable,
-            }, 
             className,
             setAttributes,
-            editable,
         } = this.props;
-
-        // const notEditable = () => {
-        //     setAttributes({
-        //         cardEditable: false,
-        //     } );
-        // };
 
         return (
             <div className={ className }>
-                {/* { this.notEditable() } */}
                 { <Card editable={ false } {...{ setAttributes, ...this.props }} /> }
             </div>
         );
