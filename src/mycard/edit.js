@@ -27,25 +27,14 @@ export default class Edit extends Component {
 
     render() {
         const {
-            attributes: { 
-                cardEditable,
-            },
             className,
             setAttributes,
-            editable,
         } = this.props;
-
-        // const editable = () => {
-        //     setAttributes({
-        //         cardEditable: true,
-        //     } );
-        // };
 
         return (
             <div className={ className }>
                 <Fragment>
-                    {/* { this.editable() } */}
-                    { <Card editable={ true } {...{ setAttributes, ...this.props }} /> }               
+                    <Card editable={ true } {...{ setAttributes, ...this.props }} />             
                </Fragment>
             </div>
         );
