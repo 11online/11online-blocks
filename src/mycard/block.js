@@ -1,7 +1,6 @@
 /**
  * Block dependencies
  */
-//import icons from './icons';
 import Edit from './edit';
 import Save from './save'
 import attributes from "./attributes";
