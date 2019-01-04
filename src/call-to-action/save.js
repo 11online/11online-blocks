@@ -57,7 +57,7 @@ export default class Save extends Component {
         );
         return (  
             <div className={ classes1 } style={ divStyle }>
-                <div className="wrap" style={ { textAlign: textAlignment } }>
+                <div className="wrap" style={ { textAlign: textAlignment, color: colorFontControl } }>
                     <RichText.Content 
                         tagName="h3" 
                         value={ headline }
