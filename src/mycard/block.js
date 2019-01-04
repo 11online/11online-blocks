@@ -1,15 +1,19 @@
 /**
  * Block dependencies
  */
-import Edit from './edit';
-import Save from './save'
+import './style.scss';
+import './editor.scss';
+
+//import Edit from './edit';
 import attributes from "./attributes";
+import Card from "./card";
 
 /**
  * Internal block libraries
  */
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { Fragment } = wp.element; 
 
 /**
  * Register action block
@@ -38,16 +42,30 @@ registerBlockType(
         attributes,
         // Determines what is displayed in the editor
         edit: props => {
-            const { setAttributes } = props;
+            const {
+                className,
+                setAttributes,
+            } = props;
+    
             return (
-                <Edit {...{ setAttributes, ...props }} />
+                <div className={ className }>
+                    <Fragment>
+                        <Card editable={ true } {...{ setAttributes, ...props }} />             
+                   </Fragment>
+                </div>
             );
         },
         // Determines what is displayed on the frontend
         save: props => {
-            const { setAttributes } = props;
+            const { 
+                className,
+                setAttributes,
+            } = props;
+    
             return (
-                <Save {...{ setAttributes, ...props }} />
+                <div className={ className }>
+                    { <Card editable={ false } {...{ setAttributes, ...props }} /> }
+                </div>
             );
         },
     },
