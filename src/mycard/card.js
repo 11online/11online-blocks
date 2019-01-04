@@ -5,6 +5,7 @@ import './editor.scss';
 
 import classnames from 'classnames';
 import Controls from "./controls";
+import Inspector from "./inspector";
 
 /**
  * Internal Libraries
@@ -41,16 +42,15 @@ export default class Card extends Component {
                 cardBtnPresent,
                 cardBtnURL,
                 cardBtnText, 
-                newTab,  
+                newTab,
+                useColor,
+                colorFontControl,
+                colorBackgroundControl,
+                styleClass,
             },
             className,
             setAttributes,
         } = this.props;
-
-        const classes = classnames(
-            className,
-            'mycard-eleven-online'
-        );
 
         const ButtonControls = (
             <div className='button-box'>
@@ -94,11 +94,24 @@ export default class Card extends Component {
             </div>
         );
 
+        const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
+
+        const classes1 = classnames(
+            className,
+            'mycard-eleven-online'
+        );
+
+        const classes2 = classnames(
+            styleClass,
+            'button'
+        );
+
         return (
             this.props.editable ?
-                <div className={ classnames }>
+                <div className={ classes1 } style={ {backgroundColor: bgrColor} }>
                     <Fragment>
                         <Controls {...{ setAttributes, ...this.props }} />
+                        <Inspector {...{ setAttributes, ...this.props }} />
                         { cardImgID && 
                             <div className="img-mycard-eleven-online">
                                 <img
@@ -107,19 +120,21 @@ export default class Card extends Component {
                                 />
                             </div>
                         }
-                        <div style={ { textAlign: cardTextAlignment, padding: '10px' } }>
+                        <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
                             <RichText
                                 tagName="h2"
+                                formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                                 placeholder={ __( 'Add your card title' ) }
                                 value={ cardTitle }
-                                // style={ { textAlign: textAlignment, color: colorFontControl } }
+                                style={ { color: colorFontControl } }
                                 onChange={ cardTitle  => setAttributes( { cardTitle  } ) }         
                             />
                             <RichText
                                 tagName="p"
+                                formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                                 placeholder={ __( 'Add your card text' ) }
                                 value={ cardText }
-                                // style={ { textAlign: textAlignment, color: colorFontControl } }
+                                style={ { color: colorFontControl } }
                                 onChange={ cardText  => setAttributes( { cardText  } ) }                   		
                             />
                             { cardBtnPresent && 
@@ -135,7 +150,7 @@ export default class Card extends Component {
                 </div>
            :
                 <Fragment>
-                    <div className={ classes }>
+                    <div className={ classes1 } style={ {backgroundColor: bgrColor} }>
                         { cardImgID && 
                             <div className="img-mycard-eleven-online">
                                 <img
@@ -144,13 +159,27 @@ export default class Card extends Component {
                                 />
                             </div>
                         }
-                        <div style={ { textAlign: cardTextAlignment, padding: '10px' } }>
-                            <h2>{ cardTitle }</h2>
-                            <p>{ cardText }</p>
-                            { cardBtnPresent && 
+                        <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
+                            <RichText.Content 
+                                tagName="h2" 
+                                value={ cardTitle }
+                                style={ { color: colorFontControl } }
+                            />
+                            <RichText.Content 
+                                tagName="p" 
+                                value={ cardText }
+                                style={ { color: colorFontControl } }
+                            /> 
+                            { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">
-                                    { renderButton() }
-                                </div>                      
+                                    <a 
+                                        className={ classes2 } 
+                                        href={ cardBtnURL }
+                                        { ...newTab ? {target: '_blank'} : null }
+                                    >
+                                        { cardBtnText }
+                                    </a>
+                                </div>
                             }
                         </div>   
                     </div>
