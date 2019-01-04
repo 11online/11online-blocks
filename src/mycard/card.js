@@ -36,6 +36,7 @@ export default class Card extends Component {
                 cardTitle,
                 cardText,
                 cardTextAlignment,
+                cardHeadingSize,
                 cardImgID, 
                 cardImgURL, 
                 cardImgAlt,
@@ -122,7 +123,7 @@ export default class Card extends Component {
                         }
                         <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
                             <RichText
-                                tagName="h2"
+                                tagName={ cardHeadingSize }
                                 formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                                 placeholder={ __( 'Add your card title' ) }
                                 value={ cardTitle }
@@ -161,7 +162,7 @@ export default class Card extends Component {
                         }
                         <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
                             <RichText.Content 
-                                tagName="h2" 
+                                tagName={ cardHeadingSize } 
                                 value={ cardTitle }
                                 style={ { color: colorFontControl } }
                             />
