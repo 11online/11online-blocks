@@ -1,24 +1,20 @@
 const attributes = {
     cardTitle: {
-        // type: 'string',
-        // source: 'text',
         type: 'string',
-        source: 'html',
-        selector: 'h2',
-        // source: 'text',
-        // selector: '.card-title-eleven-online',
         default: 'Card Title',
     },
     cardText: {
-        // type: 'string',
-        // source: 'text',
         type: 'string',
-        source: 'html',
-        selector: 'p',
+        // source: 'html',
+        // selector: 'p',
         default: 'Card text content',
     },
     cardTextAlignment: {
         type: 'string',
+    },
+    cardHeadingSize: {
+        type: 'string',
+        default: 'h2',
     },
     cardImgID: {
         type: 'number',
