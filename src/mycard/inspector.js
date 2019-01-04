@@ -30,6 +30,8 @@ export default class Inspector extends Component {
             useColor,
             colorFontControl,
             colorBackgroundControl,
+            cardBtnPresent,
+            cardHeadingSize,
         },
         setAttributes
       } = this.props;
@@ -38,23 +40,39 @@ export default class Inspector extends Component {
         <InspectorControls>
             <PanelBody>
                 <SelectControl
-                    label={ __("Button Style Settings") }
-                    help={ __("Select Button Style Option") }
-                    value={ styleClass }
+                    label={ __("Heading Font Size") }
+                    help={ __("Select heading font size for your title") }
+                    value={ cardHeadingSize }
                     options={[
-                        { value: 'primary', label: __("Primary") },
-                        { value: 'secondary', label: __("Secondary") },
-                        { value: 'primary-border', label: __("Primary Border Only") },
-                        { value: 'secondary-border', label: __("Secondary Border Only") },
+                        { value: 'h2', label: __("h2") },
+                        { value: 'h3', label: __("h3") },
+                        { value: 'h4', label: __("h4") },
                     ]}
-                    onChange={ styleClass => setAttributes({ styleClass }) }
+                    onChange={ cardHeadingSize => setAttributes({ cardHeadingSize }) }
                 />
             </PanelBody>
+
+            { cardBtnPresent &&
+                <PanelBody>
+                    <SelectControl
+                        label={ __("Button Style Settings") }
+                        help={ __("Select button style option") }
+                        value={ styleClass }
+                        options={[
+                            { value: 'primary', label: __("Primary") },
+                            { value: 'secondary', label: __("Secondary") },
+                            { value: 'primary-border', label: __("Primary Border Only") },
+                            { value: 'secondary-border', label: __("Secondary Border Only") },
+                        ]}
+                        onChange={ styleClass => setAttributes({ styleClass }) }
+                    />
+                </PanelBody>
+            }
 
             <PanelBody>
                 <ToggleControl
                     label={ __("Use Background Color?") }
-                    help={ __( useColor ? 'Solid Color Background' : 'Transparent Background' ) }
+                    help={ __( useColor ? 'Solid color background' : 'Transparent background' ) }
                     checked={ useColor }
                     onChange={ () => setAttributes( { useColor: !useColor } ) }
                 />
@@ -66,7 +84,7 @@ export default class Inspector extends Component {
                 colorSettings={[
                     {
                         label: __("Font Color"),
-                        help: __("Select Font Color"),
+                        help: __("Select font color"),
                         value: colorFontControl,
                         onChange: colorFontControl => {
                             setAttributes({ colorFontControl });
@@ -82,7 +100,7 @@ export default class Inspector extends Component {
                     colorSettings={[
                         {
                             label: __("Background Color"),
-                            help: __("Select Background Color"),
+                            help: __("Select background color"),
                             value: colorBackgroundControl,
                             onChange: colorBackgroundControl => {
                                 setAttributes({ colorBackgroundControl });
