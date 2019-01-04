@@ -1,5 +1,7 @@
 const attributes = {
     cardTitle: {
+        // type: 'string',
+        // source: 'text',
         type: 'string',
         source: 'html',
         selector: 'h2',
@@ -8,6 +10,8 @@ const attributes = {
         default: 'Card Title',
     },
     cardText: {
+        // type: 'string',
+        // source: 'text',
         type: 'string',
         source: 'html',
         selector: 'p',
@@ -50,6 +54,22 @@ const attributes = {
         source: 'text',
         selector: 'a',
         default: 'Click here',
+    },
+    newTab: {
+        type: 'boolean',
+        default: true,
+    },
+    useColor: {
+        type: 'boolean',
+        default: false,
+    },
+    colorFontControl: {
+        type: 'string',
+        default: '#000000'
+    },
+    colorBackgroundControl: {
+        type: 'string',
+        default: 'transparent',
     },
 }
 
