@@ -97,9 +97,15 @@ export default class Card extends Component {
 
         const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
 
+        const outerClass = (cardImgID ? 'mycard-eleven-online-img' : 'mycard-eleven-online');
+        const wrapperClass = (cardImgID ? 'wrapper-eleven-online-img' : 'wrapper-eleven-online');
+        const styles1 = (cardImgID ? { backgroundImage: 'url(' + cardImgURL + ')' } 
+        : {backgroundColor: bgrColor});
+        const styles2 = (cardImgID ? {backgroundColor: bgrColor, textAlign: cardTextAlignment} : { textAlign: cardTextAlignment });
+
         const classes1 = classnames(
             className,
-            'mycard-eleven-online'
+            outerClass
         );
 
         const classes2 = classnames(
@@ -109,19 +115,11 @@ export default class Card extends Component {
 
         return (
             this.props.editable ?
-                <div className={ classes1 } style={ {backgroundColor: bgrColor} }>
+                <div className={ classes1 } style={ styles1 }>
                     <Fragment>
                         <Controls {...{ setAttributes, ...this.props }} />
                         <Inspector {...{ setAttributes, ...this.props }} />
-                        { cardImgID && 
-                            <div className="img-mycard-eleven-online">
-                                <img
-                                    src={ cardImgURL }
-                                    alt={ cardImgAlt }
-                                />
-                            </div>
-                        }
-                        <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
+                        <div className={ wrapperClass } style={ styles2 }>
                             <RichText
                                 tagName={ cardHeadingSize }
                                 formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
@@ -151,16 +149,8 @@ export default class Card extends Component {
                 </div>
            :
                 <Fragment>
-                    <div className={ classes1 } style={ {backgroundColor: bgrColor} }>
-                        { cardImgID && 
-                            <div className="img-mycard-eleven-online">
-                                <img
-                                    src={ cardImgURL }
-                                    alt={ cardImgAlt }
-                                />
-                            </div>
-                        }
-                        <div style={ { textAlign: cardTextAlignment, padding: '5px', margin: '0' } }>
+                    <div className={ classes1 } style={ styles1 }>
+                        <div className={ wrapperClass } style={ styles2 }>
                             <RichText.Content 
                                 tagName={ cardHeadingSize } 
                                 value={ cardTitle }
