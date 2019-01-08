@@ -39,15 +39,14 @@ export default class Card extends Component {
                 cardHeadingSize,
                 cardImgID, 
                 cardImgURL, 
-                cardImgAlt,
                 cardBtnPresent,
                 cardBtnURL,
-                cardBtnText, 
+                cardBtnText,
+                CardBtnStyleClass, 
                 newTab,
                 useColor,
                 colorFontControl,
-                colorBackgroundControl,
-                styleClass,
+                colorBackgroundControl,   
             },
             className,
             setAttributes,
@@ -81,7 +80,7 @@ export default class Card extends Component {
                     renderToggle={ ( { isOpen, onToggle } ) => (
                         <div style={ { textAlign: cardTextAlignment } }>
                             <a 
-                                className="button" 
+                                className={ classes } 
                                 href="#0"
                                 onClick={ onToggle } 
                                 aria-expanded={ isOpen }
@@ -96,30 +95,24 @@ export default class Card extends Component {
         );
 
         const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
-
-        const outerClass = (cardImgID ? 'mycard-eleven-online-img' : 'mycard-eleven-online');
-        const wrapperClass = (cardImgID ? 'wrapper-eleven-online-img' : 'wrapper-eleven-online');
-        const styles1 = (cardImgID ? { backgroundImage: 'url(' + cardImgURL + ')' } 
-        : {backgroundColor: bgrColor});
-        const styles2 = (cardImgID ? {backgroundColor: bgrColor, textAlign: cardTextAlignment} : { textAlign: cardTextAlignment });
-
-        const classes1 = classnames(
-            className,
-            outerClass
-        );
-
-        const classes2 = classnames(
-            styleClass,
+        const classes = classnames(
+            CardBtnStyleClass,
             'button'
         );
 
         return (
             this.props.editable ?
-                <div className={ classes1 } style={ styles1 }>
+                <div className={ className } style={ {backgroundColor: bgrColor} }>
                     <Fragment>
                         <Controls {...{ setAttributes, ...this.props }} />
                         <Inspector {...{ setAttributes, ...this.props }} />
-                        <div className={ wrapperClass } style={ styles2 }>
+                        { cardImgID &&
+                            <div 
+                                className="mycard-eleven-online-img"
+                                style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                            ></div>
+                        }
+                        <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
                             <RichText
                                 tagName={ cardHeadingSize }
                                 formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
@@ -149,8 +142,14 @@ export default class Card extends Component {
                 </div>
            :
                 <Fragment>
-                    <div className={ classes1 } style={ styles1 }>
-                        <div className={ wrapperClass } style={ styles2 }>
+                     <div className={ className } style={ {backgroundColor: bgrColor} }>
+                        { cardImgID &&
+                                <div 
+                                    className="mycard-eleven-online-img"
+                                    style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                                ></div>
+                        }
+                        <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
                             <RichText.Content 
                                 tagName={ cardHeadingSize } 
                                 value={ cardTitle }
@@ -164,7 +163,7 @@ export default class Card extends Component {
                             { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">
                                     <a 
-                                        className={ classes2 } 
+                                        className={ classes } 
                                         href={ cardBtnURL }
                                         { ...newTab ? {target: '_blank'} : null }
                                     >
