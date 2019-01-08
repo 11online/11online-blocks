@@ -5,8 +5,6 @@ const attributes = {
     },
     cardText: {
         type: 'string',
-        // source: 'html',
-        // selector: 'p',
         default: 'Card text content',
     },
     cardTextAlignment: {
@@ -22,16 +20,6 @@ const attributes = {
     },
     cardImgURL: {
         type: 'string',
-        // source: 'attribute',
-        // attribute: 'src',
-        // selector: 'img',
-        default: null,
-    },
-    cardImgAlt: {
-        type: 'string',
-        // source: 'attribute',
-        // attribute: 'alt',
-        // selector: 'img',
         default: null,
     },
     cardBtnPresent: {
@@ -50,6 +38,10 @@ const attributes = {
         source: 'text',
         selector: 'a',
         default: 'Click here',
+    },
+    btnStyleClass: {
+        type: 'string',
+        default: 'primary',
     },
     newTab: {
         type: 'boolean',
