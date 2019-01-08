@@ -6,6 +6,7 @@ import './editor.scss';
 import classnames from 'classnames';
 import Controls from "./controls";
 import Inspector from "./inspector";
+import InnerBtn from "../assets/js/innerbtn";
 
 /**
  * Internal Libraries
@@ -40,65 +41,16 @@ export default class Card extends Component {
                 cardImgID, 
                 cardImgURL, 
                 cardBtnPresent,
-                cardBtnURL,
-                cardBtnText,
-                CardBtnStyleClass, 
-                newTab,
                 useColor,
                 colorFontControl,
                 colorBackgroundControl,   
             },
             className,
             setAttributes,
+            editable,
         } = this.props;
 
-        const ButtonControls = (
-            <div className='button-box'>
-                <TextControl
-                    label={ __( 'Button Text' ) }
-                    value={ cardBtnText }
-                    onChange={ cardBtnText => setAttributes( { cardBtnText } ) }
-                />
-                <TextControl
-                    label={ __( 'Link URL' ) }
-                    value={ cardBtnURL }
-                    onChange={ cardBtnURL => setAttributes( { cardBtnURL } ) }
-                />
-                <ToggleControl
-                    label={ __("Open Link in New Tab?") }
-                    help={ __( newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window' ) }
-                    checked={ newTab }
-                    onChange={ () => setAttributes( { newTab: ! newTab } ) }
-                />
-            </div>
-		);
-
-        const renderButton = () => (
-            <div style={ { width: '100%' } }>
-                <Dropdown
-                    //position="bottom left"
-                    renderToggle={ ( { isOpen, onToggle } ) => (
-                        <div style={ { textAlign: cardTextAlignment } }>
-                            <a 
-                                className={ classes } 
-                                href="#0"
-                                onClick={ onToggle } 
-                                aria-expanded={ isOpen }
-                            >
-                                { cardBtnText }
-                            </a>
-                        </div>       
-                    ) }
-                    renderContent={ () => ButtonControls }
-                />
-            </div>
-        );
-
         const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
-        const classes = classnames(
-            CardBtnStyleClass,
-            'button'
-        );
 
         return (
             this.props.editable ?
@@ -132,7 +84,7 @@ export default class Card extends Component {
                             { cardBtnPresent && 
                                 <div className="btn-mycard-eleven-online">
                                     <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                        { renderButton() }
+                                        <InnerBtn editable={ true } {...{ setAttributes, ...this.props }} />
                                     </Tooltip> 
                                 </div>                      
                             }
@@ -162,13 +114,7 @@ export default class Card extends Component {
                             /> 
                             { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">
-                                    <a 
-                                        className={ classes } 
-                                        href={ cardBtnURL }
-                                        { ...newTab ? {target: '_blank'} : null }
-                                    >
-                                        { cardBtnText }
-                                    </a>
+                                    { <InnerBtn editable={ false } {...{ setAttributes, ...props }} /> }
                                 </div>
                             }
                         </div>   
