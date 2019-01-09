@@ -1,5 +1,5 @@
 /**
- * Internal block libraries
+ * Used libraries
  */
 
 const { __ } = wp.i18n;
