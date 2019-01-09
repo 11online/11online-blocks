@@ -2,11 +2,10 @@
  * Control Component dependencies
  */
 import './editor.scss';
-
-import classnames from 'classnames';
+import './style.scss';
 
 /**
- * Internal Toolbar Controls Libraries
+ * Used Libraries
  */
 const { __ } = wp.i18n;
 const { Component } = wp.element;
@@ -38,7 +37,6 @@ export default class Controls extends Component {
                 cardBtnPresent,
                 cardImgID,
              },
-            className,
             setAttributes
           } = this.props;
 
