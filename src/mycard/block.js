@@ -4,19 +4,18 @@
 import './style.scss';
 import './editor.scss';
 
-//import Edit from './edit';
 import attributes from "./attributes";
 import Card from "./card";
 
 /**
- * Internal block libraries
+ * Used Libraries
  */
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element; 
 
 /**
- * Register action block
+ * Register block
  */
 registerBlockType( 
     'eleven-online/mycard', 
@@ -28,7 +27,6 @@ registerBlockType(
           background: '#104E8B',
           foreground: '#FFFFFF',
           src: 'editor-table',
-        //   src: icons.columns,
         },                
         keywords: [
             __( '11 Online'),
