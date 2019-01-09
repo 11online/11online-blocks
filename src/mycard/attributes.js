@@ -26,20 +26,20 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
-    cardBtnURL: {
+    buttonURL: {
         type: 'string',
         source: 'attribute',
         attribute: 'href',
         selector: 'a',
         default: 'http://'       
     },
-    cardBtnText: {
+    buttonText: {
         type: 'string',
         source: 'text',
         selector: 'a',
         default: 'Click here',
     },
-    btnStyleClass: {
+    buttonStyleClass: {
         type: 'string',
         default: 'primary',
     },
