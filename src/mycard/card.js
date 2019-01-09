@@ -2,23 +2,20 @@
  * Card Component dependencies
  */
 import './editor.scss';
+import './style.scss';
 
-import classnames from 'classnames';
 import Controls from "./controls";
 import Inspector from "./inspector";
-import InnerBtn from "../assets/js/innerbtn";
+import InnerButton from "../assets/js/inner-button";
 
 /**
- * Internal Libraries
+ * Used Libraries
  */
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
 const { RichText } = wp.editor;
 const {
     Tooltip,
-    TextControl,
-    Dropdown,
-    ToggleControl,
 } = wp.components;
 
 /**
@@ -47,7 +44,6 @@ export default class Card extends Component {
             },
             className,
             setAttributes,
-            editable,
         } = this.props;
 
         const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
@@ -84,7 +80,12 @@ export default class Card extends Component {
                             { cardBtnPresent && 
                                 <div className="btn-mycard-eleven-online">
                                     <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                        <InnerBtn editable={ true } {...{ setAttributes, ...this.props }} />
+                                        <InnerButton 
+                                            editable={ true } 
+                                            attributes={ this.props.attributes } 
+                                            setAttributes={ setAttributes } 
+                                        />
+
                                     </Tooltip> 
                                 </div>                      
                             }
@@ -114,7 +115,10 @@ export default class Card extends Component {
                             /> 
                             { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">
-                                    { <InnerBtn editable={ false } {...{ setAttributes, ...props }} /> }
+                                    { <InnerButton 
+                                        editable={ false } 
+                                        attributes={ this.props.attributes } 
+                                    /> }
                                 </div>
                             }
                         </div>   
