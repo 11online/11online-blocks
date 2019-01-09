@@ -3,6 +3,7 @@
  */
 import icons from './icons';
 import './editor.scss';
+import './style.scss';
 
 import classnames from 'classnames';
 
