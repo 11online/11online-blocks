@@ -1,6 +1,7 @@
 /**
  * Control Component dependencies
  */
+import icons from './icons';
 import './editor.scss';
 import './style.scss';
 
@@ -19,6 +20,7 @@ const {
     Toolbar,
     Button,
     Tooltip,
+    DropdownMenu,
 } = wp.components;
 
 /**
@@ -33,12 +35,16 @@ export default class Controls extends Component {
     render() {
         const {
             attributes: { 
+                cardCount,
+                cardID,
                 cardTextAlignment,
                 cardBtnPresent,
                 cardImgID,
              },
             setAttributes
           } = this.props;
+
+        const onAddCard = () => setAttributes( { cardCount: (cardCount + 1)} );
 
         const onSelectImage = img => {
             setAttributes( {
@@ -55,6 +61,73 @@ export default class Controls extends Component {
                 cardImgAlt: null,
             });
         }
+
+        const myDropdownMenu = () => (
+            <DropdownMenu
+                icon={ icons.columns }
+                label="Select a Column Class"
+                controls={ [
+                    {
+                        title: 'Column Class: one-half',
+                        icon: icons.half,
+                        onClick: () => {
+                            setAttributes( { 
+                                columnClass: 'one-half',
+                              } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-third',
+                        icon: icons.third,
+                        onClick: () => {
+                            setAttributes( { 
+                                columnClass: 'one-third',
+                             } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-fourth',
+                        icon: icons.fourth,
+                        onClick: () => {
+                            setAttributes( { 
+                                columnClass: 'one-fourth',
+                             } );
+                        }
+                    },
+                    {
+                        title: 'Column Class: one-sixth',
+                        icon: icons.sixth,
+                        onClick: () => {
+                            setAttributes( { 
+                                columnClass: 'one-sixth',
+                             } );
+                        }
+                    },
+                ] }
+            />
+        );
+
+        const renderAddCardBtn = () => (
+            <Tooltip text={ __( 'Add a New Card' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ onAddCard }
+                >
+                    { __( 'Add Card' ) }
+                </Button>
+            </Tooltip>
+        );
+
+        const renderRemoveCardBtn = () => (
+            <Tooltip text={ __( 'Remove the Selected Card' ) }>
+                <Button
+                    className={ "components-button button button-large" }
+                    onClick={ open }
+                >
+                    { __( 'Remove Card' ) }
+                </Button>
+            </Tooltip>
+        );
 
         const renderAddActionBtn = () => (
             <Tooltip text={ __( 'Add Action Button' ) }>
@@ -85,6 +158,9 @@ export default class Controls extends Component {
                     onChange={ cardTextAlignment => setAttributes( { cardTextAlignment } ) }
                 />
                 <Toolbar>
+                    { myDropdownMenu() }
+                    { renderAddCardBtn() }  
+                    { (cardCount > 1) && renderRemoveCardBtn() } 
                     { !cardImgID &&
                         <MediaUploadCheck>
                             <MediaUpload
