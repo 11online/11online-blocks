@@ -6,6 +6,8 @@ import './editor.scss';
 
 import attributes from "./attributes";
 import Card from "./card";
+import Edit from './edit';
+// import Save from './save';
 
 /**
  * Used Libraries
@@ -18,7 +20,7 @@ const { Fragment } = wp.element;
  * Register block
  */
 registerBlockType( 
-    'eleven-online/mycard', 
+    'eleven-online/cards', 
     {
         title: __( 'Cards Block' ),
         description: __( 'A \'cards\' block allows a user to create a varied number of card-like posts with an optional image and link' ),
@@ -40,17 +42,9 @@ registerBlockType(
         attributes,
         // Determines what is displayed in the editor
         edit: props => {
-            const {
-                className,
-                setAttributes,
-            } = props;
-    
+            const { setAttributes } = props;
             return (
-                <div className={ className }>
-                    <Fragment>
-                        <Card editable={ true } {...{ setAttributes, ...props }} />             
-                   </Fragment>
-                </div>
+                <Edit {...{ setAttributes, ...props }} />
             );
         },
         // Determines what is displayed on the frontend
