@@ -1,10 +1,16 @@
+.main-wrapper-eleven-online {
+    padding: 10px;
+    background-color: aquamarine;
+    z-index: -1;
+}
+
 .mycard-eleven-online-img {
-    position: relative;
+    // position: relative;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center; 
     background-size: cover;
-    padding-bottom: 30%;
+    padding-bottom: 60%;
 }
 
 .wrapper-eleven-online {
@@ -14,4 +20,9 @@
 
 .btn-mycard-eleven-online {
     padding: 10px 0px;
+}
+
+.card-eleven-online {
+    border: 2px solid rgba(232, 8, 41, 0.365);
+    padding: 0;
 }
