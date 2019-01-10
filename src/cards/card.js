@@ -4,6 +4,7 @@
 import './editor.scss';
 import './style.scss';
 
+import classnames from 'classnames';
 import Controls from "./controls";
 import Inspector from "./inspector";
 import InnerButton from "../assets/js/inner-button";
@@ -43,17 +44,25 @@ export default class Card extends Component {
                 colorBackgroundControl,   
             },
             className,
+            editable,
+            isSelected,
             setAttributes,
         } = this.props;
 
         const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
+        const classes = classnames( className, 'card-eleven-online' );
 
         return (
-            this.props.editable ?
-                <div className={ className } style={ {backgroundColor: bgrColor} }>
+            editable ?
+                <div className={ classes } style={ {backgroundColor: bgrColor} }>
                     <Fragment>
-                        <Controls {...{ setAttributes, ...this.props }} />
-                        <Inspector {...{ setAttributes, ...this.props }} />
+                        { isSelected ?
+                            <Fragment>
+                                <Controls {...{ setAttributes, ...this.props }} />
+                                <Inspector {...{ setAttributes, ...this.props }} />
+                            </Fragment>
+                            : ''
+                        }
                         { cardImgID &&
                             <div 
                                 className="mycard-eleven-online-img"
@@ -95,7 +104,7 @@ export default class Card extends Component {
                 </div>
            :
                 <Fragment>
-                     <div className={ className } style={ {backgroundColor: bgrColor} }>
+                     <div className={ classes } style={ {backgroundColor: bgrColor} }>
                         { cardImgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
