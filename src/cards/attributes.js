@@ -1,4 +1,19 @@
 const attributes = {
+    columnClass: {
+        type: 'string',
+        default: 'one-half',
+    },
+    cardCount: {
+        type: 'number',
+        default: 1,
+    },
+    cards: {
+        type: 'array',
+        default: [],
+    },
+    cardID: {
+        type: 'string',
+    },
     cardTitle: {
         type: 'string',
         default: 'Card Title',
