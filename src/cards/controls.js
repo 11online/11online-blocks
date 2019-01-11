@@ -37,6 +37,7 @@ export default class Controls extends Component {
             attributes: { 
                 cardCount,
                 cardID,
+                isEditing,
                 cardTextAlignment,
                 cardBtnPresent,
                 cardImgID,
@@ -118,17 +119,6 @@ export default class Controls extends Component {
             </Tooltip>
         );
 
-        const renderRemoveCardBtn = () => (
-            <Tooltip text={ __( 'Remove the Selected Card' ) }>
-                <Button
-                    className={ "components-button button button-large" }
-                    onClick={ open }
-                >
-                    { __( 'Remove Card' ) }
-                </Button>
-            </Tooltip>
-        );
-
         const renderAddActionBtn = () => (
             <Tooltip text={ __( 'Add Action Button' ) }>
                 <Button
@@ -152,15 +142,13 @@ export default class Controls extends Component {
         );
 
         return (
+           isEditing ? 
             <BlockControls>
                 <AlignmentToolbar
                     value={ cardTextAlignment }
                     onChange={ cardTextAlignment => setAttributes( { cardTextAlignment } ) }
                 />
                 <Toolbar>
-                    { myDropdownMenu() }
-                    { renderAddCardBtn() }  
-                    { (cardCount > 1) && renderRemoveCardBtn() } 
                     { !cardImgID &&
                         <MediaUploadCheck>
                             <MediaUpload
@@ -192,6 +180,13 @@ export default class Controls extends Component {
                         </Tooltip>
                     } 
                     { cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                </Toolbar>
+            </BlockControls>
+            :
+            <BlockControls>
+                <Toolbar>
+                    { myDropdownMenu() }
+                    { renderAddCardBtn() }
                 </Toolbar>
             </BlockControls>
         );
