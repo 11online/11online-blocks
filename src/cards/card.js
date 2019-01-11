@@ -91,16 +91,71 @@ export default class Card extends Component {
             </Tooltip>
         );
 
+        const renderForEditing = () => (
+            <Fragment>
+                <RichText
+                    tagName={ cardHeadingSize }
+                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                    placeholder={ __( 'Add your card title' ) }
+                    value={ cardTitle }
+                    style={ { color: colorFontControl } }
+                    onChange={ cardTitle  => setAttributes( { cardTitle  } ) }         
+                />
+                <RichText
+                    tagName="p"
+                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                    placeholder={ __( 'Add your card text' ) }
+                    value={ cardText }
+                    style={ { color: colorFontControl } }
+                    onChange={ cardText  => setAttributes( { cardText  } ) }                   		
+                />
+                { cardBtnPresent && 
+                    <div className="btn-mycard-eleven-online">
+                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                            <InnerButton 
+                                editable={ true } 
+                                attributes={ this.props.attributes } 
+                                setAttributes={ setAttributes } 
+                            />
+
+                        </Tooltip> 
+                    </div>                      
+                }
+            </Fragment>
+        );
+
+        const renderForDone = () => (
+            <Fragment>
+                <RichText.Content 
+                    tagName={ cardHeadingSize } 
+                    value={ cardTitle }
+                    style={ { color: colorFontControl } }
+                />
+                <RichText.Content 
+                    tagName="p" 
+                    value={ cardText }
+                    style={ { color: colorFontControl } }
+                /> 
+                { cardBtnPresent &&
+                    <div className="btn-mycard-eleven-online">
+                        { <InnerButton 
+                            editable={ false } 
+                            attributes={ this.props.attributes } 
+                        /> }
+                    </div>
+                }
+            </Fragment>
+        );
+
         return (
             editable ?
                 <div className={ classes } style={ {backgroundColor: bgrColor} }>
                     <Fragment>
-                        { isSelected ?
-                            <Fragment>
+                        { isSelected &&
+                            <Fragment> 
                                 <Controls {...{ setAttributes, ...this.props }} />
-                                <Inspector {...{ setAttributes, ...this.props }} />
+                                { isEditing && <Inspector {...{ setAttributes, ...this.props }} /> }
                             </Fragment>
-                            : ''
                         }
                         <div className="card-wrapper-eleven-online">
                             <div className="buttons-wrapper-eleven-online">
@@ -118,34 +173,7 @@ export default class Card extends Component {
                                 ></div>
                             }
                             <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
-                                <RichText
-                                    tagName={ cardHeadingSize }
-                                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                                    placeholder={ __( 'Add your card title' ) }
-                                    value={ cardTitle }
-                                    style={ { color: colorFontControl } }
-                                    onChange={ cardTitle  => setAttributes( { cardTitle  } ) }         
-                                />
-                                <RichText
-                                    tagName="p"
-                                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                                    placeholder={ __( 'Add your card text' ) }
-                                    value={ cardText }
-                                    style={ { color: colorFontControl } }
-                                    onChange={ cardText  => setAttributes( { cardText  } ) }                   		
-                                />
-                                { cardBtnPresent && 
-                                    <div className="btn-mycard-eleven-online">
-                                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                            <InnerButton 
-                                                editable={ true } 
-                                                attributes={ this.props.attributes } 
-                                                setAttributes={ setAttributes } 
-                                            />
-
-                                        </Tooltip> 
-                                    </div>                      
-                                }
+                                { isEditing ? renderForEditing() : renderForDone() }  
                             </div>
                         </div>  
                     </Fragment>
@@ -160,24 +188,7 @@ export default class Card extends Component {
                                 ></div>
                         }
                         <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
-                            <RichText.Content 
-                                tagName={ cardHeadingSize } 
-                                value={ cardTitle }
-                                style={ { color: colorFontControl } }
-                            />
-                            <RichText.Content 
-                                tagName="p" 
-                                value={ cardText }
-                                style={ { color: colorFontControl } }
-                            /> 
-                            { cardBtnPresent &&
-                                <div className="btn-mycard-eleven-online">
-                                    { <InnerButton 
-                                        editable={ false } 
-                                        attributes={ this.props.attributes } 
-                                    /> }
-                                </div>
-                            }
+                            { renderForDone() }
                         </div>   
                     </div>
                 </Fragment>
