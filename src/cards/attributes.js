@@ -7,12 +7,21 @@ const attributes = {
         type: 'number',
         default: 1,
     },
+    isEditing: {
+        type: 'boolean',
+        default: false,
+    },
+    currentID: {
+        type: 'string',
+        default: null,
+    },
     cards: {
         type: 'array',
         default: [],
     },
     cardID: {
         type: 'string',
+        default: null,
     },
     cardTitle: {
         type: 'string',
