@@ -61,7 +61,7 @@ registerBlockType( 'eleven-online/paragraphs',
                 </Button>
             </Tooltip>
         );
-        
+
         const renderParagraph = (index) => {
             return (
 				<div className="my-paragraph">
@@ -79,7 +79,7 @@ registerBlockType( 'eleven-online/paragraphs',
             );
 		};
 		
-		const renderParagraphs = () => {
+		const renderParagraphs2 = () => {
 			let myParagraphs = [];
 
 			for ( let i = 0; i < count; i++ ) {
@@ -89,6 +89,23 @@ registerBlockType( 'eleven-online/paragraphs',
 			return myParagraphs;
 		}
 
+		const renderParagraphs = paragraphs.map( (p, index) => {
+			return (
+				<div className="my-paragraph">
+					<RichText
+						tagName="p"
+						className={className}
+						value={ p['text'] }
+						onChange={ ( value ) => { 
+							let newParagraphs = [ ...paragraphs ];
+							newParagraphs[index]['text'] = value;
+							setAttributes( { paragraphs: newParagraphs } );
+						} }
+					/>
+				</div>
+			);
+		});
+		
 		return (
 			<Fragment>
 				<BlockControls>
@@ -96,21 +113,48 @@ registerBlockType( 'eleven-online/paragraphs',
 						{ renderAddParagraphBtn() }
 					</Toolbar>
 				</BlockControls>
-				{ renderParagraphs() }
+				{ renderParagraphs }
 			</Fragment>		
 			);
 	},
 
 	save: function({attributes, className}) {
 		const { count, paragraphs } = attributes;
+
+		const renderParagraphs = paragraphs.map( (p) => {
+			return (
+				<div className="my-paragraph">
+					<RichText.Content
+						tagName="p"
+						className={className}
+						value={ p['text'] }
+					/>
+				</div>
+			);
+		});
+
+		const renderParagraphs2 = () => {
+			let myParagraphs = [];
+
+			for ( let i = 0; i < count; i++ ) {
+				myParagraphs.push( 
+					<div className="my-paragraph">
+						<RichText.Content
+							tagName="p"
+							className={className}
+							value={ paragraphs[i]['text'] }
+						/>
+					</div>	
+				 );
+			}
+
+			return myParagraphs;
+		}
+
 		return (
-			<div className="my-paragraph">
-				<RichText.Content
-					tagName="p"
-					className={ className }
-					value={ paragraphs[0]['text'] }
-				/>
-			</div>
+			<Fragment>
+				{ renderParagraphs }
+			</Fragment>
 		);
 	},
 } );
