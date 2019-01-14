@@ -56,7 +56,7 @@ registerBlockType(
     
             return (
                 <div className={ className }>
-                    { <Card editable={ false } {...{ setAttributes, ...props }} /> }
+                    { <Card index={0} editable={ false } {...{ setAttributes, ...props }} /> }
                 </div>
             );
         },
