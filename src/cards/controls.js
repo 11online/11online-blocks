@@ -35,32 +35,50 @@ export default class Controls extends Component {
     render() {
         const {
             attributes: { 
-                cardCount,
-                cardID,
+                currentCard,
                 isEditing,
-                cardTextAlignment,
-                cardBtnPresent,
-                cardImgID,
+                cards,     
              },
             setAttributes
           } = this.props;
 
-        const onAddCard = () => setAttributes( { cardCount: (cardCount + 1)} );
+          const createDefaultCard = () => (
+            {
+                cardTitle: 'Card Title',
+                cardText: 'Card text content',
+                cardTextAlignment: 'left',
+                cardHeadingSize: 'h2',
+                cardImgID: null,
+                cardImgURL: null,
+                cardBtnPresent: false,
+                buttonURL: 'http://',
+                buttonText: 'Click here',
+                buttonStyleClass: 'primary',
+                newTab: true,
+                useColor: false,
+                colorFontControl: '#000000',
+                colorBackgroundControl: '#FFFFFF',
+            }
+        );
+
+        const onAddCard = () => {
+            const newCards = [ ...cards];
+            newCards.push(createDefaultCard());
+            setAttributes( { cards: newCards } );
+        };
 
         const onSelectImage = img => {
-            setAttributes( {
-                cardImgID: img.id,
-                cardImgURL: img.url,
-                cardImgAlt: img.alt,
-            } );
+            const newCards = [ ...cards];
+            newCards[currentCard].cardImgID = img.id;
+            newCards[currentCard].cardImgURL = img.url;
+            setAttributes( { cards: newCards } );
         };
 
         const onRemoveImage = () => {
-            setAttributes({
-                cardImgID: null,
-                cardImgURL: null,
-                cardImgAlt: null,
-            });
+            const newCards = [ ...cards];
+            newCards[currentCard].cardImgID = null;
+            newCards[currentCard].cardImgURL = null;
+            setAttributes( { cards: newCards } );
         }
 
         const myDropdownMenu = () => (
@@ -123,7 +141,11 @@ export default class Controls extends Component {
             <Tooltip text={ __( 'Add Action Button' ) }>
                 <Button
                     className={ "components-button button button-large" }
-                    onClick={ () => setAttributes( { cardBtnPresent: true } ) }
+                    onClick={ () => {
+                        const newCards = [ ...cards];
+                        newCards[currentCard].cardBtnPresent = true;
+                        setAttributes( { cards: newCards } );
+                    } }
                 >
                     { __( 'Add Button' ) }
                 </Button>
@@ -134,7 +156,11 @@ export default class Controls extends Component {
             <Tooltip text={ __( 'Remove Action Button' ) }>
                 <Button
                     className={ "components-button button button-large" }
-                    onClick={ () => setAttributes( { cardBtnPresent: false} ) }
+                    onClick={ () => {
+                        const newCards = [ ...cards];
+                        newCards[currentCard].cardBtnPresent = false;
+                        setAttributes( { cards: newCards } );
+                    } }
                 >
                     { __( 'Remove Button' ) }
                 </Button>
@@ -145,16 +171,20 @@ export default class Controls extends Component {
            isEditing ? 
             <BlockControls>
                 <AlignmentToolbar
-                    value={ cardTextAlignment }
-                    onChange={ cardTextAlignment => setAttributes( { cardTextAlignment } ) }
+                    value={ cards[currentCard].cardTextAlignment }
+                    onChange={ cardTextAlignment => {
+                        const newCards = [ ...cards];
+                        newCards[currentCard].cardTextAlignment = cardTextAlignment;
+                        setAttributes( { cards: newCards } );
+                    } }
                 />
                 <Toolbar>
-                    { !cardImgID &&
+                    { !cards[currentCard].cardImgID &&
                         <MediaUploadCheck>
                             <MediaUpload
                                 onSelect={ onSelectImage }
                                 type="image"
-                                value={ cardImgID }
+                                value={ cards[currentCard].cardImgID }
                                 render={ ( { open } ) => (
                                     <Tooltip text={ __( 'Click to Upload Image' ) }>
                                         <Button
@@ -169,7 +199,7 @@ export default class Controls extends Component {
                             </MediaUpload>
                         </MediaUploadCheck>
                     } 
-                    { cardImgID &&
+                    { cards[currentCard].cardImgID &&
                         <Tooltip text={ __( 'Click to Remove Image' ) }>
                             <Button
                                 className={ "components-button button button-large" }
@@ -179,7 +209,7 @@ export default class Controls extends Component {
                             </Button>
                         </Tooltip>
                     } 
-                    { cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                    { cards[currentCard].cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
                 </Toolbar>
             </BlockControls>
             :
