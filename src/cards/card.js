@@ -34,34 +34,26 @@ export default class Card extends Component {
     render() {
         const {
             attributes: {
+                columnClass,
+                currentCard,
                 isEditing,
-                currentID,
-                cardID,
-                cardTitle,
-                cardText,
-                cardTextAlignment,
-                cardHeadingSize,
-                cardImgID, 
-                cardImgURL, 
-                cardBtnPresent,
-                useColor,
-                colorFontControl,
-                colorBackgroundControl,   
+                cards,                    
             },
             className,
+            index,
             editable,
             isSelected,
-            setAttributes,
-        } = this.props;
+            setAttributes,          
+        } = this.props;    
 
-        const bgrColor = ( useColor ? colorBackgroundControl : 'transparent' );
+        const bgrColor = ( cards[index].useColor ? cards[index].colorBackgroundControl : '#FFFFFF' );
         const classes = classnames( className, 'card-eleven-online' );
 
         const renderEditCardBtn = () => (
             <Tooltip text={ __( 'Edit Card' )  }>
                 <Button 
                     className={ "button" }
-                    onClick={ () => setAttributes( { isEditing: true } ) }
+                    onClick={ () => setAttributes( { isEditing: true, currentCard: index} ) }
                 >
                     { icons.edit }
                 </Button>
@@ -72,7 +64,7 @@ export default class Card extends Component {
             <Tooltip text={ __( 'Apply Changes' )  }>
                 <Button
                     className={ "button" }
-                    onClick={ () => setAttributes( { isEditing: false } ) }
+                    onClick={ () => setAttributes( { isEditing: false, currentCard: -1 } ) }
                 >
                     { icons.check }
                 </Button>
@@ -82,42 +74,60 @@ export default class Card extends Component {
         const renderDeleteCardBtn = () => (
             <Tooltip text={ __( 'Delete Card' )  }>
                 <Button
-                    // className="components-icon-button"
                     className={ "button" }
-                    onClick={ () => setAttributes( { cardID: 'deleted' } ) }
+                    onClick={ () => { 
+						const newCards = [ ...cards ];
+						newCards.splice(index, 1);
+						setAttributes( { cards: newCards } );
+					} }
                 >
                     { icons.delete }
                 </Button>
             </Tooltip>
         );
 
+        const setBtnAttributeHelper = (newAttributes) => {
+            const newCards = [...cards];
+            for(let key in newAttributes) {
+                newCards[index][key] = newAttributes[key];
+            }
+            setAttributes({cards: newCards});
+        }
+
         const renderForEditing = () => (
             <Fragment>
                 <RichText
-                    tagName={ cardHeadingSize }
+                    tagName={ cards[index].cardHeadingSize }
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                     placeholder={ __( 'Add your card title' ) }
-                    value={ cardTitle }
-                    style={ { color: colorFontControl } }
-                    onChange={ cardTitle  => setAttributes( { cardTitle  } ) }         
+                    value={ cards[index].cardTitle }
+                    style={ { color: cards[index].colorFontControl } }
+                    onChange={ (cardTitle)  => {
+                        const newCards = [ ...cards ];
+						cards[index].cardTitle = cardTitle;
+						setAttributes( { cards: newCards } );
+                    } }         
                 />
                 <RichText
                     tagName="p"
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                     placeholder={ __( 'Add your card text' ) }
-                    value={ cardText }
-                    style={ { color: colorFontControl } }
-                    onChange={ cardText  => setAttributes( { cardText  } ) }                   		
+                    value={ cards[index].cardText }
+                    style={ { color: cards[index].colorFontControl } }
+                    onChange={ (cardText)  => {
+                        const newCards = [ ...cards ];
+						cards[index].cardText = cardText;
+						setAttributes( { cards: newCards } );
+                    } }                            		
                 />
-                { cardBtnPresent && 
+                { cards[index].cardBtnPresent && 
                     <div className="btn-mycard-eleven-online">
                         <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                            <InnerButton 
-                                editable={ true } 
-                                attributes={ this.props.attributes } 
-                                setAttributes={ setAttributes } 
+                            <InnerButton
+                                editable={ true }  
+                                setAttributes={ this.setBtnAttributeHelper }
+                                attributes={ cards[index] }
                             />
-
                         </Tooltip> 
                     </div>                      
                 }
@@ -127,21 +137,23 @@ export default class Card extends Component {
         const renderForDone = () => (
             <Fragment>
                 <RichText.Content 
-                    tagName={ cardHeadingSize } 
-                    value={ cardTitle }
-                    style={ { color: colorFontControl } }
+                    tagName={ cards[index].cardHeadingSize }
+                    value={ cards[index].cardTitle }
+                    style={ { color: cards[index].colorFontControl } }
                 />
                 <RichText.Content 
                     tagName="p" 
-                    value={ cardText }
-                    style={ { color: colorFontControl } }
+                    value={ cards[index].cardText }
+                    style={ { color: cards[index].colorFontControl } }
                 /> 
-                { cardBtnPresent &&
+                { cards[index].cardBtnPresent &&
                     <div className="btn-mycard-eleven-online">
-                        { <InnerButton 
-                            editable={ false } 
-                            attributes={ this.props.attributes } 
-                        /> }
+                        {  <InnerButton
+                                editable={ false }  
+                                setAttributes={ this.setBtnAttributeHelper }
+                                attributes={ cards[index] }
+                            /> 
+                        }
                     </div>
                 }
             </Fragment>
@@ -166,13 +178,13 @@ export default class Card extends Component {
                                 }
                                 { renderDeleteCardBtn() }    
                             </div>
-                            { cardImgID &&
+                            { cards[index].cardImgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                                    style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
                                 ></div>
                             }
-                            <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
+                            <div className="wrapper-eleven-online" style={ {textAlign: cards[index].cardTextAlignment} }>
                                 { isEditing ? renderForEditing() : renderForDone() }  
                             </div>
                         </div>  
@@ -181,13 +193,13 @@ export default class Card extends Component {
            :
                 <Fragment>
                      <div className={ classes } style={ {backgroundColor: bgrColor} }>
-                        { cardImgID &&
+                        { cards[index].cardImgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                                    style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
                                 ></div>
                         }
-                        <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
+                        <div className="wrapper-eleven-online" style={ {textAlign: cards[index].cardTextAlignment} }>
                             { renderForDone() }
                         </div>   
                     </div>
