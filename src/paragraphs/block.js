@@ -1,4 +1,5 @@
-//  Import CSS.
+
+import icons from './icons';
 import './style.scss';
 //import './editor.scss';
 
@@ -89,9 +90,27 @@ registerBlockType( 'eleven-online/paragraphs',
 			return myParagraphs;
 		}
 
+		const renderDeleteParagraphBtn = (index) => (
+            <Tooltip text={ __( 'Delete Card' )  }>
+                <Button
+                    className={ "button" }
+                    onClick={ () => { 
+						const newParagraphs = [ ...paragraphs ];
+						newParagraphs.splice(index, 1);
+						setAttributes( { paragraphs: newParagraphs } );
+					} }
+                >
+                    { icons.delete }
+                </Button>
+            </Tooltip>
+        );
+
 		const renderParagraphs = paragraphs.map( (p, index) => {
 			return (
 				<div className="my-paragraph">
+					<div className="buttons-wrapper-my-paragraph-eleven-online">
+						{ renderDeleteParagraphBtn(index) }    
+					</div>
 					<RichText
 						tagName="p"
 						className={className}
