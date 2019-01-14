@@ -33,7 +33,6 @@ export default class Edit extends Component {
         const {
             attributes: { 
                 columnClass,
-                cardCount,
             },
                 className,
                 setAttributes
@@ -45,9 +44,8 @@ export default class Edit extends Component {
         return (
             <div className={ classes }> 
                 <Fragment>
-                   <div className={ firstClass }>                 
-                        <Card editable={ true } {...{ setAttributes, ...this.props }} />
-                        <p>{cardCount}</p>
+                    <div className={ firstClass }>                 
+                        <Card index={ 0 } editable={ true } {...{ setAttributes, ...this.props }} />
                     </div> 
                     <div className="clearfix"></div> 
                 </Fragment>               
