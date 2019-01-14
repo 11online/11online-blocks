@@ -2,12 +2,19 @@ const attributes = {
     columnClass: {
         type: 'string',
         default: 'one-half',
-    },   
+    },
+    currentCard: {
+        type: 'number',
+        default: -1,
+    }, 
+    isEditing: {
+        type: 'boolean',
+        default: false,
+    } ,
     cards: {
         type: 'array',
         default: [
             {
-                isEditing: false,
                 cardTitle: 'Card Title',
                 cardText: 'Card text content',
                 cardTextAlignment: 'left',
