@@ -26,12 +26,8 @@ export default class Inspector extends Component {
     render() {
       const {
         attributes: {
-            CardBtnStyleClass,
-            useColor,
-            colorFontControl,
-            colorBackgroundControl,
-            cardBtnPresent,
-            cardHeadingSize,
+            currentCard,
+            cards,
         },
         setAttributes
       } = this.props;
@@ -42,29 +38,37 @@ export default class Inspector extends Component {
                 <SelectControl
                     label={ __("Heading Font Size") }
                     help={ __("Select heading font size for your title") }
-                    value={ cardHeadingSize }
+                    value={ cards[currentCard].cardHeadingSize }
                     options={[
                         { value: 'h2', label: __("h2") },
                         { value: 'h3', label: __("h3") },
                         { value: 'h4', label: __("h4") },
                     ]}
-                    onChange={ cardHeadingSize => setAttributes({ cardHeadingSize }) }
+                    onChange={ cardHeadingSize => {
+                        const newCards = [ ...cards];
+                        newCards[currentCard].cardHeadingSize = cardHeadingSize;
+                        setAttributes( { cards: newCards } );
+                    } }
                 />
             </PanelBody>
 
-            { cardBtnPresent &&
+            { cards[currentCard].cardBtnPresent &&
                 <PanelBody>
                     <SelectControl
                         label={ __("Button Style Settings") }
                         help={ __("Select button style option") }
-                        value={ CardBtnStyleClass }
+                        value={ cards[currentCard].CardBtnStyleClass }
                         options={[
                             { value: 'primary', label: __("Primary") },
                             { value: 'secondary', label: __("Secondary") },
                             { value: 'primary-border', label: __("Primary Border Only") },
                             { value: 'secondary-border', label: __("Secondary Border Only") },
                         ]}
-                        onChange={ CardBtnStyleClass => setAttributes({ CardBtnStyleClass }) }
+                        onChange={ CardBtnStyleClass => {
+                            const newCards = [ ...cards];
+                            newCards[currentCard].CardBtnStyleClass = CardBtnStyleClass;
+                            setAttributes( { cards: newCards } );
+                       } }      
                     />
                 </PanelBody>
             }
@@ -72,10 +76,14 @@ export default class Inspector extends Component {
             <PanelBody>
                 <ToggleControl
                     label={ __("Use Background Color?") }
-                    help={ __( useColor ? 'Solid color background' : 'Transparent background' ) }
-                    checked={ useColor }
-                    onChange={ () => setAttributes( { useColor: !useColor } ) }
-                />
+                    help={ __( cards[currentCard].useColor ? 'Solid color background' : 'White background' ) }
+                    checked={ cards[currentCard].useColor }
+                    onChange={ () => {
+                        const newCards = [ ...cards];
+                        newCards[currentCard].useColor = !newCards[currentCard].useColor;
+                        setAttributes( { cards: newCards } );
+                    } }                      
+                  />
             </PanelBody>
 
             <PanelColorSettings
@@ -85,15 +93,17 @@ export default class Inspector extends Component {
                     {
                         label: __("Font Color"),
                         help: __("Select font color"),
-                        value: colorFontControl,
+                        value: cards[currentCard].colorFontControl,
                         onChange: colorFontControl => {
-                            setAttributes({ colorFontControl });
+                            const newCards = [ ...cards];
+                            newCards[currentCard].colorFontControl = colorFontControl;
+                            setAttributes( { cards: newCards } );
                         },
                     }
                 ]}
             />
 
-            { useColor &&
+            { cards[currentCard].useColor &&
                 <PanelColorSettings
                     title={__("Background Color")}
                     initialOpen={ false }
@@ -101,9 +111,11 @@ export default class Inspector extends Component {
                         {
                             label: __("Background Color"),
                             help: __("Select background color"),
-                            value: colorBackgroundControl,
+                            value: cards[currentCard].colorBackgroundControl,
                             onChange: colorBackgroundControl => {
-                                setAttributes({ colorBackgroundControl });
+                                const newCards = [ ...cards];
+                                newCards[currentCard].colorBackgroundControl = colorBackgroundControl;
+                                setAttributes( { cards: newCards } );
                             },
                         }
                     ]}
