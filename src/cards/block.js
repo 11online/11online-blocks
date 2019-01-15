@@ -5,9 +5,7 @@ import './style.scss';
 import './editor.scss';
 
 import attributes from "./attributes";
-import Card from "./card";
-import Edit from './edit';
-// import Save from './save';
+import Cards from "./cards";
 
 /**
  * Used Libraries
@@ -42,12 +40,17 @@ registerBlockType(
         attributes,
         // Determines what is displayed in the editor
         edit: props => {
-            const { setAttributes } = props;
+            const { 
+                className,
+                setAttributes,
+            } = props;
+    
             return (
-                <Edit {...{ setAttributes, ...props }} />
+                <div className={ className }>
+                    { <Cards inEditor={ true } {...{ setAttributes, ...props }} /> }
+                </div>
             );
         },
-        // Determines what is displayed on the frontend
         save: props => {
             const { 
                 className,
@@ -56,7 +59,7 @@ registerBlockType(
     
             return (
                 <div className={ className }>
-                    { <Card index={0} editable={ false } {...{ setAttributes, ...props }} /> }
+                    { <Cards inEditor={ false } {...{ setAttributes, ...props }} /> }
                 </div>
             );
         },
