@@ -124,9 +124,11 @@ export default class Card extends Component {
                     <div className="btn-mycard-eleven-online">
                         <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
                             <InnerButton
-                                editable={ true }  
-                                setAttributes={ this.setBtnAttributeHelper }
-                                attributes={ cards[index] }
+                                editable={ true } 
+                                // attributes={ this.attributes } 
+                                attributes={ {...cards[index], ...this.attributes} }
+                                // attributes={ cards[index] }
+                                setAttributes={ setBtnAttributeHelper }
                             />
                         </Tooltip> 
                     </div>                      
@@ -150,8 +152,10 @@ export default class Card extends Component {
                     <div className="btn-mycard-eleven-online">
                         {  <InnerButton
                                 editable={ false }  
-                                setAttributes={ this.setBtnAttributeHelper }
-                                attributes={ cards[index] }
+                                // attributes={ this.attributes }
+                                attributes={ {...cards[index], ...this.attributes} }
+                                // attributes={ cards[index] }
+                                setAttributes={ setBtnAttributeHelper }   
                             /> 
                         }
                     </div>
