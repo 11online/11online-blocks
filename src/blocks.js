@@ -15,5 +15,6 @@ import './checkerboard/block.js';
 import './call-to-action/block.js';
 import './mycard/block.js';
 import './cards/block.js';
+import './background/block.js';
 
 import './paragraphs/block.js';
