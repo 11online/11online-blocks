@@ -53,6 +53,7 @@ export default class Card extends Component {
             <Tooltip text={ __( 'Edit Card' )  }>
                 <Button 
                     className={ "button" }
+                    disabled={ isEditing && currentCard !== index }
                     onClick={ () => setAttributes( { isEditing: true, currentCard: index} ) }
                 >
                     { icons.edit }
@@ -125,9 +126,7 @@ export default class Card extends Component {
                         <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
                             <InnerButton
                                 editable={ true } 
-                                // attributes={ this.attributes } 
                                 attributes={ {...cards[index], ...this.attributes} }
-                                // attributes={ cards[index] }
                                 setAttributes={ setBtnAttributeHelper }
                             />
                         </Tooltip> 
@@ -152,9 +151,7 @@ export default class Card extends Component {
                     <div className="btn-mycard-eleven-online">
                         {  <InnerButton
                                 editable={ false }  
-                                // attributes={ this.attributes }
                                 attributes={ {...cards[index], ...this.attributes} }
-                                // attributes={ cards[index] }
                                 setAttributes={ setBtnAttributeHelper }   
                             /> 
                         }
