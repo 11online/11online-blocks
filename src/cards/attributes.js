@@ -28,7 +28,7 @@ const attributes = {
                 newTab: true,
                 useColor: false,
                 colorFontControl: '#000000',
-                colorBackgroundControl: '#FFFFFF',
+                colorBackgroundControl: 'transparent',
             },
         ],
     },

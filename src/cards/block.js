@@ -12,7 +12,6 @@ import Cards from "./cards";
  */
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { Fragment } = wp.element; 
 
 /**
  * Register block

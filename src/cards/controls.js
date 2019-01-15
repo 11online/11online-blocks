@@ -57,7 +57,7 @@ export default class Controls extends Component {
                 newTab: true,
                 useColor: false,
                 colorFontControl: '#000000',
-                colorBackgroundControl: '#FFFFFF',
+                colorBackgroundControl: 'transparent',
             }
         );
 

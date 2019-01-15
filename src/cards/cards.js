@@ -5,15 +5,14 @@ import './editor.scss';
 import './style.scss';
 
 import classnames from 'classnames';
+import Controls from "./controls";
+import Inspector from "./inspector";
 import Card from "./card";
 
 /**
  * Used Libraries
  */
-const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const {
-} = wp.components;
 
 /**
  * Create a Cards Component
@@ -30,25 +29,14 @@ export default class Cards extends Component {
             attributes: { 
                 columnClass,
                 cards,
+                isEditing,
             },
                 setAttributes,
                 inEditor,
+                isSelected,
         } = this.props;
 
         const firstClass = classnames( columnClass, 'first' );
-
-        const isRightSpot = (colClass, pos) => {
-            return (
-                (
-                    (colClass === 'one-half' && (pos+1) % 2 === 0) ||
-                    (colClass === 'one-third' && (pos+1) % 3 === 0) ||
-                    (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
-                    (colClass === 'one-sixth' && (pos+1) % 6 === 0)
-                )  ?  true
-                    
-            : false 
-           );
-        }
 
         const isFirst = (colClass, pos) => {
             return (
@@ -61,7 +49,20 @@ export default class Cards extends Component {
                 ) ? true
                 : false 
             );
-        }
+        };
+
+        const isRightSpot = (colClass, pos) => {
+            return (
+                (
+                    (colClass === 'one-half' && (pos+1) % 2 === 0) ||
+                    (colClass === 'one-third' && (pos+1) % 3 === 0) ||
+                    (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
+                    (colClass === 'one-sixth' && (pos+1) % 6 === 0)
+                )  ?  true
+                    
+            : false 
+           );
+        };
 
         const renderCards = ( canEdit ) => {
             const myCards = [];
@@ -86,9 +87,15 @@ export default class Cards extends Component {
         return (
             inEditor ? 
                 <Fragment>
+                    { isSelected &&
+                        <Fragment> 
+                            <Controls {...{ setAttributes, ...this.props }} />
+                            { isEditing && <Inspector {...{ setAttributes, ...this.props }} /> }
+                        </Fragment>
+                    }
                     { renderCards(true) }
                 </Fragment>
-                : 
+            : 
                 <Fragment>
                     { renderCards(false) }
                 </Fragment>

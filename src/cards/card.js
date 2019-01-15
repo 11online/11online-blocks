@@ -5,8 +5,6 @@ import './editor.scss';
 import './style.scss';
 
 import classnames from 'classnames';
-import Controls from "./controls";
-import Inspector from "./inspector";
 import InnerButton from "../assets/js/inner-button";
 import icons from './icons';
 
@@ -34,7 +32,6 @@ export default class Card extends Component {
     render() {
         const {
             attributes: {
-                columnClass,
                 currentCard,
                 isEditing,
                 cards,                    
@@ -42,11 +39,10 @@ export default class Card extends Component {
             className,
             index,
             editable,
-            isSelected,
             setAttributes,          
         } = this.props;    
 
-        const bgrColor = ( cards[index].useColor ? cards[index].colorBackgroundControl : '#FFFFFF' );
+        const bgrColor = ( cards[index].useColor ? cards[index].colorBackgroundControl : 'transparent' );
         const classes = classnames( className, 'card-eleven-online' );
 
         const renderEditCardBtn = () => (
@@ -61,8 +57,8 @@ export default class Card extends Component {
             </Tooltip>
         );
 
-        const renderApplyCardBtn = () => (
-            <Tooltip text={ __( 'Apply Changes' )  }>
+        const renderSaveCardBtn = () => (
+            <Tooltip text={ __( 'Save Changes' )  }>
                 <Button
                     className={ "button" }
                     onClick={ () => setAttributes( { isEditing: false, currentCard: -1 } ) }
@@ -76,6 +72,7 @@ export default class Card extends Component {
             <Tooltip text={ __( 'Delete Card' )  }>
                 <Button
                     className={ "button" }
+                    disabled={ cards.length === 1 }
                     onClick={ () => { 
 						const newCards = [ ...cards ];
 						newCards.splice(index, 1);
@@ -92,7 +89,7 @@ export default class Card extends Component {
             for(let key in newAttributes) {
                 newCards[index][key] = newAttributes[key];
             }
-            setAttributes({cards: newCards});
+            setAttributes({ cards: newCards });
         }
 
         const renderForEditing = () => (
@@ -105,7 +102,7 @@ export default class Card extends Component {
                     style={ { color: cards[index].colorFontControl } }
                     onChange={ (cardTitle)  => {
                         const newCards = [ ...cards ];
-						cards[index].cardTitle = cardTitle;
+						newCards[index].cardTitle = cardTitle;
 						setAttributes( { cards: newCards } );
                     } }         
                 />
@@ -117,7 +114,7 @@ export default class Card extends Component {
                     style={ { color: cards[index].colorFontControl } }
                     onChange={ (cardText)  => {
                         const newCards = [ ...cards ];
-						cards[index].cardText = cardText;
+						newCards[index].cardText = cardText;
 						setAttributes( { cards: newCards } );
                     } }                            		
                 />
@@ -162,18 +159,12 @@ export default class Card extends Component {
 
         return (
             editable ?
-                <div className={ classes } style={ {backgroundColor: bgrColor} }>
-                    <Fragment>
-                        { isSelected &&
-                            <Fragment> 
-                                <Controls {...{ setAttributes, ...this.props }} />
-                                { isEditing && <Inspector {...{ setAttributes, ...this.props }} /> }
-                            </Fragment>
-                        }
+                <div className={ classes }>
+                    <Fragment>                       
                         <div className="card-wrapper-eleven-online">
                             <div className="buttons-wrapper-eleven-online">
-                                { isEditing ?
-                                    renderApplyCardBtn() 
+                                { isEditing && currentCard === index ?
+                                    renderSaveCardBtn() 
                                     : 
                                     renderEditCardBtn()  
                                 }
@@ -185,22 +176,22 @@ export default class Card extends Component {
                                     style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
                                 ></div>
                             }
-                            <div className="wrapper-eleven-online" style={ {textAlign: cards[index].cardTextAlignment} }>
-                                { isEditing ? renderForEditing() : renderForDone() }  
+                            <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>
+                                { isEditing && currentCard === index ? renderForEditing() : renderForDone() }  
                             </div>
                         </div>  
                     </Fragment>
                 </div>
            :
                 <Fragment>
-                     <div className={ classes } style={ {backgroundColor: bgrColor} }>
+                     <div className={ classes }>
                         { cards[index].cardImgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
                                     style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
                                 ></div>
                         }
-                        <div className="wrapper-eleven-online" style={ {textAlign: cards[index].cardTextAlignment} }>
+                        <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>
                             { renderForDone() }
                         </div>   
                     </div>
