@@ -18,7 +18,7 @@ const {
 /**
  * Create a Cards Component
  */
-export default class Card extends Component {
+export default class Cards extends Component {
 
     constructor(props) {
         super( ...arguments );
@@ -31,47 +31,60 @@ export default class Card extends Component {
                 columnClass,
                 cards,
             },
-                setAttributes
+                setAttributes,
+                inEditor,
         } = this.props;
 
         const firstClass = classnames( columnClass, 'first' );
 
         const isRightSpot = (colClass, pos) => {
             return (
-            (
-                (colClass === 'one-half' && (pos+1) % 2 === 0) ||
-                (colClass === 'one-third' && (pos+1) % 3 === 0) ||
-                (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
-                (colClass === 'one-sixth' && (pos+1) % 6 === 0)
-            )  ?  true
-                
-           : false );
+                (
+                    (colClass === 'one-half' && (pos+1) % 2 === 0) ||
+                    (colClass === 'one-third' && (pos+1) % 3 === 0) ||
+                    (colClass === 'one-fourth' && (pos+1) % 4 === 0) ||
+                    (colClass === 'one-sixth' && (pos+1) % 6 === 0)
+                )  ?  true
+                    
+            : false 
+           );
+        }
+
+        const isFirst = (colClass, pos) => {
+            return (
+                (
+                    (colClass === 'one-half' && pos % 2 === 0) ||
+                    (colClass === 'one-third' && pos % 3 === 0) ||
+                    (colClass === 'one-fourth' && pos % 4 === 0) ||
+                    (colClass === 'one-sixth' && pos % 6 === 0)
+
+                ) ? true
+                : false 
+            );
         }
 
         const renderCards = ( canEdit ) => {
-            let myCards = [];
+            const myCards = [];
             const currCount = cards.length;
-            myCards.push( 
-                <div className={ firstClass }>                 
-                    <Card index={ 0 } editable={ canEdit } {...{ setAttributes, ...this.props }} />
-                </div> 
-            ); 
-            for (let i = 1; i < currCount; i++) {
-                if ( isRightSpot(columnClass, i) )
-                    myCards.push( <div className="clearfix"></div> );
+            let currClass;
+            
+            for (let i = 0; i < currCount; i++) {
+                currClass = isFirst(columnClass, i) ? firstClass : columnClass;
                 myCards.push( 
-                    <div className={ columnClass }>                 
+                    <div className={ currClass }>                 
                         <Card index={ i } editable={ canEdit } {...{ setAttributes, ...this.props }} />
                     </div> 
                 ); 
+                if ( isRightSpot(columnClass, i) )
+                    myCards.push( <div className="clearfix"></div> );
             }
-            if ( !isRightSpot(columnClass, cardCount-1) )
+            if ( !isRightSpot(columnClass, currCount-1) )
                 myCards.push( <div className="clearfix"></div> );
             return myCards;
         }
 
         return (
-            editable ? 
+            inEditor ? 
                 <Fragment>
                     { renderCards(true) }
                 </Fragment>
