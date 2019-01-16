@@ -29,8 +29,8 @@ export default class Inspector extends Component {
             bgrOption,
             imgOpacity,
             colorBackgroundControl,
-            paddingTop,
-            paddingBottom,
+            padTop,
+            padBottom,
         },
         setAttributes
       } = this.props;
@@ -105,23 +105,23 @@ export default class Inspector extends Component {
                         beforeIcon="arrow-left-alt2"
                         afterIcon="arrow-right-alt2"
                         label={ __("Padding Top" ) }
-                        help={ __("Top padding on the scale from 0 to 30 px") }
-                        value={ paddingTop }
-                        onChange={ paddingTop => setAttributes( { paddingTop } ) }
-                        initialPosition={ 5 }
+                        help={ __("Top padding on the scale from 0 to 40 px") }
+                        value={ padTop }
+                        onChange={ padTop => setAttributes( { padTop } ) }
+                        initialPosition={ 20 }
                         min={ 0 }
-                        max={ 30 }
+                        max={ 100 }
                     />
                     <RangeControl
                        beforeIcon="arrow-left-alt2"
                        afterIcon="arrow-right-alt2"
                        label={ __("Padding Bottom" ) }
-                       help={ __("Bottom padding on the scale from 0 to 30 px") }
-                       value={ paddingBottom }
-                       onChange={ paddingBottom => setAttributes( { paddingBottom } ) }
-                       initialPosition={ 5 }
+                       help={ __("Bottom padding on the scale from 0 to 40 px") }
+                       value={ padBottom }
+                       onChange={ padBottom => setAttributes( { padBottom } ) }
+                       initialPosition={ 20 }
                        min={ 0 }
-                       max={ 30 }
+                       max={ 100 }
                     />
                 </PanelBody>
         </InspectorControls>

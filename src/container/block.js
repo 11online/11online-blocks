@@ -1,9 +1,6 @@
 /**
  * Block dependencies
  */
-//import './style.scss';
-//import './editor.scss';
-
 import attributes from "./attributes";
 import Container from "./container";
 
@@ -17,10 +14,10 @@ const { registerBlockType } = wp.blocks;
  * Register block
  */
 registerBlockType( 
-    'eleven-online/background', 
+    'eleven-online/container', 
     {
-        title: __( 'Background Block' ),
-        description: __( 'A \'background\' block can be used as a container for the inner blocks' ),
+        title: __( 'Container Block' ),
+        description: __( 'A \'container\' block can be used as a main container to hold any number of other inner blocks' ),
         category: 'common',
         icon: {
           background: '#F04848',
@@ -47,7 +44,6 @@ registerBlockType(
             return (
                 <div className={ className }>
                     { <Container inEditor={ true } {...{ setAttributes, ...props }} /> }
-                    {/* <p>I am in the editor</p> */}
                 </div>
             );
         },
@@ -60,7 +56,6 @@ registerBlockType(
             return (
                 <div className={ className }>
                     { <Container inEditor={ false } {...{ setAttributes, ...props }} /> }
-                    {/* <p>I am in the browser</p> */}
                 </div>
             );
         },

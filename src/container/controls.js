@@ -15,7 +15,7 @@ const {
 } = wp.components;
 
 /**
- * Create a Block Controls wrapper Component
+ * Create a Toolbar Controls wrapper Component
  */
 export default class Controls extends Component {
     constructor(props) {

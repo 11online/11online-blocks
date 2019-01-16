@@ -19,13 +19,13 @@ const attributes = {
         type: 'string',
         default: 'transparent'
     },
-    paddingTop: {
-        type: 'string',
-        default: '5',
+    padTop: {
+        type: 'number',
+        default: '20',
     },
-    paddingBottom: {
-        type: 'string',
-        default: '5',
+    padBottom: {
+        type: 'number',
+        default: '20',
     },
 }
 

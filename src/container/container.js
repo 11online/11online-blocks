@@ -1,10 +1,10 @@
 /**
  * Container Component dependencies
  */
-//import './editor.scss';
 import './style.scss';
 
 import classnames from 'classnames';
+
 import Controls from "./controls";
 import Inspector from "./inspector";
 
@@ -13,11 +13,11 @@ import Inspector from "./inspector";
  */
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const {  } = wp.editor;
+const { InnerBlocks } = wp.editor;
 const {  } = wp.components;
 
 /**
- * Create a Card Component
+ * Create a Container Component
  */
 export default class Container extends Component {
 
@@ -32,7 +32,9 @@ export default class Container extends Component {
                 colorBackgroundControl,
                 imgID,
                 imgURL,
-                imgOpacity,                 
+                imgOpacity,
+                padTop,
+                padBottom,                 
             },
             className,
             setAttributes,
@@ -41,21 +43,23 @@ export default class Container extends Component {
         } = this.props;    
 
         const classes = classnames( className, 'background-eleven-online' );
+        const divStyle = {
+            backgroundColor: colorBackgroundControl, 
+            paddingTop: `${String(padTop)}px`, 
+            paddingBottom: `${String(padBottom)}px`
+        };
 
-        const renderContainer = () => {
+        const renderContainer = (isInEditor) => {
             return (
-                <div className={ classes } style={ {backgroundColor: colorBackgroundControl} }>
-                    <p><br /></p>
-                    <p><br /></p>
-                    <p><br /></p>
-                    <p><br /></p>
+                <div className={ classes } style={ divStyle }>
+                    { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> }  
                     { imgID &&
                         <div 
                             className="img-background-background-eleven-online"
                             style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
                         ></div>
                     }
-                </div>
+                </div>            
             );
         }
 
@@ -68,11 +72,11 @@ export default class Container extends Component {
                             { isSelected && <Inspector {...{ setAttributes, ...this.props }} /> }
                         </Fragment>
                     }
-                    { renderContainer() }
+                    { renderContainer(true) }
                 </Fragment>
             : 
                 <Fragment>
-                    { renderContainer() }
+                    { renderContainer(false) }
                 </Fragment>   
         );
     }
