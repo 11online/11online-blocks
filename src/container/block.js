@@ -26,7 +26,7 @@ registerBlockType(
         },                
         keywords: [
             __( '11 Online'),
-            __( 'Background' ),
+            __( 'Container' ),
             __( 'Eleven Online' ),
         ],
         // add support for the block alignment as a whole
