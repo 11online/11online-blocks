@@ -1,14 +1,13 @@
 const attributes = {
     title: {
         source: 'string',
-        source: 'text',
         default: 'Resource',
     },
     titleHeadingSize: {
         type: 'string',
         default: 'h2',
     },
-    titleColor: {
+    colorFontControl: {
         type: 'string',
         default: '#000000'
     },
@@ -29,9 +28,13 @@ const attributes = {
         type: 'string',
         default: null,
     },
+    useBackgroundColor: {
+        type: 'boolean',
+        default: false,
+    },
     colorBackgroundControl: {
         type: 'string',
-        default: '#FFFFFF'
+        default: 'transparent',
     },
 };
 
