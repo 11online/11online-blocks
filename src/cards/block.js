@@ -29,7 +29,7 @@ registerBlockType(
         },                
         keywords: [
             __( '11 Online'),
-            __( 'Card' ),
+            __( 'Cards' ),
             __( 'Eleven Online' ),
         ],
         // add support for the block alignment as a whole
