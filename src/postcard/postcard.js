@@ -5,9 +5,7 @@
 import './style.scss';
 
 // import classnames from 'classnames';
-// import Controls from "./controls";
-// import Inspector from "./inspector";
-
+import Inspector from "./inspector";
 import BackgroungImag from "../assets/js/background-image";
 
 /**
@@ -37,10 +35,12 @@ export default class Postcard extends Component {
                 title,
                 titleHeadingSize,
                 titleAlignment,
-                titleColor,
+                colorFontControl,
                 text,
                 imgID,
                 imgURL,
+                useBackgroundColor,
+                colorBackgroundControl,
             },
                 setAttributes,
                 inEditor,
@@ -50,24 +50,25 @@ export default class Postcard extends Component {
         const setBackgroundImgHelper = (newAttributes) => {
             setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL });
         }
+        const bgrColor = ( useBackgroundColor ? colorBackgroundControl : 'transparent' );
 
         const renderPostcard = ( isInEditor ) => {
             return (
-                <div>
+                <div style={ {backgroundColor: bgrColor} }>
                     { isInEditor ? 
                         <RichText
                             tagName={ titleHeadingSize }
                             formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                             placeholder={ __( 'Add your title' ) }
                             value={ title }
-                            style={ { textAlign: titleAlignment, color: titleColor } }
+                            style={ { textAlign: titleAlignment, color: colorFontControl } }
                             onChange={ title  => setAttributes( { title } ) }         
                         />
                         :
                         <RichText.Content 
                             tagName={ titleHeadingSize }
                             value={ title }
-                            style={ { textAlign: titleAlignment, color: titleColor } }
+                            style={ { textAlign: titleAlignment, color: colorFontControl } }
                         />
                     }
                     <div className="img-background-wrapper-postcard-eleven-online">
@@ -112,7 +113,7 @@ export default class Postcard extends Component {
                                     setAttributes={ setBackgroundImgHelper }
                                 />
                             </BlockControls>
-                            {/* { <Inspector {...{ setAttributes, ...this.props }} /> } */}
+                            <Inspector {...{ setAttributes, ...this.props }} />
                         </Fragment>
                     }
                     { renderPostcard(true) }
