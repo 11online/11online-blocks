@@ -14,7 +14,6 @@ import './button/block.js';
 import './checkerboard/block.js';
 import './call-to-action/block.js';
 import './mycard/block.js';
-import './cards/block.js';
-import './Container/block.js';
+import './postcard/block.js';
 
 import './paragraphs/block.js';
