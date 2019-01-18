@@ -27,6 +27,10 @@ const attributes = {
         type: 'number',
         default: '20',
     },
+    innerAlignment: {
+        type: 'string',
+        default: 'center',
+    },
 }
 
 export default attributes;

@@ -49,10 +49,25 @@ export default class Container extends Component {
             paddingBottom: `${String(padBottom)}px`
         };
 
+        const flexStyle = () => {
+            let currStyle;
+            if (innerAlignment === 'left')
+                currStyle = 'flex-start';
+            else if (innerAlignment === 'right') 
+                currStyle = 'flex-end';
+            else
+                currStyle = 'center';
+            return currStyle;
+        }
+
+        // const alignStyle ()
+
         const renderContainer = (isInEditor) => {
             return (
                 <div className={ classes } style={ divStyle }>
-                    { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> }  
+                    <div style={ {display: 'flex', justifyContent: `${flexStyle()}`} }>
+                        { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> } 
+                    </div>
                     { imgID &&
                         <div 
                             className="img-background-background-eleven-online"

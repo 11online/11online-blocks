@@ -4,6 +4,7 @@
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
+    AlignmentToolbar,
     BlockControls,
     MediaUpload,
     MediaUploadCheck,
@@ -28,6 +29,7 @@ export default class Controls extends Component {
             attributes: { 
                 bgrOption, 
                 imgID,
+                innerAlignment,
              },
             setAttributes
           } = this.props;
@@ -48,6 +50,10 @@ export default class Controls extends Component {
 
         return (
             <BlockControls>
+                <AlignmentToolbar
+                    value={ innerAlignment }
+                    onChange={ innerAlignment => setAttributes( { innerAlignment } ) }
+                />
                 <Toolbar>
                     { (bgrOption === 'bgrImage') && imgID &&
                         <Tooltip text={ __( 'Click to Remove Image' ) }>
