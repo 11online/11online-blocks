@@ -6,7 +6,7 @@ import './style.scss';
 
 // import classnames from 'classnames';
 import Inspector from "./inspector";
-import BackgroungImag from "../assets/js/background-image";
+import BackgroungImage from "../assets/js/background-image";
 
 /**
  * Used Libraries
@@ -47,9 +47,6 @@ export default class Postcard extends Component {
                 isSelected,
         } = this.props;
 
-        const setBackgroundImgHelper = (newAttributes) => {
-            setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL });
-        }
         const bgrColor = ( useBackgroundColor ? colorBackgroundControl : 'transparent' );
 
         const renderPostcard = ( isInEditor ) => {
@@ -108,9 +105,10 @@ export default class Postcard extends Component {
                                     value={ titleAlignment }
                                     onChange={ titleAlignment => setAttributes( { titleAlignment } ) }
                                 />
-                                <BackgroungImag
-                                    attributes={ {imgID, imgURL, ...this.attributes} }
-                                    setAttributes={ setBackgroundImgHelper }
+                                <BackgroungImage
+                                    attributes={ {imgID, imgURL} }
+                                    setAttributes={ (newAttributes) => {
+                                        setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
                                 />
                             </BlockControls>
                             <Inspector {...{ setAttributes, ...this.props }} />

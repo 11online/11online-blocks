@@ -1,6 +1,6 @@
 const attributes = {
     title: {
-        source: 'string',
+        type: 'string',
         default: 'Resource',
     },
     titleHeadingSize: {
