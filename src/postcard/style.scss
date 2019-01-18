@@ -20,3 +20,18 @@
     background-position: center;
     background-size: cover;   
 }
+
+.wrapper-toggle-postcard-eleven-online {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toggle-postcard-eleven-online {
+    background: none !important;
+    color: inherit;
+    border: none; 
+    padding: 0 !important;
+    color: inherit;
+    cursor: pointer;
+  	outline-color: transparent;
+}
