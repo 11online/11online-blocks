@@ -7,6 +7,7 @@ import './style.scss';
 // import classnames from 'classnames';
 import Inspector from "./inspector";
 import BackgroungImage from "../assets/js/background-image";
+import icons from './icons';
 
 /**
  * Used Libraries
@@ -117,9 +118,12 @@ export default class Postcard extends Component {
                     { renderPostcard(true) }
                 </Fragment>
             : 
-                <Fragment>
+                <div className="collapsible-content-postcard-eleven-onlin">
+                    <div className="wrapper-toggle-postcard-eleven-online">
+                        <button className="toggle-postcard-eleven-online">{ icons.plus }</button>
+                    </div>
                      { renderPostcard(false) }
-                </Fragment>
+                </div>
         );
     }
 }
