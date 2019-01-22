@@ -22,9 +22,11 @@ const attributes = {
     },
     textAlignment: {
         type: 'string',
+        default: 'left',
     },
     align: {
         type: 'string',
+        default: 'center',
     },
     styleClass: {
         type: 'string',
@@ -56,7 +58,7 @@ const attributes = {
     },
     colorBackgroundControl: {
         type: 'string',
-        default: '#FFFFFF'
+        default: 'transparent',
     },
 };
 
