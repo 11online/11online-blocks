@@ -11,6 +11,10 @@ const attributes = {
         type: 'boolean',
         default: false,
     } ,
+    align: {
+        type: 'string',
+        default: 'center',
+    },
     cards: {
         type: 'array',
         default: [
