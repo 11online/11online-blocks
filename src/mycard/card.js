@@ -85,7 +85,6 @@ export default class Card extends Component {
                                             attributes={ this.props.attributes } 
                                             setAttributes={ setAttributes } 
                                         />
-
                                     </Tooltip> 
                                 </div>                      
                             }
