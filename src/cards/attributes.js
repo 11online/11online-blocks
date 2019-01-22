@@ -15,8 +15,8 @@ const attributes = {
         type: 'array',
         default: [
             {
-                cardTitle: 'Card Title',
-                cardText: 'Card text content',
+                cardTitle: '',
+                cardText: '',
                 cardTextAlignment: 'left',
                 cardHeadingSize: 'h2',
                 cardImgID: null,

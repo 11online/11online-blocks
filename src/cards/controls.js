@@ -44,8 +44,8 @@ export default class Controls extends Component {
 
           const createDefaultCard = () => (
             {
-                cardTitle: 'Card Title',
-                cardText: 'Card text content',
+                cardTitle: '',
+                cardText: '',
                 cardTextAlignment: 'left',
                 cardHeadingSize: 'h2',
                 cardImgID: null,
