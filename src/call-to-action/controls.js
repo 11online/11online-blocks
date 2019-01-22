@@ -32,20 +32,6 @@ export default class Controls extends Component {
             setAttributes
           } = this.props;
 
-        const onSelectImage = img => {
-            setAttributes( {
-                imgID: img.id,
-                imgURL: img.url,
-            } );
-        };
-
-        const onRemoveImage = () => {
-            setAttributes({
-                imgID: null,
-                imgURL: null,
-            } );
-        };
-
         return (
             <BlockControls>
                 <AlignmentToolbar
