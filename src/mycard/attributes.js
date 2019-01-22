@@ -1,11 +1,9 @@
 const attributes = {
     cardTitle: {
         type: 'string',
-        default: 'Card Title',
     },
     cardText: {
         type: 'string',
-        default: 'Card text content',
     },
     cardTextAlignment: {
         type: 'string',
