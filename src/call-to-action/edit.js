@@ -52,7 +52,7 @@ export default class Edit extends Component {
                 className,
                 setAttributes,
             } = this.props;
-            
+
         const classes = classnames(
             className,
             styleClass,
@@ -111,6 +111,7 @@ export default class Edit extends Component {
                         <Controls {...{ setAttributes, ...this.props }} />
                         <RichText
                             tagName="h3"
+                            formattingControls={ [ 'bold', 'italic' ] }
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment, color: colorFontControl } }
@@ -118,6 +119,7 @@ export default class Edit extends Component {
                         />
                         <RichText
                             tagName="p"
+                            formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
                             style={ { textAlign: textAlignment, color: colorFontControl } }

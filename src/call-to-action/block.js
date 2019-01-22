@@ -18,7 +18,7 @@ registerBlockType(
     'eleven-online/call-to-action', 
     {
         title: __( 'Call To Action Block' ),
-        description: __( 'A \'call to action\' block prompts a user to visit a specified link by clicking a button' ),
+        description: __( 'A \'call to action\' block allows a user to create a post with an action button that contains a link and an optional background image or color' ),
         category: 'common',
         icon: {
           background: '#F04848',
