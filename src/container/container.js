@@ -2,19 +2,16 @@
  * Container Component dependencies
  */
 import './style.scss';
-
 import classnames from 'classnames';
-
-import Controls from "./controls";
 import Inspector from "./inspector";
+import BackgroungImage from "../assets/js/background-image";
 
 /**
  * Used Libraries
  */
 const { __ } = wp.i18n;
 const { Component, Fragment } = wp.element;
-const { InnerBlocks } = wp.editor;
-const {  } = wp.components;
+const { InnerBlocks, BlockControls } = wp.editor;
 
 /**
  * Create a Container Component
@@ -29,12 +26,13 @@ export default class Container extends Component {
     render() {
         const {
             attributes: {
+                bgrOption, 
                 colorBackgroundControl,
                 imgID,
                 imgURL,
                 imgOpacity,
                 padTop,
-                padBottom,                 
+                padBottom,               
             },
             className,
             setAttributes,
@@ -46,35 +44,20 @@ export default class Container extends Component {
         const divStyle = {
             backgroundColor: colorBackgroundControl, 
             paddingTop: `${String(padTop)}px`, 
-            paddingBottom: `${String(padBottom)}px`
+            paddingBottom: `${String(padBottom)}px`,
         };
-
-        const flexStyle = () => {
-            let currStyle;
-            if (innerAlignment === 'left')
-                currStyle = 'flex-start';
-            else if (innerAlignment === 'right') 
-                currStyle = 'flex-end';
-            else
-                currStyle = 'center';
-            return currStyle;
-        }
-
-        // const alignStyle ()
 
         const renderContainer = (isInEditor) => {
             return (
                 <div className={ classes } style={ divStyle }>
-                    <div style={ {display: 'flex', justifyContent: `${flexStyle()}`} }>
-                        { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> } 
-                    </div>
+                    { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> } 
                     { imgID &&
                         <div 
                             className="img-background-background-eleven-online"
-                            style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                            style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1 } }
                         ></div>
                     }
-                </div>            
+                </div>                        
             );
         }
 
@@ -83,7 +66,17 @@ export default class Container extends Component {
                 <Fragment>
                     { isSelected &&
                         <Fragment> 
-                            <Controls {...{ setAttributes, ...this.props }} />
+                            { isSelected &&  
+                                <BlockControls>
+                                    { (bgrOption === 'bgrImage') && 
+                                        <BackgroungImage
+                                            attributes={ {imgID, imgURL} }
+                                            setAttributes={ (newAttributes) => {
+                                                setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
+                                        />
+                                    }         
+                                </BlockControls>
+                            }
                             { isSelected && <Inspector {...{ setAttributes, ...this.props }} /> }
                         </Fragment>
                     }

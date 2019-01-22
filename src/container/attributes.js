@@ -27,9 +27,9 @@ const attributes = {
         type: 'number',
         default: '20',
     },
-    innerAlignment: {
+    align: {
         type: 'string',
-        default: 'center',
+        default: 'wide',
     },
 }
 
