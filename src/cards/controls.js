@@ -46,10 +46,10 @@ export default class Controls extends Component {
             {
                 cardTitle: '',
                 cardText: '',
-                cardTextAlignment: 'left',
+                cardTextAlignment: 'center',
                 cardHeadingSize: 'h2',
-                cardImgID: null,
-                cardImgURL: null,
+                imgID: null,
+                imgURL: null,
                 cardBtnPresent: false,
                 buttonURL: 'http://',
                 buttonText: 'Click here',
@@ -69,15 +69,15 @@ export default class Controls extends Component {
 
         const onSelectImage = img => {
             const newCards = [ ...cards];
-            newCards[currentCard].cardImgID = img.id;
-            newCards[currentCard].cardImgURL = img.url;
+            newCards[currentCard].imgID = img.id;
+            newCards[currentCard].imgURL = img.url;
             setAttributes( { cards: newCards } );
         };
 
         const onRemoveImage = () => {
             const newCards = [ ...cards];
-            newCards[currentCard].cardImgID = null;
-            newCards[currentCard].cardImgURL = null;
+            newCards[currentCard].imgID = null;
+            newCards[currentCard].imgURL = null;
             setAttributes( { cards: newCards } );
         }
 
@@ -179,12 +179,12 @@ export default class Controls extends Component {
                     } }
                 />
                 <Toolbar>
-                    { !cards[currentCard].cardImgID &&
+                    { !cards[currentCard].imgID &&
                         <MediaUploadCheck>
                             <MediaUpload
                                 onSelect={ onSelectImage }
                                 type="image"
-                                value={ cards[currentCard].cardImgID }
+                                value={ cards[currentCard].imgID }
                                 render={ ( { open } ) => (
                                     <Tooltip text={ __( 'Click to Upload Image' ) }>
                                         <Button
@@ -199,7 +199,7 @@ export default class Controls extends Component {
                             </MediaUpload>
                         </MediaUploadCheck>
                     } 
-                    { cards[currentCard].cardImgID &&
+                    { cards[currentCard].imgID &&
                         <Tooltip text={ __( 'Click to Remove Image' ) }>
                             <Button
                                 className={ "components-button button button-large" }

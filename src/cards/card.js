@@ -5,7 +5,7 @@ import './editor.scss';
 import './style.scss';
 
 import classnames from 'classnames';
-import InnerButton from "../assets/js/inner-button";
+import ActionButton from "../assets/js/action-button";
 import icons from './icons';
 
 /**
@@ -121,7 +121,7 @@ export default class Card extends Component {
                 { cards[index].cardBtnPresent && 
                     <div className="btn-mycard-eleven-online">
                         <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                            <InnerButton
+                            <ActionButton
                                 editable={ true } 
                                 attributes={ {...cards[index], ...this.attributes} }
                                 setAttributes={ setBtnAttributeHelper }
@@ -146,7 +146,7 @@ export default class Card extends Component {
                 /> 
                 { cards[index].cardBtnPresent &&
                     <div className="btn-mycard-eleven-online">
-                        {  <InnerButton
+                        {  <ActionButton
                                 editable={ false }  
                                 attributes={ {...cards[index], ...this.attributes} }
                                 setAttributes={ setBtnAttributeHelper }   
@@ -170,10 +170,10 @@ export default class Card extends Component {
                                 }
                                 { renderDeleteCardBtn() }    
                             </div>
-                            { cards[index].cardImgID &&
+                            { cards[index].imgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
+                                    style={ { backgroundImage: `url(${ cards[index].imgURL })` } }
                                 ></div>
                             }
                             <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>
@@ -185,10 +185,10 @@ export default class Card extends Component {
            :
                 <Fragment>
                      <div className={ classes }>
-                        { cards[index].cardImgID &&
+                        { cards[index].imgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: 'url(' + cards[index].cardImgURL + ')' } }
+                                    style={ { backgroundImage: `url(${ cards[index].imgURL })` } }
                                 ></div>
                         }
                         <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>

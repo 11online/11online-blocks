@@ -21,10 +21,10 @@ const attributes = {
             {
                 cardTitle: '',
                 cardText: '',
-                cardTextAlignment: 'left',
+                cardTextAlignment: 'center',
                 cardHeadingSize: 'h2',
-                cardImgID: null,
-                cardImgURL: null,
+                imgID: null,
+                imgURL: null,
                 cardBtnPresent: false,
                 buttonURL: 'http://',
                 buttonText: 'Click here',

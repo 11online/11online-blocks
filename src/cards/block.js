@@ -20,7 +20,7 @@ registerBlockType(
     'eleven-online/cards', 
     {
         title: __( 'Cards Block' ),
-        description: __( 'A \'cards\' block allows a user to create a varied number of card-like posts with an optional image and link in each' ),
+        description: __( 'A \'cards\' block allows a user to create a varied number of card-like elements with an optional image and link in each' ),
         category: 'common',
         icon: {
           background: '#F04848',
