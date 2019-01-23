@@ -4,7 +4,7 @@
 import './style.scss';
 import classnames from 'classnames';
 import Inspector from "./inspector";
-import BackgroungImage from "../assets/js/background-image";
+import ImageControl from "../assets/js/image-control";
 
 /**
  * Used Libraries
@@ -69,7 +69,7 @@ export default class Container extends Component {
                             { isSelected &&  
                                 <BlockControls>
                                     { (bgrOption === 'bgrImage') && 
-                                        <BackgroungImage
+                                        <ImageControl
                                             attributes={ {imgID, imgURL} }
                                             setAttributes={ (newAttributes) => {
                                                 setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
