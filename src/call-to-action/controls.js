@@ -1,7 +1,7 @@
 /**
  * Controls component dependencies
  */
-import BackgroungImage from "../assets/js/background-image";
+import ImageControl from "../assets/js/image-control";
 
 /**
  * Internal Toolbar Controls Libraries
@@ -39,7 +39,7 @@ export default class Controls extends Component {
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
                 { (bgrOption === 'bgrImage') && 
-                    <BackgroungImage
+                    <ImageControl
                         attributes={ {imgID, imgURL} }
                         setAttributes={ (newAttributes) => {
                             setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }

@@ -29,7 +29,6 @@ export default class Save extends Component {
                 text, 
                 url, 
                 textAlignment,
-                bgrOption,
                 imgID,
                 imgURL, 
                 imgOpacity,

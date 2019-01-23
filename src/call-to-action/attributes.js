@@ -22,7 +22,7 @@ const attributes = {
     },
     textAlignment: {
         type: 'string',
-        default: 'left',
+        default: 'center',
     },
     align: {
         type: 'string',
