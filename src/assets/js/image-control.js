@@ -16,7 +16,7 @@ const {
 /**
  * Create a BackgroungImage Component
  */
-export default class BackgroungImage extends Component {
+export default class ImageControl extends Component {
 
     constructor(props) {
         super( ...arguments );
