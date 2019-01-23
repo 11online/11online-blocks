@@ -18,37 +18,42 @@ const {
  * Create an Inspector Controls wrapper Component
  */
 export default class Inspector extends Component {
-    constructor() {
-      super(...arguments);
+    constructor(props) {
+        super( ...arguments );
+        this.props = props;
     }
   
     render() {
       const {
         attributes: {
-            styleClass,
             bgrOption,
             imgOpacity,
-            colorFontControl,
             colorBackgroundControl,
+            padTop,
+            padBottom,
         },
         setAttributes
       } = this.props;
 
+        const onChangeBgrOption = (value) => {
+            if (value === 'bgrImage' || value === 'bgrNone') {
+                setAttributes({
+                    colorBackgroundControl: 'transparent'
+                });
+            }
+
+            if (value === 'bgrColor' || value === 'bgrNone') {
+                setAttributes({
+                    imgID: null,
+                    imgURL: null,
+                } );
+            }
+
+            setAttributes({ bgrOption: value });
+        };
+
       return (
         <InspectorControls>
-            <PanelBody>
-                <SelectControl
-                    label={ __("Style Settings") }
-                    help={ __("Select Style Option") }
-                    value={ styleClass }
-                    options={[
-                        { value: "Primary", label: __("Primary Option") },
-                        { value: "Secondary", label: __("Secondary Option") },
-                    ]}
-                    onChange={ styleClass => setAttributes({ styleClass }) }
-                />
-            </PanelBody>
-
             <PanelBody>
                 <SelectControl
                     label={ __("Background Settings") }
@@ -59,24 +64,9 @@ export default class Inspector extends Component {
                         { value: "bgrColor", label: __("Background Color") },
                         { value: "bgrNone", label: __("None") },
                     ]}
-                    onChange={ bgrOption => setAttributes({ bgrOption }) }
+                    onChange={ onChangeBgrOption }
                 />
             </PanelBody>
-
-            <PanelColorSettings
-                title={__("Font Color")}
-                initialOpen={ false }
-                colorSettings={[
-                    {
-                        label: __("Font Color"),
-                        help: __("Select Font Color"),
-                        value: colorFontControl,
-                        onChange: colorFontControl => {
-                            setAttributes({ colorFontControl });
-                        },
-                    }
-                ]}
-            />
 
             { bgrOption === 'bgrImage' &&
                 <PanelBody>
@@ -84,7 +74,7 @@ export default class Inspector extends Component {
                         beforeIcon="arrow-left-alt2"
                         afterIcon="arrow-right-alt2"
                         label={ __("Background Image Opacity" ) }
-                        help={ __("Use the slider to change the background image opacity on the scale from 1 to 10") }
+                        help={ __("Background image opacity on the scale from 1 to 10") }
                         value={ imgOpacity }
                         onChange={ imgOpacity => setAttributes( { imgOpacity } ) }
                         initialPosition={ 10 }
@@ -110,6 +100,30 @@ export default class Inspector extends Component {
                     ]}
                 />
             }
+            <PanelBody>
+                    <RangeControl
+                        beforeIcon="arrow-left-alt2"
+                        afterIcon="arrow-right-alt2"
+                        label={ __("Padding Top" ) }
+                        help={ __("Top padding on the scale from 0 to 40 px") }
+                        value={ padTop }
+                        onChange={ padTop => setAttributes( { padTop } ) }
+                        initialPosition={ 20 }
+                        min={ 0 }
+                        max={ 100 }
+                    />
+                    <RangeControl
+                       beforeIcon="arrow-left-alt2"
+                       afterIcon="arrow-right-alt2"
+                       label={ __("Padding Bottom" ) }
+                       help={ __("Bottom padding on the scale from 0 to 40 px") }
+                       value={ padBottom }
+                       onChange={ padBottom => setAttributes( { padBottom } ) }
+                       initialPosition={ 20 }
+                       min={ 0 }
+                       max={ 100 }
+                    />
+                </PanelBody>
         </InspectorControls>
       );
     }

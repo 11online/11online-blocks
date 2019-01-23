@@ -1,11 +1,12 @@
-.call-to-action {
+.background-eleven-online {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 20px;
     z-index: 1;
 }
 
-.img-background {
+.img-background-background-eleven-online {
+    position: absolute;
     content: "";
     width: 100%;
     height: 100%;
@@ -16,6 +17,5 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;   
-    position: absolute;
     z-index: -1; 
 }

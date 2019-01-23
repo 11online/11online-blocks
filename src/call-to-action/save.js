@@ -29,7 +29,6 @@ export default class Save extends Component {
                 text, 
                 url, 
                 textAlignment,
-                bgrOption,
                 imgID,
                 imgURL, 
                 imgOpacity,
@@ -40,28 +39,25 @@ export default class Save extends Component {
             }, 
             className,
         } = this.props;
+
         const classes1 = classnames(
             className,
             styleClass,
             'call-to-action'
         );
+        
         const classes2 = classnames(
             styleClass,
             'button'
         );
-        const divStyle = (
-            bgrOption === 'bgrColor' ?
-            { textAlign: textAlignment, backgroundColor: colorBackgroundControl }
-            :
-            { textAlign: textAlignment }
-        );
+        
         return (  
-            <div className={ classes1 } style={ divStyle }>
-                <div className="wrap">
+            <div className={ classes1 } style={ {backgroundColor: colorBackgroundControl} }>
+                <div className="wrap" style={ { textAlign: textAlignment, color: colorFontControl } }>
                     <RichText.Content 
                         tagName="h3" 
                         value={ headline }
-                        style={ { color: colorFontControl } } 
+                        style={ { color: colorFontControl } }
                     />
                     <RichText.Content 
                         tagName="p" 
@@ -81,7 +77,7 @@ export default class Save extends Component {
                 { imgID &&
                     <div 
                         className="img-background"
-                        style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                        style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1 } }
                     ></div>
                 }
 

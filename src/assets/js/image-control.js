@@ -1,11 +1,9 @@
 /**
- * Internal Toolbar Controls Libraries
+ * Used Libraries
  */
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
-    AlignmentToolbar,
-    BlockControls,
     MediaUpload,
     MediaUploadCheck,
 } = wp.editor;
@@ -16,24 +14,24 @@ const {
 } = wp.components;
 
 /**
- * Create a Block Controls wrapper Component
+ * Create an ImageControl Component
  */
-export default class Controls extends Component {
+export default class ImageControl extends Component {
 
-    constructor() {
+    constructor(props) {
         super( ...arguments );
+        this.props = props;
     }
+
     render() {
         const {
             attributes: { 
-                textAlignment,
-                bgrOption, 
-                imgID, 
+                imgID,
              },
             setAttributes
           } = this.props;
 
-        const onSelectImage = img => {
+          const onSelectImage = img => {
             setAttributes( {
                 imgID: img.id,
                 imgURL: img.url,
@@ -48,25 +46,19 @@ export default class Controls extends Component {
         };
 
         return (
-            <BlockControls>
-                <AlignmentToolbar
-                    value={ textAlignment }
-                    onChange={ textAlignment => setAttributes( { textAlignment } ) }
-                />
-                <Toolbar>
-                    { (bgrOption === 'bgrImage') && imgID &&
-                        <Tooltip text={ __( 'Click to Remove Image' ) }>
-                        <Button
-                            className={ "components-button button button-large" }
-                            onClick={ onRemoveImage }
-                        >
-                            {/* { icons.remove } */}
-                            { __( 'Remove Image' ) }
-                        </Button>
-                    </Tooltip>
-                    }
-                    { (bgrOption === 'bgrImage') && !imgID &&
-                        <MediaUploadCheck>
+            <Toolbar>
+                { imgID &&
+                    <Tooltip text={ __( 'Click to Remove Image' ) }>
+                    <Button
+                        className={ "components-button button button-large" }
+                        onClick={ onRemoveImage }
+                    >
+                        { __( 'Remove Image' ) }
+                    </Button>
+                </Tooltip>
+                }
+                { !imgID &&
+                    <MediaUploadCheck>
                         <MediaUpload
                             onSelect={ onSelectImage }
                             type="image"
@@ -77,7 +69,6 @@ export default class Controls extends Component {
                                         className={ "components-button button button-large" }
                                         onClick={ open }
                                     >
-                                        {/* { icons.upload } */}
                                         { __( 'Upload Image' ) }
                                     </Button>
                                 </Tooltip>
@@ -85,9 +76,8 @@ export default class Controls extends Component {
                         >
                         </MediaUpload>
                     </MediaUploadCheck>
-                    }
-                </Toolbar>
-            </BlockControls>
+                }
+            </Toolbar>
         );
     }
 }

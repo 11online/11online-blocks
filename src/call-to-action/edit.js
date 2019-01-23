@@ -50,19 +50,15 @@ export default class Edit extends Component {
                 styleClass,
             },
                 className,
-                setAttributes
+                setAttributes,
             } = this.props;
+
         const classes = classnames(
             className,
             styleClass,
             'call-to-action'
         );
-        const divStyle = (
-            bgrOption === 'bgrColor' ?
-            { backgroundColor: colorBackgroundControl }
-            :
-            null
-        );
+
         const toggleNewTab = () => setAttributes( { newTab: ! newTab } );
 
         const ButtonControls = (
@@ -108,13 +104,14 @@ export default class Edit extends Component {
         );
 
         return (
-            <div className={ classes } style={ divStyle }>
+            <div className={ classes } style={ {backgroundColor: colorBackgroundControl} }>
                 <div className="wrap">
                     <Fragment>
                         <Inspector {...{ setAttributes, ...this.props }} />
                         <Controls {...{ setAttributes, ...this.props }} />
                         <RichText
                             tagName="h3"
+                            formattingControls={ [ 'bold', 'italic' ] }
                             placeholder={ __( 'Add your custom heading' ) }
                             value={ headline }
                             style={ { textAlign: textAlignment, color: colorFontControl } }
@@ -122,6 +119,7 @@ export default class Edit extends Component {
                         />
                         <RichText
                             tagName="p"
+                            formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                             placeholder={ __( 'Add your custom message' ) }
                             value={ message }
                             style={ { textAlign: textAlignment, color: colorFontControl } }
@@ -129,7 +127,7 @@ export default class Edit extends Component {
                         />
                         <Fragment>
                             <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                {renderButton()}
+                                { renderButton() }  
                             </Tooltip>
                         </Fragment>
                     </Fragment>
@@ -137,7 +135,7 @@ export default class Edit extends Component {
                 { imgID &&
                     <div 
                         className="img-background"
-                        style={ { backgroundImage: 'url(' + imgURL + ')', opacity: imgOpacity*0.1 } }
+                        style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1 } }
                     ></div>
                 }
             </div>
