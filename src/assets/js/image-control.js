@@ -14,7 +14,7 @@ const {
 } = wp.components;
 
 /**
- * Create a BackgroungImage Component
+ * Create a ImageControl Component
  */
 export default class ImageControl extends Component {
 
