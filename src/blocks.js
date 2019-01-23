@@ -18,5 +18,5 @@ import './card/block.js';
 import './cards/block.js';
 import './container/block.js';
 
-//import './postcard/block.js';
+import './postcard/block.js';
 //import './paragraphs/block.js';
