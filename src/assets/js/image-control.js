@@ -14,7 +14,7 @@ const {
 } = wp.components;
 
 /**
- * Create a ImageControl Component
+ * Create an ImageControl Component
  */
 export default class ImageControl extends Component {
 
@@ -27,7 +27,6 @@ export default class ImageControl extends Component {
         const {
             attributes: { 
                 imgID,
-                imgURL,
              },
             setAttributes
           } = this.props;
