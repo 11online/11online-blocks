@@ -7,16 +7,17 @@ const attributes = {
     },
     cardTextAlignment: {
         type: 'string',
+        default: 'center',
     },
     cardHeadingSize: {
         type: 'string',
         default: 'h2',
     },
-    cardImgID: {
+    imgID: {
         type: 'number',
         default: null,
     },
-    cardImgURL: {
+    imgURL: {
         type: 'string',
         default: null,
     },

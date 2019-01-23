@@ -3,6 +3,7 @@
  */
 import './editor.scss';
 import './style.scss';
+import ImageControl from "../assets/js/image-control";
 
 /**
  * Used Libraries
@@ -12,13 +13,11 @@ const { Component } = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
-    MediaUpload,
-    MediaUploadCheck,
 } = wp.editor;
 const {
-    Toolbar,
     Button,
     Tooltip,
+    Toolbar,
 } = wp.components;
 
 /**
@@ -34,29 +33,14 @@ export default class Controls extends Component {
         const {
             attributes: { 
                 cardTextAlignment,
+                imgID,
+                imgURL,
                 cardBtnPresent,
-                cardImgID,
              },
             setAttributes
           } = this.props;
 
-        const onSelectImage = img => {
-            setAttributes( {
-                cardImgID: img.id,
-                cardImgURL: img.url,
-                cardImgAlt: img.alt,
-            } );
-        };
-
-        const onRemoveImage = () => {
-            setAttributes({
-                cardImgID: null,
-                cardImgURL: null,
-                cardImgAlt: null,
-            });
-        }
-
-        const renderAddActionBtn = () => (
+          const renderAddActionBtn = () => (
             <Tooltip text={ __( 'Add Action Button' ) }>
                 <Button
                     className={ "components-button button button-large" }
@@ -84,39 +68,14 @@ export default class Controls extends Component {
                     value={ cardTextAlignment }
                     onChange={ cardTextAlignment => setAttributes( { cardTextAlignment } ) }
                 />
+                <ImageControl
+                    attributes={ {imgID, imgURL} }
+                    setAttributes={ (newAttributes) => {
+                        setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
+                />
                 <Toolbar>
-                    { !cardImgID &&
-                        <MediaUploadCheck>
-                            <MediaUpload
-                                onSelect={ onSelectImage }
-                                type="image"
-                                value={ cardImgID }
-                                render={ ( { open } ) => (
-                                    <Tooltip text={ __( 'Click to Upload Image' ) }>
-                                        <Button
-                                            className={ "components-button button button-large" }
-                                            onClick={ open }
-                                        >
-                                            { __( 'Upload Image' ) }
-                                        </Button>
-                                    </Tooltip>
-                                ) }
-                            >
-                            </MediaUpload>
-                        </MediaUploadCheck>
-                    } 
-                    { cardImgID &&
-                        <Tooltip text={ __( 'Click to Remove Image' ) }>
-                            <Button
-                                className={ "components-button button button-large" }
-                                onClick={ onRemoveImage }
-                            >
-                                { __( 'Remove Image' ) }
-                            </Button>
-                        </Tooltip>
-                    } 
                     { cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
-                </Toolbar>
+                </Toolbar>        
             </BlockControls>
         );
     }

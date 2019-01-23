@@ -6,7 +6,7 @@ import './style.scss';
 
 import Controls from "./controls";
 import Inspector from "./inspector";
-import InnerButton from "../assets/js/inner-button";
+import ActionButton from "../assets/js/action-button";
 
 /**
  * Used Libraries
@@ -35,8 +35,8 @@ export default class Card extends Component {
                 cardText,
                 cardTextAlignment,
                 cardHeadingSize,
-                cardImgID, 
-                cardImgURL, 
+                imgID, 
+                imgURL, 
                 cardBtnPresent,
                 useColor,
                 colorFontControl,
@@ -54,10 +54,10 @@ export default class Card extends Component {
                     <Fragment>
                         <Controls {...{ setAttributes, ...this.props }} />
                         <Inspector {...{ setAttributes, ...this.props }} />
-                        { cardImgID &&
+                        { imgID &&
                             <div 
                                 className="mycard-eleven-online-img"
-                                style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                                style={ { backgroundImage: `url(${ imgURL })` } }
                             ></div>
                         }
                         <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
@@ -80,7 +80,7 @@ export default class Card extends Component {
                             { cardBtnPresent && 
                                 <div className="btn-mycard-eleven-online">
                                     <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
-                                        <InnerButton 
+                                        <ActionButton 
                                             editable={ true } 
                                             attributes={ this.props.attributes } 
                                             setAttributes={ setAttributes } 
@@ -95,11 +95,11 @@ export default class Card extends Component {
                 </div>
            :
                 <Fragment>
-                     <div className={ className } style={ {backgroundColor: bgrColor} }>
-                        { cardImgID &&
+                    <div className={ className } style={ {backgroundColor: bgrColor} }>
+                        { imgID &&
                                 <div 
                                     className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: 'url(' + cardImgURL + ')' } }
+                                    style={ { backgroundImage: `url(${ imgURL })` } }
                                 ></div>
                         }
                         <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
@@ -115,7 +115,7 @@ export default class Card extends Component {
                             /> 
                             { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">
-                                    { <InnerButton 
+                                    { <ActionButton 
                                         editable={ false } 
                                         attributes={ this.props.attributes } 
                                     /> }
