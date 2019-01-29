@@ -10,6 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  */
 function eleven_online_block_assets() {
+	// enqueue jQuery
+	wp_enqueue_script('jquery');
+	wp_enqueue_script(
+		'11online-block_postcard-display-handler-js',
+		plugins_url( 'src/postcard/display-handler.js', dirname( __FILE__ ) ),
+		array( 'jquery' ), null, true
+	);
 	wp_enqueue_style('11online-block-style-css', plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), array( 'wp-edit-blocks' ));
 } 
 add_action( 'enqueue_block_assets', 'eleven_online_block_assets' );
@@ -19,6 +26,8 @@ add_action( 'enqueue_block_assets', 'eleven_online_block_assets' );
  *
  */
 function eleven_online_editor_assets() {
+	// enqueue jQuery
+	wp_enqueue_script('jquery');
 	// react code
 	wp_enqueue_script(
 		'11online-dev-block-js', plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-data' ), true);
