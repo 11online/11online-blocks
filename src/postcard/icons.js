@@ -14,4 +14,13 @@ icons.plus = <svg width='20px' height='20px' xmlns="http://www.w3.org/2000/svg" 
 </g>
 </svg>
 
+icons.minus = <svg width='20px' height='20px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<g>
+  <g fill="#1D1D1B">
+	<path d="m46.551,30.119h-28.285c-1.105,0-2,0.896-2,2s0.895,2 2,2h28.285c1.105,0 2-0.896 2-2s-0.895-2-2-2z"/>
+	<path d="M32,0C14.355,0,0,14.355,0,32s14.355,32,32,32s32-14.355,32-32S49.645,0,32,0z M32,60    C16.561,60,4,47.439,4,32S16.561,4,32,4s28,12.561,28,28S47.439,60,32,60z"/>
+  </g>
+</g>
+</svg>
+
 export default icons;
