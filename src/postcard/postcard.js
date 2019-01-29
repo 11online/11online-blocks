@@ -5,6 +5,7 @@
 import './style.scss';
 
 // import classnames from 'classnames';
+//import $ from "jquery";
 import Inspector from "./inspector";
 import ImageControl from "../assets/js/image-control";
 import icons from './icons';
@@ -49,6 +50,7 @@ export default class Postcard extends Component {
         } = this.props;
 
         const bgrColor = ( useBackgroundColor ? colorBackgroundControl : 'transparent' );
+        const imgHeight = ( inEditor ? (imgID ? '400px' : '0') : '150px');
 
         const renderPostcard = ( isInEditor ) => {
             return (
@@ -69,7 +71,7 @@ export default class Postcard extends Component {
                             style={ { textAlign: titleAlignment, color: colorFontControl } }
                         />
                     }
-                    <div className="img-background-wrapper-postcard-eleven-online">
+                    <div className="img-background-wrapper-postcard-eleven-online" style={ { height: imgHeight } }>
                         { imgID &&
                             <div 
                                 className="img-background-postcard-eleven-online"
@@ -86,15 +88,25 @@ export default class Postcard extends Component {
                             onChange={ text => setAttributes( { text } ) }                 		
                         />
                         :
-                        <RichText.Content 
-                            tagName="p" 
-                            value={ text }
-                            style={ { textAlign: 'justify'} }
-                        /> 
+                        <div class="content-eleven-online">
+                            <RichText.Content 
+                                tagName="p" 
+                                value={ text }
+                                style={ { textAlign: 'justify'} }
+                            /> 
+                        </div> 
                     }
-                </div>
+                    </div>          
             );
         }
+
+        const handleClick = (e) => {
+            e.preventDefault();
+            $('#accordion').css({
+                'display': 'block',
+            }); 
+        }
+
 
         return (
             inEditor ? 
@@ -106,7 +118,7 @@ export default class Postcard extends Component {
                                     value={ titleAlignment }
                                     onChange={ titleAlignment => setAttributes( { titleAlignment } ) }
                                 />
-                                <BackgroungImage
+                                <ImageControl
                                     attributes={ {imgID, imgURL} }
                                     setAttributes={ (newAttributes) => {
                                         setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
@@ -120,7 +132,11 @@ export default class Postcard extends Component {
             : 
                 <div className="collapsible-content-postcard-eleven-onlin">
                     <div className="wrapper-toggle-postcard-eleven-online">
-                        <button className="toggle-postcard-eleven-online">{ icons.plus }</button>
+                        <button 
+                            className="toggle-postcard-eleven-online" 
+                        >
+                            { icons.plus }
+                        </button>
                     </div>
                      { renderPostcard(false) }
                 </div>
