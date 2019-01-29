@@ -1,7 +1,6 @@
 const attributes = {
     title: {
         type: 'string',
-        default: 'Resource',
     },
     titleHeadingSize: {
         type: 'string',
@@ -13,12 +12,12 @@ const attributes = {
     },
     titleAlignment: {
         type: 'string',
+        default: 'center'
     },
     text: {
         type: 'string',
         source: 'html',
         selector: 'p',
-        default: 'Paragraph content',
     },
     imgID: {
         type: 'number',
@@ -35,6 +34,10 @@ const attributes = {
     colorBackgroundControl: {
         type: 'string',
         default: 'transparent',
+    },
+    align: {
+        type: 'string',
+        default: 'wide',
     },
 };
 
