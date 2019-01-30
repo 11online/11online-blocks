@@ -17,7 +17,7 @@ registerBlockType(
     'eleven-online/postcard', 
     {
         title: __( 'Postcard Block' ),
-        description: __( 'A \'postcard\' block consists of a title, a large postcard-like image, and some text underneath' ),
+        description: __( 'A \'postcard\' block is collapsible/expandable on the front-end and consists of a title, a large postcard-like image, and some text underneath' ),
         category: 'common',
         icon: {
           background: '#F04848',

@@ -3,12 +3,8 @@
  */
 //import './editor.scss';
 import './style.scss';
-
-// import classnames from 'classnames';
-//import $ from "jquery";
 import Inspector from "./inspector";
 import ImageControl from "../assets/js/image-control";
-import icons from './icons';
 
 /**
  * Used Libraries
@@ -51,27 +47,37 @@ export default class Postcard extends Component {
 
         const bgrColor = ( useBackgroundColor ? colorBackgroundControl : 'transparent' );
         const imgHeight = ( inEditor ? (imgID ? '400px' : '0') : '150px');
+        const imgMrg = ( inEditor ? '' : '-10px');
 
         const renderPostcard = ( isInEditor ) => {
             return (
-                <div style={ {backgroundColor: bgrColor} }>
+                <div className="postcard-eleven-online" style={ {backgroundColor: bgrColor} }>
                     { isInEditor ? 
                         <RichText
                             tagName={ titleHeadingSize }
                             formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                             placeholder={ __( 'Add your title' ) }
                             value={ title }
-                            style={ { textAlign: titleAlignment, color: colorFontControl } }
+                            style={ { textAlign: titleAlignment, color: colorFontControl, paddingTop: '15px' } }
                             onChange={ title  => setAttributes( { title } ) }         
                         />
                         :
                         <RichText.Content 
                             tagName={ titleHeadingSize }
                             value={ title }
-                            style={ { textAlign: titleAlignment, color: colorFontControl } }
+                            style={ { textAlign: titleAlignment, color: colorFontControl, marginBottom: '-15px', paddingTop: '15px' } }
                         />
                     }
-                    <div className="img-background-wrapper-postcard-eleven-online" style={ { height: imgHeight } }>
+                    { !isInEditor &&
+                        <div className="wrapper-toggle-postcard-eleven-online">
+                            <button 
+                                className="toggle-postcard-eleven-online" 
+                            >
+                                &#x2295;
+                            </button>
+                        </div>
+                    }
+                    <div className="img-background-wrapper-postcard-eleven-online" style={ { height: imgHeight, marginTop: imgMrg } }>
                         { imgID &&
                             <div 
                                 className="img-background-postcard-eleven-online"
@@ -79,24 +85,25 @@ export default class Postcard extends Component {
                             ></div>
                         }
                     </div>
-                    { isInEditor ? 
-                        <RichText
-                            tagName="p"
-                            placeholder={ __( 'Add your paragraph content' ) }
-                            value={ text }
-                            style={ { textAlign: 'justify'} }
-                            onChange={ text => setAttributes( { text } ) }                 		
-                        />
+                    <div class="content-eleven-online">
+                        { isInEditor ? 
+                            <RichText
+                                tagName="p"
+                                formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
+                                placeholder={ __( 'Add your paragraph content' ) }
+                                value={ text }
+                                style={ { color: colorFontControl, margin: '0 0 5px' } }
+                                onChange={ text => setAttributes( { text } ) }                 		
+                            />
                         :
-                        <div class="content-eleven-online">
                             <RichText.Content 
                                 tagName="p" 
                                 value={ text }
-                                style={ { textAlign: 'justify'} }
-                            /> 
-                        </div> 
-                    }
-                    </div>          
+                                style={ { color: colorFontControl, margin: '0 0 5px' } }
+                            />   
+                        }
+                    </div> 
+                </div>          
             );
         }
 
@@ -131,13 +138,6 @@ export default class Postcard extends Component {
                 </Fragment>
             : 
                 <div className="collapsible-content-postcard-eleven-onlin">
-                    <div className="wrapper-toggle-postcard-eleven-online">
-                        <button 
-                            className="toggle-postcard-eleven-online" 
-                        >
-                            { icons.plus }
-                        </button>
-                    </div>
                      { renderPostcard(false) }
                 </div>
         );

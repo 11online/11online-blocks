@@ -19,6 +19,10 @@ const attributes = {
         source: 'html',
         selector: 'p',
     },
+    textAlignment: {
+        type: 'string',
+        default: 'left'
+    },
     imgID: {
         type: 'number',
         default: null,

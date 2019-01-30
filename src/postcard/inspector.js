@@ -59,12 +59,12 @@ export default class Inspector extends Component {
             </PanelBody>
 
             <PanelColorSettings
-                title={__("Title Font Color")}
+                title={__("Font Color")}
                 initialOpen={ false }
                 colorSettings={[
                     {
-                        label: __("Title Font Color"),
-                        help: __("Select title font color"),
+                        label: __("Font Color"),
+                        help: __("Select font color"),
                         value: colorFontControl,
                         onChange: colorFontControl => setAttributes( { colorFontControl  }),
                     }
