@@ -1,7 +1,6 @@
 /**
  * Postcard Component dependencies
  */
-//import './editor.scss';
 import './style.scss';
 import Inspector from "./inspector";
 import ImageControl from "../assets/js/image-control";
@@ -17,6 +16,7 @@ const {
     RichText,
 } = wp.editor;
 const {} = wp.components;
+
 /**
  * Create a Cards Component
  */
@@ -113,7 +113,6 @@ export default class Postcard extends Component {
                 'display': 'block',
             }); 
         }
-
 
         return (
             inEditor ? 
