@@ -72,6 +72,7 @@ export default class Postcard extends Component {
                         <div className="wrapper-toggle-postcard-eleven-online">
                             <button 
                                 className="toggle-postcard-eleven-online" 
+                                style={ { color: colorFontControl } }
                             >
                                 &#x2295;
                             </button>
