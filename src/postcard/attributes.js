@@ -39,6 +39,10 @@ const attributes = {
         type: 'string',
         default: 'wide',
     },
+    btnID: {
+        type: 'string',
+        default: null,
+    }
 };
 
 export default attributes;

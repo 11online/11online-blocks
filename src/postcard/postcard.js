@@ -27,6 +27,11 @@ export default class Postcard extends Component {
         this.props = props;
     }
 
+    componentDidMount() {
+        !this.props.attributes.btnID && 
+            this.props.setAttributes({ btnID: Math.random().toString(36).substr(2, 11) });
+    }
+
     render() {
         const {
             attributes: { 
@@ -39,6 +44,7 @@ export default class Postcard extends Component {
                 imgURL,
                 useBackgroundColor,
                 colorBackgroundControl,
+                btnID,
             },
                 setAttributes,
                 inEditor,
@@ -51,7 +57,10 @@ export default class Postcard extends Component {
 
         const renderPostcard = ( isInEditor ) => {
             return (
-                <div className="postcard-eleven-online" style={ {backgroundColor: bgrColor} }>
+                <div 
+                    className="postcard-eleven-online" 
+                    style={ {backgroundColor: bgrColor} }
+                >
                     { isInEditor ? 
                         <RichText
                             tagName={ titleHeadingSize }
@@ -71,6 +80,7 @@ export default class Postcard extends Component {
                     { !isInEditor &&
                         <div className="wrapper-toggle-postcard-eleven-online">
                             <button 
+                                id={ btnID }
                                 className="toggle-postcard-eleven-online" 
                                 style={ { color: colorFontControl } }
                             >
@@ -104,15 +114,8 @@ export default class Postcard extends Component {
                             />   
                         }
                     </div> 
-                </div>          
+                </div>        
             );
-        }
-
-        const handleClick = (e) => {
-            e.preventDefault();
-            $('#accordion').css({
-                'display': 'block',
-            }); 
         }
 
         return (
@@ -136,10 +139,10 @@ export default class Postcard extends Component {
                     }
                     { renderPostcard(true) }
                 </Fragment>
-            : 
-                <div className="collapsible-content-postcard-eleven-onlin">
-                     { renderPostcard(false) }
-                </div>
+            :
+            <Fragment>  
+                { renderPostcard(false) }
+            </Fragment>
         );
     }
 }
