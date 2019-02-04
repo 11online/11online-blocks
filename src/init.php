@@ -12,9 +12,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 function eleven_online_block_assets() {
 	// enqueue jQuery
 	wp_enqueue_script('jquery');
+
+	// enqueue custom jQuery script
 	wp_enqueue_script(
 		'11online-block_postcard-display-handler-js',
-		plugins_url( 'src/postcard/display-handler.js', dirname( __FILE__ ) ),
+		plugins_url( '/src/postcard/display-handler.js', dirname( __FILE__ ) ),
 		array( 'jquery' ), null, true
 	);
 	wp_enqueue_style('11online-block-style-css', plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), array( 'wp-edit-blocks' ));
