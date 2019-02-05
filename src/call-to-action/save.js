@@ -62,7 +62,7 @@ export default class Save extends Component {
                     <RichText.Content 
                         tagName="p" 
                         value={ message }
-                        style={ { color: colorFontControl } }
+                        style={ { color: colorFontControl, marginBottom: '15px' } }
                     /> 
                     <p>
                         <a 
