@@ -111,7 +111,7 @@ export default class Card extends Component {
                             <RichText.Content 
                                 tagName="p" 
                                 value={ cardText }
-                                style={ { color: colorFontControl } }
+                                style={ { color: colorFontControl, marginBottom: '15px' } }
                             /> 
                             { cardBtnPresent &&
                                 <div className="btn-mycard-eleven-online">

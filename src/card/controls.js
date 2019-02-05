@@ -4,6 +4,7 @@
 import './editor.scss';
 import './style.scss';
 import ImageControl from "../assets/js/image-control";
+import classnames from 'classnames';
 
 /**
  * Used Libraries
@@ -29,6 +30,7 @@ export default class Controls extends Component {
         super( ...arguments );
         this.props = props;
     }
+
     render() {
         const {
             attributes: { 
@@ -40,10 +42,12 @@ export default class Controls extends Component {
             setAttributes
           } = this.props;
 
+          const classesBtn = classnames( 'button', 'btn-custom-eleven-online' );
+
           const renderAddActionBtn = () => (
             <Tooltip text={ __( 'Add Action Button' ) }>
                 <Button
-                    className={ "components-button button button-large" }
+                    className={ classesBtn }
                     onClick={ () => setAttributes( { cardBtnPresent: true } ) }
                 >
                     { __( 'Add Button' ) }
@@ -54,7 +58,7 @@ export default class Controls extends Component {
         const renderRemoveActionBtn = () => (
             <Tooltip text={ __( 'Remove Action Button' ) }>
                 <Button
-                    className={ "components-button button button-large" }
+                    className={ classesBtn }
                     onClick={ () => setAttributes( { cardBtnPresent: false} ) }
                 >
                     { __( 'Remove Button' ) }
@@ -74,7 +78,9 @@ export default class Controls extends Component {
                         setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
                 />
                 <Toolbar>
-                    { cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                    <div className="wrapper-btn-custom-eleven-online">
+                        { cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                    </div>
                 </Toolbar>        
             </BlockControls>
         );
