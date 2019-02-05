@@ -1,6 +1,9 @@
 /**
  * Used Libraries
  */
+import '../css/style.scss';
+import classnames from 'classnames';
+
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
@@ -31,6 +34,8 @@ export default class ImageControl extends Component {
             setAttributes
           } = this.props;
 
+          const classesBtn = classnames( 'button', 'btn-custom-eleven-online' );
+
           const onSelectImage = img => {
             setAttributes( {
                 imgID: img.id,
@@ -45,44 +50,39 @@ export default class ImageControl extends Component {
             } );
         };
 
-        const wrapperStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center' };
-        const btnStyle = { border: 'none', outline: 'none', background: 'none', boxShadow: 'none' };
-
         return (
             <Toolbar>
-                <div style={ wrapperStyle }>
-                { imgID &&
-                    <Tooltip text={ __( 'Click to Remove Image' ) }>
-                    <Button
-                        className={ "button" }
-                        onClick={ onRemoveImage }
-                        style={ btnStyle }
-                    >
-                        { __( 'Remove Image' ) }
-                    </Button>
-                </Tooltip>
-                }
-                { !imgID &&
-                    <MediaUploadCheck>
-                        <MediaUpload
-                            onSelect={ onSelectImage }
-                            type="image"
-                            value={ imgID }
-                            render={ ( { open } ) => (
-                                <Tooltip text={ __( 'Click to Upload Image' ) }>
-                                    <Button
-                                        className={ "button" }
-                                        onClick={ open }
-                                        style={ btnStyle }
-                                    >
-                                        { __( 'Upload Image' ) }
-                                    </Button>
-                                </Tooltip>
-                            ) }
+                <div className="wrapper-btn-custom-eleven-online">
+                    { imgID &&
+                        <Tooltip text={ __( 'Click to Remove Image' ) }>
+                        <Button
+                            className={ classesBtn }
+                            onClick={ onRemoveImage }
                         >
-                        </MediaUpload>
-                    </MediaUploadCheck>
-                }
+                            { __( 'Remove Image' ) }
+                        </Button>
+                    </Tooltip>
+                    }
+                    { !imgID &&
+                        <MediaUploadCheck>
+                            <MediaUpload
+                                onSelect={ onSelectImage }
+                                type="image"
+                                value={ imgID }
+                                render={ ( { open } ) => (
+                                    <Tooltip text={ __( 'Click to Upload Image' ) }>
+                                        <Button
+                                            className={ classesBtn }
+                                            onClick={ open }
+                                        >
+                                            { __( 'Upload Image' ) }
+                                        </Button>
+                                    </Tooltip>
+                                ) }
+                            >
+                            </MediaUpload>
+                        </MediaUploadCheck>
+                    }
                 </div>
             </Toolbar>
         );
