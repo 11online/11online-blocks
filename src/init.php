@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 function eleven_online_block_assets() {
 	// enqueue jQuery
 	wp_enqueue_script('jquery');
-
 	// enqueue custom jQuery script
 	wp_enqueue_script(
 		'11online-block_postcard-display-handler-js',
