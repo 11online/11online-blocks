@@ -24,3 +24,20 @@
 .card-wrapper-eleven-online {
     padding: 0;
 }
+
+.wrapper-btn-custom-eleven-online {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-custom-eleven-online {
+    border: none !important;
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+
+.btn-custom-eleven-online:hover {
+    outline: 1px solid black !important;
+}

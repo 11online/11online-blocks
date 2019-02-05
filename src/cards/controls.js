@@ -1,6 +1,7 @@
 /**
  * Control Component dependencies
  */
+import classnames from 'classnames';
 import icons from './icons';
 import './editor.scss';
 import './style.scss';
@@ -41,6 +42,8 @@ export default class Controls extends Component {
              },
             setAttributes
           } = this.props;
+
+          const classesBtn = classnames( 'button', 'btn-custom-eleven-online' );
 
           const createDefaultCard = () => (
             {
@@ -129,7 +132,7 @@ export default class Controls extends Component {
         const renderAddCardBtn = () => (
             <Tooltip text={ __( 'Add a New Card' ) }>
                 <Button
-                    className={ "components-button button button-large" }
+                    className={ classesBtn }
                     onClick={ onAddCard }
                 >
                     { __( 'Add Card' ) }
@@ -140,7 +143,7 @@ export default class Controls extends Component {
         const renderAddActionBtn = () => (
             <Tooltip text={ __( 'Add Action Button' ) }>
                 <Button
-                    className={ "components-button button button-large" }
+                    className={ classesBtn }
                     onClick={ () => {
                         const newCards = [ ...cards];
                         newCards[currentCard].cardBtnPresent = true;
@@ -155,7 +158,7 @@ export default class Controls extends Component {
         const renderRemoveActionBtn = () => (
             <Tooltip text={ __( 'Remove Action Button' ) }>
                 <Button
-                    className={ "components-button button button-large" }
+                    className={ classesBtn }
                     onClick={ () => {
                         const newCards = [ ...cards];
                         newCards[currentCard].cardBtnPresent = false;
@@ -179,6 +182,7 @@ export default class Controls extends Component {
                     } }
                 />
                 <Toolbar>
+                    <div className="wrapper-btn-custom-eleven-online">
                     { !cards[currentCard].imgID &&
                         <MediaUploadCheck>
                             <MediaUpload
@@ -188,7 +192,7 @@ export default class Controls extends Component {
                                 render={ ( { open } ) => (
                                     <Tooltip text={ __( 'Click to Upload Image' ) }>
                                         <Button
-                                            className={ "components-button button button-large" }
+                                            className={ classesBtn }
                                             onClick={ open }
                                         >
                                             { __( 'Upload Image' ) }
@@ -202,22 +206,31 @@ export default class Controls extends Component {
                     { cards[currentCard].imgID &&
                         <Tooltip text={ __( 'Click to Remove Image' ) }>
                             <Button
-                                className={ "components-button button button-large" }
+                                className={ classesBtn }
                                 onClick={ onRemoveImage }
                             >
                                 { __( 'Remove Image' ) }
                             </Button>
                         </Tooltip>
                     } 
-                    { cards[currentCard].cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                    </div>
+                </Toolbar>
+                <Toolbar>
+                    <div className="wrapper-btn-custom-eleven-online">
+                        { cards[currentCard].cardBtnPresent ? renderRemoveActionBtn() : renderAddActionBtn() }
+                    </div>
                 </Toolbar>
             </BlockControls>
             :
-            <BlockControls>
+            <BlockControls>  
                 <Toolbar>
                     { myDropdownMenu() }
-                    { renderAddCardBtn() }
                 </Toolbar>
+                <Toolbar>
+                    <div className="wrapper-btn-custom-eleven-online">
+                        { renderAddCardBtn() }
+                    </div>
+                </Toolbar>              
             </BlockControls>
         );
     }
