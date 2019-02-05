@@ -45,13 +45,18 @@ export default class ImageControl extends Component {
             } );
         };
 
+        const wrapperStyle = { display: 'flex', alignItems: 'center', justifyContent: 'center' };
+        const btnStyle = { border: 'none', outline: 'none', background: 'none', boxShadow: 'none' };
+
         return (
             <Toolbar>
+                <div style={ wrapperStyle }>
                 { imgID &&
                     <Tooltip text={ __( 'Click to Remove Image' ) }>
                     <Button
-                        className={ "components-button button button-large" }
+                        className={ "button" }
                         onClick={ onRemoveImage }
+                        style={ btnStyle }
                     >
                         { __( 'Remove Image' ) }
                     </Button>
@@ -66,8 +71,9 @@ export default class ImageControl extends Component {
                             render={ ( { open } ) => (
                                 <Tooltip text={ __( 'Click to Upload Image' ) }>
                                     <Button
-                                        className={ "components-button button button-large" }
+                                        className={ "button" }
                                         onClick={ open }
+                                        style={ btnStyle }
                                     >
                                         { __( 'Upload Image' ) }
                                     </Button>
@@ -77,6 +83,7 @@ export default class ImageControl extends Component {
                         </MediaUpload>
                     </MediaUploadCheck>
                 }
+                </div>
             </Toolbar>
         );
     }
