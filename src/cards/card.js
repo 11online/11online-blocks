@@ -111,7 +111,7 @@ export default class Card extends Component {
                     formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                     placeholder={ __( 'Add your card text' ) }
                     value={ cards[index].cardText }
-                    style={ { color: cards[index].colorFontControl } }
+                    style={ { color: cards[index].colorFontControl, marginBottom: '15px' } }
                     onChange={ (cardText)  => {
                         const newCards = [ ...cards ];
 						newCards[index].cardText = cardText;
@@ -142,7 +142,7 @@ export default class Card extends Component {
                 <RichText.Content 
                     tagName="p" 
                     value={ cards[index].cardText }
-                    style={ { color: cards[index].colorFontControl } }
+                    style={ { color: cards[index].colorFontControl, marginBottom: '15px' } }
                 /> 
                 { cards[index].cardBtnPresent &&
                     <div className="btn-mycard-eleven-online">
