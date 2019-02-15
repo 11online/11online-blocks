@@ -19,14 +19,6 @@ const attributes = {
         source: 'html',
         selector: 'p',
     },
-    imgID: {
-        type: 'number',
-        default: null,
-    },
-    imgURL: {
-        type: 'string',
-        default: null,
-    },
     useBackgroundColor: {
         type: 'boolean',
         default: false,

@@ -2,7 +2,7 @@
  * Block dependencies
  */
 import attributes from "./attributes";
-import Postcard from "./postcard";
+import Accordion from "./accordion";
 
 /**
  * Used Libraries
@@ -43,7 +43,7 @@ registerBlockType(
     
             return (
                 <div className={ className }>
-                    { <Postcard inEditor={ true } {...{ setAttributes, ...props }} /> }
+                    {<Accordion inEditor={ true } {...{ setAttributes, ...props }} /> }
                 </div>
             );
         },
@@ -55,7 +55,7 @@ registerBlockType(
     
             return (
                 <div className={ className }>
-                    { <Postcard inEditor={ false } {...{ setAttributes, ...props }} /> }
+                    {<Accordion inEditor={ false } {...{ setAttributes, ...props }} /> }
                 </div>
             );
         },
