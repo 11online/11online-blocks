@@ -53,14 +53,13 @@ export default class Controls extends Component {
                 cardHeadingSize: 'h2',
                 imgID: null,
                 imgURL: null,
+                imgOpacity: '10',
                 cardBtnPresent: false,
                 buttonURL: 'http://',
                 buttonText: 'Click here',
                 buttonStyleClass: 'primary',
                 newTab: true,
-                useColor: false,
                 colorFontControl: '#000000',
-                colorBackgroundControl: 'transparent',
             }
         );
 

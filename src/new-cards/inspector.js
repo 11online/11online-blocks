@@ -5,13 +5,13 @@
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const {
-  InspectorControls,
-  PanelColorSettings,
+    InspectorControls,
+    PanelColorSettings,
 } = wp.editor;
 const {
-  PanelBody,
-  SelectControl,
-  ToggleControl,
+    PanelBody,
+    SelectControl,
+    RangeControl,
 } = wp.components;
 
 /**
@@ -71,20 +71,27 @@ export default class Inspector extends Component {
                        } }      
                     />
                 </PanelBody>
+              }
+              
+              { cards[currentCard].imgID &&
+                <PanelBody>
+                    <RangeControl
+                        beforeIcon="arrow-left-alt2"
+                        afterIcon="arrow-right-alt2"
+                        label={ __("Background Image Opacity") }
+                        help={ __("Background image opacity on the scale from 1 to 10") }
+                        value={ cards[currentCard].imgOpacity }
+                        onChange={ imgOpacity => {
+                            const newCards = [...cards];
+                            newCards[currentCard].imgOpacity = imgOpacity;
+                            setAttributes({ cards: newCards });
+                        } }      
+                        initialPosition={ 10 }
+                        min={ 1 }
+                        max={ 10 }
+                    />
+                </PanelBody>
             }
-
-            <PanelBody>
-                <ToggleControl
-                    label={ __("Use Background Color?") }
-                    help={ __( cards[currentCard].useColor ? 'Solid color background' : 'White background' ) }
-                    checked={ cards[currentCard].useColor }
-                    onChange={ () => {
-                        const newCards = [ ...cards];
-                        newCards[currentCard].useColor = !newCards[currentCard].useColor;
-                        setAttributes( { cards: newCards } );
-                    } }                      
-                  />
-            </PanelBody>
 
             <PanelColorSettings
                 title={__("Font Color")}
@@ -102,25 +109,6 @@ export default class Inspector extends Component {
                     }
                 ]}
             />
-
-            { cards[currentCard].useColor &&
-                <PanelColorSettings
-                    title={__("Background Color")}
-                    initialOpen={ false }
-                    colorSettings={[
-                        {
-                            label: __("Background Color"),
-                            help: __("Select background color"),
-                            value: cards[currentCard].colorBackgroundControl,
-                            onChange: colorBackgroundControl => {
-                                const newCards = [ ...cards];
-                                newCards[currentCard].colorBackgroundControl = colorBackgroundControl;
-                                setAttributes( { cards: newCards } );
-                            },
-                        }
-                    ]}
-                />
-            }
         </InspectorControls>
       );
     }

@@ -25,7 +25,7 @@ const {
 export default class Card extends Component {
 
     constructor(props) {
-        super( ...arguments );
+        super(...arguments);
         this.props = props;
     }
 
@@ -34,59 +34,58 @@ export default class Card extends Component {
             attributes: {
                 currentCard,
                 isEditing,
-                cards,                    
+                cards,
             },
             className,
             index,
             editable,
-            setAttributes,          
-        } = this.props;    
+            setAttributes,
+        } = this.props;
 
-        const bgrColor = ( cards[index].useColor ? cards[index].colorBackgroundControl : 'transparent' );
-        const classes = classnames( className, 'card-eleven-online' );
+        const classes = classnames(className, 'newcard-eleven-online');
 
         const renderEditCardBtn = () => (
-            <Tooltip text={ __( 'Edit Card' )  }>
-                <Button 
-                    className={ "button" }
-                    disabled={ isEditing && currentCard !== index }
-                    onClick={ () => setAttributes( { isEditing: true, currentCard: index} ) }
+            <Tooltip text={__('Edit Card')}>
+                <Button
+                    className={"button"}
+                    disabled={isEditing && currentCard !== index}
+                    onClick={() => setAttributes({ isEditing: true, currentCard: index })}
                 >
-                    { icons.edit }
+                    {icons.edit}
                 </Button>
             </Tooltip>
         );
 
         const renderSaveCardBtn = () => (
-            <Tooltip text={ __( 'Save Changes' )  }>
+            <Tooltip text={__('Save Changes')}>
                 <Button
-                    className={ "button" }
-                    onClick={ () => setAttributes( { isEditing: false, currentCard: -1 } ) }
+                    className={"button"}
+                    onClick={() => setAttributes({ isEditing: false, currentCard: -1 })}
                 >
-                    { icons.check }
+                    {icons.check}
                 </Button>
             </Tooltip>
         );
 
         const renderDeleteCardBtn = () => (
-            <Tooltip text={ __( 'Delete Card' )  }>
+            <Tooltip text={__('Delete Card')}>
                 <Button
-                    className={ "button" }
-                    disabled={ cards.length === 1 }
-                    onClick={ () => { 
-						const newCards = [ ...cards ];
-						newCards.splice(index, 1);
-						setAttributes( { cards: newCards } );
-					} }
+                    className={"button"}
+                    disabled={cards.length === 1}
+                    onClick={() => {
+                        const newCards = [...cards];
+                        newCards.splice(index, 1);
+                        setAttributes({ cards: newCards });
+                    }}
                 >
-                    { icons.delete }
+                    {icons.delete}
                 </Button>
             </Tooltip>
         );
 
         const setBtnAttributeHelper = (newAttributes) => {
             const newCards = [...cards];
-            for(let key in newAttributes) {
+            for (let key in newAttributes) {
                 newCards[index][key] = newAttributes[key];
             }
             setAttributes({ cards: newCards });
@@ -95,62 +94,62 @@ export default class Card extends Component {
         const renderForEditing = () => (
             <Fragment>
                 <RichText
-                    tagName={ cards[index].cardHeadingSize }
-                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                    placeholder={ __( 'Add your card title' ) }
-                    value={ cards[index].cardTitle }
-                    style={ { color: cards[index].colorFontControl } }
-                    onChange={ (cardTitle)  => {
-                        const newCards = [ ...cards ];
-						newCards[index].cardTitle = cardTitle;
-						setAttributes( { cards: newCards } );
-                    } }         
+                    tagName={cards[index].cardHeadingSize}
+                    formattingControls={['bold', 'italic', 'strikethrough']}
+                    placeholder={__('Add your card title')}
+                    value={cards[index].cardTitle}
+                    style={{ color: cards[index].colorFontControl }}
+                    onChange={(cardTitle) => {
+                        const newCards = [...cards];
+                        newCards[index].cardTitle = cardTitle;
+                        setAttributes({ cards: newCards });
+                    }}
                 />
                 <RichText
                     tagName="p"
-                    formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
-                    placeholder={ __( 'Add your card text' ) }
-                    value={ cards[index].cardText }
-                    style={ { color: cards[index].colorFontControl, marginBottom: '15px' } }
-                    onChange={ (cardText)  => {
-                        const newCards = [ ...cards ];
-						newCards[index].cardText = cardText;
-						setAttributes( { cards: newCards } );
-                    } }                            		
+                    formattingControls={['bold', 'italic', 'strikethrough']}
+                    placeholder={__('Add your card text')}
+                    value={cards[index].cardText}
+                    style={{ color: cards[index].colorFontControl, marginBottom: '15px' }}
+                    onChange={(cardText) => {
+                        const newCards = [...cards];
+                        newCards[index].cardText = cardText;
+                        setAttributes({ cards: newCards });
+                    }}
                 />
-                { cards[index].cardBtnPresent && 
+                {cards[index].cardBtnPresent &&
                     <div className="btn-mycard-eleven-online">
-                        <Tooltip text={ __( 'Click to add or edit Button Text and Link URL' ) }>
+                        <Tooltip text={__('Click to add or edit Button Text and Link URL')}>
                             <ActionButton
-                                editable={ true } 
-                                attributes={ {...cards[index], ...this.attributes} }
-                                setAttributes={ setBtnAttributeHelper }
+                                editable={true}
+                                attributes={{ ...cards[index], ...this.attributes }}
+                                setAttributes={setBtnAttributeHelper}
                             />
-                        </Tooltip> 
-                    </div>                      
+                        </Tooltip>
+                    </div>
                 }
             </Fragment>
         );
 
         const renderForDone = () => (
             <Fragment>
-                <RichText.Content 
-                    tagName={ cards[index].cardHeadingSize }
-                    value={ cards[index].cardTitle }
-                    style={ { color: cards[index].colorFontControl } }
+                <RichText.Content
+                    tagName={cards[index].cardHeadingSize}
+                    value={cards[index].cardTitle}
+                    style={{ color: cards[index].colorFontControl }}
                 />
-                <RichText.Content 
-                    tagName="p" 
-                    value={ cards[index].cardText }
-                    style={ { color: cards[index].colorFontControl, marginBottom: '15px' } }
-                /> 
-                { cards[index].cardBtnPresent &&
+                <RichText.Content
+                    tagName="p"
+                    value={cards[index].cardText}
+                    style={{ color: cards[index].colorFontControl, marginBottom: '15px' }}
+                />
+                {cards[index].cardBtnPresent &&
                     <div className="btn-mycard-eleven-online">
-                        {  <ActionButton
-                                editable={ false }  
-                                attributes={ {...cards[index], ...this.attributes} }
-                                setAttributes={ setBtnAttributeHelper }   
-                            /> 
+                        {<ActionButton
+                            editable={false}
+                            attributes={{ ...cards[index], ...this.attributes }}
+                            setAttributes={setBtnAttributeHelper}
+                        />
                         }
                     </div>
                 }
@@ -159,41 +158,41 @@ export default class Card extends Component {
 
         return (
             editable ?
-                <div className={ classes }>
-                    <Fragment>                       
+                <div className={classes}>
+                    <Fragment>
                         <div className="card-wrapper-eleven-online">
                             <div className="buttons-wrapper-eleven-online">
-                                { isEditing && currentCard === index ?
-                                    renderSaveCardBtn() 
-                                    : 
-                                    renderEditCardBtn()  
+                                {isEditing && currentCard === index ?
+                                    renderSaveCardBtn()
+                                    :
+                                    renderEditCardBtn()
                                 }
-                                { renderDeleteCardBtn() }    
+                                {renderDeleteCardBtn()}
                             </div>
-                            { cards[index].imgID &&
-                                <div 
-                                    className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: `url(${ cards[index].imgURL })` } }
+                            
+                            <div className="newcard-wrapper-eleven-online" style={{ textAlign: cards[index].cardTextAlignment }}>
+                                {isEditing && currentCard === index ? renderForEditing() : renderForDone()}
+                                {cards[index].imgID &&
+                                    <div
+                                        className="newcard-eleven-online-img" style={ { backgroundImage: `url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 } }
                                 ></div>
-                            }
-                            <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>
-                                { isEditing && currentCard === index ? renderForEditing() : renderForDone() }  
+                                }
                             </div>
-                        </div>  
+                        </div>
                     </Fragment>
                 </div>
-           :
+                :
                 <Fragment>
-                     <div className={ classes }>
-                        { cards[index].imgID &&
-                                <div 
-                                    className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: `url(${ cards[index].imgURL })` } }
-                                ></div>
-                        }
-                        <div className="wrapper-eleven-online" style={ {backgroundColor: bgrColor, textAlign: cards[index].cardTextAlignment} }>
-                            { renderForDone() }
-                        </div>   
+                    <div className={classes}>
+                        <div className="newcard-wrapper-eleven-online" style={{ textAlign: cards[index].cardTextAlignment }}>
+                            {renderForDone()}
+                            {cards[index].imgID &&
+                                <div
+                                className="newcard-eleven-online-img"
+                                style={ { backgroundImage: `url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 }}
+                            ></div>
+                            }
+                        </div> 
                     </div>
                 </Fragment>
         );

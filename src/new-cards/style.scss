@@ -1,20 +1,32 @@
-.card-eleven-online {
+.newcard-eleven-online { 
     box-shadow: 5px 5px 9px 0 rgba(0, 0, 0, 0.4);
     margin: 5px;
-}
-
-.mycard-eleven-online-img {
-    // position: relative;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: cover;
-    padding-bottom: 70%;
 }
 
 .wrapper-eleven-online {
     padding: 10px;
     margin: 0;
+}
+
+.newcard-wrapper-eleven-online {
+    position: relative;
+    padding: 7em 4em 4em;
+    z-index: 1;
+}
+
+.newcard-eleven-online-img {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;   
+    z-index: -1; 
 }
 
 .btn-mycard-eleven-online {

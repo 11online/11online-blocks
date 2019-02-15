@@ -17,19 +17,19 @@ const { registerBlockType } = wp.blocks;
  * Register block
  */
 registerBlockType( 
-    'eleven-online/cards', 
+    'eleven-online/new-cards', 
     {
-        title: __( 'Cards Block' ),
-        description: __( 'A \'cards\' block allows a user to create a varied number of card-like elements with an optional image and link in each' ),
+        title: __( 'New Cards Block' ),
+        description: __( 'A \'cards\' block allows a user to create a varied number of card-like elements with an optional background image and link in each' ),
         category: 'common',
         icon: {
-          background: '#F04848',
-          foreground: '#FFFFFF',
-          src: 'editor-table',
+            background: '#DDA0DD',
+            foreground: '#FFFFFF',
+            src: 'editor-table',
         },                
         keywords: [
             __( '11 Online'),
-            __( 'Cards' ),
+            __( 'New Cards' ),
             __( 'Eleven Online' ),
         ],
         // add support for the block alignment as a whole
