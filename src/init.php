@@ -18,6 +18,11 @@ function eleven_online_block_assets() {
 		plugins_url( '/src/postcard/display-handler.js', dirname( __FILE__ ) ),
 		array( 'jquery' ), null, true
 	);
+	wp_enqueue_script(
+		'11online-block_accordion-display-handler-js',
+		plugins_url( '/src/accordion/display-handler.js', dirname( __FILE__ ) ),
+		array( 'jquery' ), null, true
+	);
 	wp_enqueue_style('11online-block-style-css', plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), array( 'wp-edit-blocks' ));
 } 
 add_action( 'enqueue_block_assets', 'eleven_online_block_assets' );
