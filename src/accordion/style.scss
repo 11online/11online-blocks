@@ -1,0 +1,32 @@
+.accordion-title {
+    position: relative;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    line-height: 2em;
+}
+
+.wrapper-toggle-accordion-eleven-online {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2em 2em auto;
+}
+
+.toggle-accordion-eleven-online {
+    background: none;
+    border: none; 
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline-color: transparent;
+    font-size: 4rem;
+}
+
+.wrapper-toggle-accordion-eleven-online button:focus, button:hover {
+    outline: none;
+    background: none;
+}
+
+.accordion-content-eleven-online {
+    padding: 10px 10px 5px;
+}
