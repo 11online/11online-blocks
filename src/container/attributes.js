@@ -13,7 +13,7 @@ const attributes = {
     },
     imgOpacity: {
         type: 'number',
-        default: "10", 
+        default: '10', 
     },
     colorBackgroundControl: {
         type: 'string',
