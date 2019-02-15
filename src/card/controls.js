@@ -74,7 +74,7 @@ export default class Controls extends Component {
                 />
                 <ImageControl
                     attributes={ {imgID, imgURL} }
-                    setAttributes={ (newAttributes) => {
+                    setAttributes={(newAttributes) => {
                         setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
                 />
                 <Toolbar>

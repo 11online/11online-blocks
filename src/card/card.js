@@ -50,17 +50,17 @@ export default class Card extends Component {
 
         return (
             this.props.editable ?
-                <div className={ className } style={ {backgroundColor: bgrColor} }>
+                <div className={ className }>
                     <Fragment>
                         <Controls {...{ setAttributes, ...this.props }} />
                         <Inspector {...{ setAttributes, ...this.props }} />
-                        { imgID &&
-                            <div 
-                                className="mycard-eleven-online-img"
-                                style={ { backgroundImage: `url(${ imgURL })` } }
+                        {imgID &&
+                            <div
+                                className="card-eleven-online-img"
+                                style={{ backgroundImage: `url(${imgURL})` }}
                             ></div>
                         }
-                        <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
+                        <div className="wrapper-eleven-online" style={{ backgroundColor: bgrColor, textAlign: cardTextAlignment} }>
                             <RichText
                                 tagName={ cardHeadingSize }
                                 formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
@@ -88,20 +88,19 @@ export default class Card extends Component {
                                     </Tooltip> 
                                 </div>                      
                             }
-                        </div>
-                        
+                        </div>   
                     </Fragment>
                 </div>
            :
                 <Fragment>
-                    <div className={ className } style={ {backgroundColor: bgrColor} }>
-                        { imgID &&
-                                <div 
-                                    className="mycard-eleven-online-img"
-                                    style={ { backgroundImage: `url(${ imgURL })` } }
-                                ></div>
+                    <div className={className}>
+                        {imgID &&
+                            <div
+                                className="card-eleven-online-img"
+                                style={{ backgroundImage: `url(${imgURL})` }}
+                            ></div>
                         }
-                        <div className="wrapper-eleven-online" style={ {textAlign: cardTextAlignment} }>
+                        <div className="wrapper-eleven-online" style={{ backgroundColor: bgrColor, textAlign: cardTextAlignment} }>
                             <RichText.Content 
                                 tagName={ cardHeadingSize } 
                                 value={ cardTitle }
