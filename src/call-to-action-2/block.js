@@ -17,7 +17,7 @@ const { registerBlockType } = wp.blocks;
 registerBlockType( 
     'eleven-online/call-to-action-2', 
     {
-        title: __( 'Call To Action Block' ),
+        title: __( 'Call To Action 2 Block' ),
         description: __( 'A \'call to action\' block allows a user to create a content area with an optional background image or color and two action buttons with links' ),
         category: 'common',
         icon: {

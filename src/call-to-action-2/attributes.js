@@ -1,36 +1,36 @@
 const attributes = {
     headline: {
-        source: 'html',
-        selector: 'h3',
+        type: 'string',
+        default: 'h2',
     },
     message: {
-        source: 'html',
-        selector: 'p',
-    },
-    text: {
         type: 'string',
-        source: 'text',
-        selector: 'a',
-        default: 'Click here',
-    },
-    url: {
-        type: 'string',
-        source: 'attribute',
-        attribute: 'href',
-        selector: 'a',
-        default: 'http://'              
     },
     textAlignment: {
         type: 'string',
-        default: 'center',
+        default: 'left',
+    },
+    headingSize: {
+        type: 'string',
+        default: 'h2',
+    },
+    buttons: {
+        type: 'array',
+        default: [
+            {
+                buttonURL: 'http://',
+                buttonText: 'Click here',
+                newTab: true,
+            },
+        ],
+    },
+    buttonStyleClass: {
+        type: 'string',
+        default: 'primary',
     },
     align: {
         type: 'string',
-        default: 'center',
-    },
-    styleClass: {
-        type: 'string',
-        default: 'primary',
+        default: 'wide',
     },
     bgrOption: {
         type: 'string',
@@ -44,13 +44,21 @@ const attributes = {
         type: 'string',
         default: null,
     },
+    logoID: {
+        type: 'number',
+        default: null,
+    },
+    logoURL: {
+        type: 'string',
+        default: null,
+    },
+    logoAlt: {
+        type: 'string',
+        default: null,
+    },
     imgOpacity: {
         type: 'number',
         default: "10", 
-    },
-    newTab: {
-        type: 'boolean',
-        default: true,
     },
     colorFontControl: {
         type: 'string',

@@ -24,38 +24,55 @@ export default class Save extends Component {
     render() {
         const { 
             attributes: {
-                headline, 
+                headline,
+                headingSize,
                 message, 
-                text, 
-                url, 
                 textAlignment,
+                buttons,
+                buttonStyleClass,
                 imgID,
                 imgURL, 
                 imgOpacity,
                 colorFontControl,
                 colorBackgroundControl,
-                styleClass,
-                newTab,
             }, 
             className,
         } = this.props;
 
         const classes1 = classnames(
             className,
-            styleClass,
             'call-to-action'
         );
         
         const classes2 = classnames(
-            styleClass,
+            buttonStyleClass,
             'button'
         );
+
+        const renderFinalButtons = () => {
+            const finalButtons = [];
+            for (let i = 0; i < buttons.length; i++) {
+                finalButtons.push(
+                    <div className={`custom-button-${i+1}`}>
+                        <a
+                            className={classes2}
+                            href={buttons[i].buttonURL}
+                            {...buttons[i].newTab ? { target: '_blank' } : null}
+                        >
+                            {buttons[i].buttonText}
+                        </a>
+                    </div>
+                );  
+            }
+
+            return finalButtons;
+        };
         
         return (  
             <div className={ classes1 } style={ {backgroundColor: colorBackgroundControl} }>
                 <div className="wrap" style={ { textAlign: textAlignment, color: colorFontControl } }>
                     <RichText.Content 
-                        tagName="h3" 
+                        tagName={headingSize}
                         value={ headline }
                         style={ { color: colorFontControl } }
                     />
@@ -64,15 +81,9 @@ export default class Save extends Component {
                         value={ message }
                         style={ { color: colorFontControl, marginBottom: '15px' } }
                     /> 
-                    <p>
-                        <a 
-                            className={ classes2 } 
-                            href={ url }
-                            { ...newTab ? {target: '_blank'} : null }
-                        >
-                            { text }
-                        </a>
-                    </p> 
+                    <div className="btn-wrapper">
+                        {renderFinalButtons()}
+                    </div>
                 </div>            
                 { imgID &&
                     <div 
@@ -80,7 +91,6 @@ export default class Save extends Component {
                         style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1 } }
                     ></div>
                 }
-
             </div>                     
         );
     }

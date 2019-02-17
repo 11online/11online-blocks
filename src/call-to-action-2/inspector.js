@@ -18,14 +18,18 @@ const {
  * Create an Inspector Controls wrapper Component
  */
 export default class Inspector extends Component {
-    constructor() {
-      super(...arguments);
+    constructor(props) {
+        super(...arguments);
+        this.props = props;
     }
+
   
     render() {
       const {
-        attributes: {
-            styleClass,
+          attributes: {
+            headingSize,
+            buttons,
+            buttonStyleClass,
             bgrOption,
             imgOpacity,
             colorFontControl,
@@ -52,22 +56,38 @@ export default class Inspector extends Component {
         };
 
       return (
-        <InspectorControls>
+          <InspectorControls>   
             <PanelBody>
                 <SelectControl
-                    label={ __("Button Style Settings") }
-                    help={ __("Select Button Style Option") }
-                    value={ styleClass }
-                    options={[
-                        { value: 'primary', label: __("Primary") },
-                        { value: 'secondary', label: __("Secondary") },
-                        { value: 'primary-border', label: __("Primary Border Only") },
-                        { value: 'secondary-border', label: __("Secondary Border Only") },
-                    ]}
-                    onChange={ styleClass => setAttributes({ styleClass }) }
+                    label={ __("Heading Font Size") }
+                    help={ __("Select heading font size for your title") }
+                    value={ headingSize }
+                    options={ [
+                        { value: 'h2', label: __("h2") },
+                        { value: 'h3', label: __("h3") },
+                        { value: 'h4', label: __("h4") },
+                    ] }
+                    onChange={ headingSize => setAttributes({ headingSize }) }
                 />
             </PanelBody>
-
+              
+            { buttons.length && 
+                <PanelBody>
+                    <SelectControl
+                        label={ __("Button Style Settings") }
+                        help={ __("Select Button Style Option") }
+                        value={ buttonStyleClass }
+                        options={[
+                            { value: 'primary', label: __("Primary") },
+                            { value: 'secondary', label: __("Secondary") },
+                            { value: 'primary-border', label: __("Primary Border Only") },
+                            { value: 'secondary-border', label: __("Secondary Border Only") },
+                        ]}
+                      onChange={buttonStyleClass => { setAttributes({ buttonStyleClass }); }}
+                    /> 
+                </PanelBody>
+            }
+              
             <PanelBody>
                 <SelectControl
                     label={ __("Background Settings") }
@@ -83,9 +103,9 @@ export default class Inspector extends Component {
             </PanelBody>
 
             <PanelColorSettings
-                title={__("Font Color")}
+                title={ __("Font Color") }
                 initialOpen={ false }
-                colorSettings={[
+                colorSettings={ [
                     {
                         label: __("Font Color"),
                         help: __("Select Font Color"),
@@ -94,7 +114,7 @@ export default class Inspector extends Component {
                             setAttributes({ colorFontControl });
                         },
                     }
-                ]}
+                ] }
             />
 
             { bgrOption === 'bgrImage' &&
