@@ -57,16 +57,16 @@ export default class Inspector extends Component {
                     <SelectControl
                         label={ __("Button Style Settings") }
                         help={ __("Select button style option") }
-                        value={ cards[currentCard].CardBtnStyleClass }
+                        value={ cards[currentCard].buttonStyleClass }
                         options={[
                             { value: 'primary', label: __("Primary") },
                             { value: 'secondary', label: __("Secondary") },
                             { value: 'primary-border', label: __("Primary Border Only") },
                             { value: 'secondary-border', label: __("Secondary Border Only") },
                         ]}
-                        onChange={ CardBtnStyleClass => {
+                        onChange={ buttonStyleClass => {
                             const newCards = [ ...cards];
-                            newCards[currentCard].CardBtnStyleClass = CardBtnStyleClass;
+                            newCards[currentCard].buttonStyleClass = buttonStyleClass;
                             setAttributes( { cards: newCards } );
                        } }      
                     />
