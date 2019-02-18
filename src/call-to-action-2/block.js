@@ -18,7 +18,7 @@ registerBlockType(
     'eleven-online/call-to-action-2', 
     {
         title: __( 'Call To Action 2 Block' ),
-        description: __( 'A \'call to action 2\' lets you create a content area with an optional background image or color, up to three optional action buttons with links, an optional logo, and adjustable block paddings' ),
+        description: __( 'A \'call to action 2\' block lets you create a content area with an optional background image or color, up to three optional action buttons with links, an optional logo with the adjustable size, and adjustable block paddings' ),
         category: 'common',
         icon: {
             background: '#DDA0DD',
