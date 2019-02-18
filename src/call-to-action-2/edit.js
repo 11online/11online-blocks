@@ -55,9 +55,9 @@ export default class Edit extends Component {
         const btnClasses = classnames(buttonStyleClass, 'button');
 
         const renderButtons = () => {
-            const editorButtons = [];
+            const actionButtons = [];
             buttons.forEach((button, i) => { 
-                editorButtons.push(
+                actionButtons.push(
                     <div className={`custom-button-${i + 1}`}>
                         <Fragment>
                             <Tooltip text={__('Click to add or edit Button Text and Link URL')}>
@@ -114,69 +114,7 @@ export default class Edit extends Component {
                     </div>
                 );
             });
-            /*
-
-            for (let i = 0; i < buttons.length; i++) {
-                editorButtons.push(
-                    <div className={`custom-button-${i + 1}`}>
-                        <Fragment>
-                            <Tooltip text={__('Click to add or edit Button Text and Link URL')}>
-                                <div style={{ width: '100%' }}>
-                                    <Dropdown
-                                        renderToggle={({ isOpen, onToggle }) => (
-                                            <div style={{ textAlign: textAlignment, color: colorFontControl }}>
-                                                <a
-                                                    className={btnClasses}
-                                                    href="#0"
-                                                    onClick={onToggle}
-                                                    aria-expanded={isOpen}
-                                                >
-                                                    {buttons[i].buttonText}
-                                                </a>
-                                            </div>
-                                        )}
-                                        renderContent={(i) =>
-                                            // renderButtonControl(i)
-                                            <div className='button-box'>
-                                                <TextControl
-                                                    label={__('Button Text')}
-                                                    value={buttons[i].buttonText}
-                                                    onChange={(buttonText) => {
-                                                        const newButtons = [...buttons];
-                                                        newButtons[i].buttonText = buttonText;
-                                                        setAttributes({ buttons: newButtons });
-                                                    }}
-                                                />
-                                                <TextControl
-                                                    label={__('Link URL')}
-                                                    value={buttons[i].buttonURL}
-                                                    onChange={(buttonURL) => {
-                                                        const newButtons = [...buttons];
-                                                        newButtons[i].buttonURL = buttonURL;
-                                                        setAttributes({ buttons: newButtons });
-                                                    }}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Open Link in New Tab?")}
-                                                    help={__(buttons[i].newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window')}
-                                                    checked={buttons[i].newTab}
-                                                    onChange={() => {
-                                                        const newButtons = [...buttons];
-                                                        newButtons[i].newTab = !newButtons[i].newTab;
-                                                        setAttributes({ buttons: newButtons });
-                                                    }}
-                                                />
-                                            </div>
-                                        }
-                                    />
-                                </div>
-                            </Tooltip>
-                        </Fragment>
-                    </div>
-                );
-            }
-            */
-            return editorButtons;
+            return actionButtons;
         }
 
         return (
