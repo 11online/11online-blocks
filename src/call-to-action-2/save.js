@@ -2,7 +2,6 @@
  * Block dependencies
  */
 import './style.scss';
-
 import classnames from 'classnames';
 
 /**
@@ -33,21 +32,33 @@ export default class Save extends Component {
                 imgID,
                 imgURL, 
                 imgOpacity,
+                logoID,
+                logoURL,
+                logoWidth,
+                logoHeight,
+                padTop,
+                padBottom,
+                padLeft,
                 colorFontControl,
                 colorBackgroundControl,
             }, 
             className,
         } = this.props;
 
-        const classes1 = classnames(
-            className,
-            'call-to-action'
-        );
+        const classes1 = classnames( className, 'call-to-action-2' );  
+        const classes2 = classnames(buttonStyleClass, 'button');
         
-        const classes2 = classnames(
-            buttonStyleClass,
-            'button'
-        );
+        const divStyle = {
+            backgroundColor: colorBackgroundControl,
+            paddingTop: `${String(padTop)}px`,
+            paddingBottom: `${String(padBottom)}px`,
+            paddingLeft: `${String(padLeft)}px`,
+        };
+
+        const logoDivStyle = {
+            width: `${String(logoWidth)}px`,
+            height: `${String(logoHeight)}px`
+        };
 
         const renderFinalButtons = () => {
             const finalButtons = [];
@@ -69,8 +80,13 @@ export default class Save extends Component {
         };
         
         return (  
-            <div className={ classes1 } style={ {backgroundColor: colorBackgroundControl} }>
-                <div className="wrap" style={ { textAlign: textAlignment, color: colorFontControl } }>
+            <div className={classes1} style={divStyle}>
+                <div className="wrap" style={{ textAlign: textAlignment, color: colorFontControl }}>
+                    {logoID &&
+                        <div className="logo-wrapper" style={logoDivStyle}>
+                            <img src={logoURL} alt="logo" />
+                        </div>
+                    }
                     <RichText.Content 
                         tagName={headingSize}
                         value={ headline }

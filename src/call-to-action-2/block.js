@@ -18,7 +18,7 @@ registerBlockType(
     'eleven-online/call-to-action-2', 
     {
         title: __( 'Call To Action 2 Block' ),
-        description: __( 'A \'call to action\' block allows a user to create a content area with an optional background image or color and two action buttons with links' ),
+        description: __( 'A \'call to action 2\' lets you create a content area with an optional background image or color, up to three optional action buttons with links, an optional logo, and adjustable block paddings' ),
         category: 'common',
         icon: {
             background: '#DDA0DD',
@@ -27,7 +27,7 @@ registerBlockType(
         },                
         keywords: [
             __( '11 Online'),
-            __( 'Call to Action' ),
+            __( 'Call to Action 2' ),
             __( 'Eleven Online' ),
         ],
         // add support for the block alignment as a whole

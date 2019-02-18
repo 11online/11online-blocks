@@ -44,6 +44,13 @@ export default class Edit extends Component {
                 imgID,
                 imgURL,
                 imgOpacity,
+                logoID,
+                logoURL,
+                logoWidth,
+                logoHeight,
+                padTop,
+                padBottom,
+                padLeft,
                 colorFontControl,
                 colorBackgroundControl,
             },
@@ -51,8 +58,20 @@ export default class Edit extends Component {
             setAttributes,
         } = this.props;
 
-        const classes = classnames(className, 'call-to-action');
+        const classes = classnames(className, 'call-to-action-2');
         const btnClasses = classnames(buttonStyleClass, 'button');
+
+        const divStyle = {
+            backgroundColor: colorBackgroundControl,
+            paddingTop: `${String(padTop)}px`,
+            paddingBottom: `${String(padBottom)}px`,
+            paddingLeft: `${String(padLeft)}px`,
+        };
+
+        const logoDivStyle = {
+            width: `${String(logoWidth)}px`,
+            height: `${String(logoHeight)}px`
+        };
 
         const renderButtons = () => {
             const actionButtons = [];
@@ -118,11 +137,16 @@ export default class Edit extends Component {
         }
 
         return (
-            <div className={classes} style={{ backgroundColor: colorBackgroundControl }}>
+            <div className={classes} style={divStyle}>
                 <div className="wrap">
                     <Fragment>
                         <Inspector {...{ setAttributes, ...this.props }} />
                         <Controls {...{ setAttributes, ...this.props }} />
+                        {logoID && 
+                            <div className="logo-wrapper" style={logoDivStyle}>
+                                <img src={logoURL} alt="logo"/>
+                            </div>
+                        }
                         <RichText
                             tagName={headingSize}
                             formattingControls={['bold', 'italic', 'strikethrough']}
@@ -139,7 +163,7 @@ export default class Edit extends Component {
                             style={{ textAlign: textAlignment, color: colorFontControl }}
                             onChange={message => setAttributes({ message })}
                         />
-                        <div className="btn-wrapper">
+                        <div className="btn-wrapper" style={{ textAlign: textAlignment }} >
                             {buttons.length > 0 && renderButtons()}
                         </div>
                     </Fragment>

@@ -32,3 +32,18 @@ div[class^="custom-button-"] {
 .custom-button-3 {
     margin-left: 15px;
 }
+
+.logo-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-wrapper > img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-height: 100%;
+    min-width: 100%;
+    transform: translate(-50%, -50%);
+}

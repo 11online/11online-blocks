@@ -12,6 +12,8 @@ const { Component } = wp.element;
 const {
     AlignmentToolbar,
     BlockControls,
+    MediaUpload,
+    MediaUploadCheck,
 } = wp.editor;
 const {
     Button,
@@ -36,13 +38,31 @@ export default class Controls extends Component {
                 bgrOption, 
                 imgID,
                 imgURL,
+                logoID,
+                logoURL,
+                logoWidth,
+                logoHeight,
                 buttons,
              },
             setAttributes
         } = this.props;
 
         const classesBtn = classnames('button', 'btn-custom-eleven-online');
-        
+
+        const onSelectLogo = img => {
+            setAttributes({
+                logoID: img.id,
+                logoURL: img.url,
+            });
+        };
+
+        const onRemoveLogo = () => {
+            setAttributes({
+                logoID: null,
+                logoURL: null,
+            });
+        }
+
         const createDefaultButton = () => (
             {
                 buttonURL: 'http://',
@@ -87,14 +107,46 @@ export default class Controls extends Component {
                     value={ textAlignment }
                     onChange={ textAlignment => setAttributes( { textAlignment } ) }
                 />
-                { (bgrOption === 'bgrImage') && 
+                <Toolbar>
                     <div className="wrapper-btn-custom-eleven-online">
-                        <ImageControl
-                            attributes={ {imgID, imgURL} }
-                            setAttributes={ (newAttributes) => {
-                                setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
-                        />
+                        {!logoID &&
+                            <MediaUploadCheck>
+                                <MediaUpload
+                                    onSelect={onSelectLogo}
+                                    type="image"
+                                    value={logoID}
+                                    render={({ open }) => (
+                                        <Tooltip text={__('Click to Upload Logo Image')}>
+                                            <Button
+                                                className={classesBtn}
+                                                onClick={open}
+                                            >
+                                                {__('Upload Logo')}
+                                            </Button>
+                                        </Tooltip>
+                                    )}
+                                >
+                                </MediaUpload>
+                            </MediaUploadCheck>
+                        }
+                        {logoID &&
+                            <Tooltip text={__('Click to Remove Logo Image')}>
+                                <Button
+                                    className={classesBtn}
+                                    onClick={onRemoveLogo}
+                                >
+                                    {__('Remove Logo')}
+                                </Button>
+                            </Tooltip>
+                        } 
                     </div>
+                </Toolbar>
+                { (bgrOption === 'bgrImage') && 
+                    <ImageControl
+                        attributes={ {imgID, imgURL} }
+                        setAttributes={ (newAttributes) => {
+                            setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
+                    />
                 }
                 <Toolbar>
                     <div className="wrapper-btn-custom-eleven-online">

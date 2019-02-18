@@ -30,6 +30,12 @@ export default class Inspector extends Component {
             headingSize,
             buttons,
             buttonStyleClass,
+            logoID,
+            logoWidth,
+            logoHeight,
+            padTop,
+            padBottom,
+            padLeft,
             bgrOption,
             imgOpacity,
             colorFontControl,
@@ -56,7 +62,35 @@ export default class Inspector extends Component {
         };
 
       return (
-          <InspectorControls>   
+          <InspectorControls> 
+            <PanelBody>
+                <SelectControl
+                    label={__("Background Settings")}
+                    help={__("Select Background Option")}
+                    value={bgrOption}
+                    options={[
+                        { value: "bgrImage", label: __("Background Image") },
+                        { value: "bgrColor", label: __("Background Color") },
+                        { value: "bgrNone", label: __("None") },
+                    ]}
+                    onChange={(value) => onChangeBgrOption(value)}
+                />
+            </PanelBody>
+            {bgrOption === 'bgrImage' &&
+                <PanelBody>
+                    <RangeControl
+                        beforeIcon="arrow-left-alt2"
+                        afterIcon="arrow-right-alt2"
+                        label={__("Background Image Opacity")}
+                        help={__("Use the slider to change the background image opacity on the scale from 1 to 10")}
+                        value={imgOpacity}
+                        onChange={imgOpacity => setAttributes({ imgOpacity })}
+                        initialPosition={10}
+                        min={1}
+                        max={10}
+                    />
+                </PanelBody>
+            }
             <PanelBody>
                 <SelectControl
                     label={ __("Heading Font Size") }
@@ -70,7 +104,6 @@ export default class Inspector extends Component {
                     onChange={ headingSize => setAttributes({ headingSize }) }
                 />
             </PanelBody>
-              
             { buttons.length > 0 && 
                 <PanelBody>
                     <SelectControl
@@ -87,21 +120,67 @@ export default class Inspector extends Component {
                     /> 
                 </PanelBody>
             }
-              
             <PanelBody>
-                <SelectControl
-                    label={ __("Background Settings") }
-                    help={ __("Select Background Option") }
-                    value={ bgrOption }
-                    options={[
-                        { value: "bgrImage", label: __("Background Image") },
-                        { value: "bgrColor", label: __("Background Color") },
-                        { value: "bgrNone", label: __("None") },
-                    ]}
-                      onChange={(value) => onChangeBgrOption(value) }
-                />
+                <RangeControl
+                    beforeIcon="arrow-left-alt2"
+                    afterIcon="arrow-right-alt2"
+                    label={__("Block Padding Top")}
+                      help={__("Block padding top on the scale from 5 to 300 px")}
+                    value={padTop}
+                    onChange={padTop => setAttributes({ padTop })}
+                    initialPosition={20}
+                    min={5}
+                    max={300}
+                  />
+                  <RangeControl
+                      beforeIcon="arrow-left-alt2"
+                      afterIcon="arrow-right-alt2"
+                      label={__("Block Padding Bottom")}
+                      help={__("Block padding bottom on the scale from 5 to 300 px")}
+                      value={padBottom}
+                      onChange={padBottom => setAttributes({ padBottom })}
+                      initialPosition={20}
+                      min={5}
+                      max={300}
+                  />
+                  <RangeControl
+                      beforeIcon="arrow-left-alt2"
+                      afterIcon="arrow-right-alt2"
+                      label={__("Block Padding Left")}
+                      help={__("Block padding left on the scale from 5 to 300 px")}
+                      value={padLeft}
+                      onChange={padLeft => setAttributes({ padLeft })}
+                      initialPosition={20}
+                      min={5}
+                      max={300}
+                  />
             </PanelBody>
-
+            { logoID &&
+                <PanelBody>
+                    <RangeControl
+                        beforeIcon="arrow-left-alt2"
+                        afterIcon="arrow-right-alt2"
+                        label={__("Logo Width")}
+                        help={__("Logo width on the scale from 10 to 500 px")}
+                        value={logoWidth}
+                        onChange={logoWidth => setAttributes({ logoWidth })}
+                        initialPosition={150}
+                        min={10}
+                        max={500}
+                    />
+                    <RangeControl
+                        beforeIcon="arrow-left-alt2"
+                        afterIcon="arrow-right-alt2"
+                        label={__("Logo Height")}
+                        help={__("Logo width on the scale from 10 to 500 px")}
+                        value={logoHeight}
+                        onChange={logoHeight => setAttributes({ logoHeight })}
+                        initialPosition={150}
+                        min={10}
+                        max={500}
+                    />
+                  </PanelBody>
+              }
             <PanelColorSettings
                 title={ __("Font Color") }
                 initialOpen={ false }
@@ -116,23 +195,6 @@ export default class Inspector extends Component {
                     }
                 ] }
             />
-
-            { bgrOption === 'bgrImage' &&
-                <PanelBody>
-                    <RangeControl
-                        beforeIcon="arrow-left-alt2"
-                        afterIcon="arrow-right-alt2"
-                        label={ __("Background Image Opacity" ) }
-                        help={ __("Use the slider to change the background image opacity on the scale from 1 to 10") }
-                        value={ imgOpacity }
-                        onChange={ imgOpacity => setAttributes( { imgOpacity } ) }
-                        initialPosition={ 10 }
-                        min={ 1 }
-                        max={ 10 }
-                    />
-                </PanelBody>
-            }
-
             { bgrOption === 'bgrColor' &&
                 <PanelColorSettings
                     title={__("Background Color")}

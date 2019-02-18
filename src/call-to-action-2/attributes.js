@@ -45,9 +45,25 @@ const attributes = {
         type: 'string',
         default: null,
     },
-    logoAlt: {
-        type: 'string',
-        default: null,
+    logoWidth: {
+        type: 'number',
+        default: '150',
+    },
+    logoHeight: {
+        type: 'number',
+        default: '150',
+    },
+    padTop: {
+        type: 'number',
+        default: '20',
+    },
+    padBottom: {
+        type: 'number',
+        default: '20',
+    },
+    padLeft: {
+        type: 'number',
+        default: '20',
     },
     imgOpacity: {
         type: 'number',
