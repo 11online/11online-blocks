@@ -54,42 +54,68 @@ export default class Edit extends Component {
         const classes = classnames(className, 'call-to-action');
         const btnClasses = classnames(buttonStyleClass, 'button');
 
-        const renderButtonControl = (ind) => {
-            // console.log(`button ${ind+1} was clicked`);
-            <div className='button-box'>
-                <TextControl
-                    label={__('Button Text')}
-                    value={buttons[ind].buttonText}
-                    onChange={(buttonText) => {
-                        const newButtons = [...buttons];
-                        newButtons[ind].buttonText = buttonText;
-                        setAttributes({ buttons: newButtons });
-                    }}
-                />
-                <TextControl
-                    label={__('Link URL')}
-                    value={buttons[ind].buttonURL}
-                    onChange={(buttonURL) => {
-                        const newButtons = [...buttons];
-                        newButtons[ind].buttonURL = buttonURL;
-                        setAttributes({ buttons: newButtons });
-                    }}
-                />
-                <ToggleControl
-                    label={__("Open Link in New Tab?")}
-                    help={__(buttons[ind].newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window')}
-                    checked={buttons[ind].newTab}
-                    onChange={() => {
-                        const newButtons = [...buttons];
-                        newButtons[ind].newTab = !newButtons[ind].newTab;
-                        setAttributes({ buttons: newButtons });
-                    }}
-                />
-            </div>
-        };
-
         const renderButtons = () => {
             const editorButtons = [];
+            buttons.forEach((button, i) => { 
+                editorButtons.push(
+                    <div className={`custom-button-${i + 1}`}>
+                        <Fragment>
+                            <Tooltip text={__('Click to add or edit Button Text and Link URL')}>
+                                <div style={{ width: '100%' }}>
+                                    <Dropdown
+                                        renderToggle={({ isOpen, onToggle }) => (
+                                            <div style={{ textAlign: textAlignment, color: colorFontControl }}>
+                                                <a
+                                                    className={btnClasses}
+                                                    href="#0"
+                                                    onClick={onToggle}
+                                                    aria-expanded={isOpen}
+                                                >
+                                                    {button.buttonText}
+                                                </a>
+                                            </div>
+                                        )}
+                                        renderContent={() =>
+                                            <div className='button-box'>
+                                                <TextControl
+                                                    label={__('Button Text')}
+                                                    value={button.buttonText}
+                                                    onChange={(buttonText) => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].buttonText = buttonText;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                                <TextControl
+                                                    label={__('Link URL')}
+                                                    value={button.buttonURL}
+                                                    onChange={(buttonURL) => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].buttonURL = buttonURL;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                                <ToggleControl
+                                                    label={__("Open Link in New Tab?")}
+                                                    help={__(buttons[i].newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window')}
+                                                    checked={button.newTab}
+                                                    onChange={() => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].newTab = !newButtons[i].newTab;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                            </div>
+                                        }
+                                    />
+                                </div>
+                            </Tooltip>
+                        </Fragment>
+                    </div>
+                );
+            });
+            /*
+
             for (let i = 0; i < buttons.length; i++) {
                 editorButtons.push(
                     <div className={`custom-button-${i + 1}`}>
@@ -109,8 +135,39 @@ export default class Edit extends Component {
                                                 </a>
                                             </div>
                                         )}
-                                        renderContent={(i) => renderButtonControl(i)}
-                                        // renderContent={renderButtonControl(i)}
+                                        renderContent={(i) =>
+                                            // renderButtonControl(i)
+                                            <div className='button-box'>
+                                                <TextControl
+                                                    label={__('Button Text')}
+                                                    value={buttons[i].buttonText}
+                                                    onChange={(buttonText) => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].buttonText = buttonText;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                                <TextControl
+                                                    label={__('Link URL')}
+                                                    value={buttons[i].buttonURL}
+                                                    onChange={(buttonURL) => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].buttonURL = buttonURL;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                                <ToggleControl
+                                                    label={__("Open Link in New Tab?")}
+                                                    help={__(buttons[i].newTab ? 'Open Link in a New Tab' : 'Open Link in the Same Window')}
+                                                    checked={buttons[i].newTab}
+                                                    onChange={() => {
+                                                        const newButtons = [...buttons];
+                                                        newButtons[i].newTab = !newButtons[i].newTab;
+                                                        setAttributes({ buttons: newButtons });
+                                                    }}
+                                                />
+                                            </div>
+                                        }
                                     />
                                 </div>
                             </Tooltip>
@@ -118,6 +175,7 @@ export default class Edit extends Component {
                     </div>
                 );
             }
+            */
             return editorButtons;
         }
 
@@ -144,7 +202,7 @@ export default class Edit extends Component {
                             onChange={message => setAttributes({ message })}
                         />
                         <div className="btn-wrapper">
-                            {renderButtons()}
+                            {buttons.length > 0 && renderButtons()}
                         </div>
                     </Fragment>
                 </div>

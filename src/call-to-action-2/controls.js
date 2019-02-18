@@ -47,7 +47,6 @@ export default class Controls extends Component {
             {
                 buttonURL: 'http://',
                 buttonText: 'Click here',
-                buttonStyleClass: 'primary',
                 newTab: true,
             }
         );
@@ -56,13 +55,33 @@ export default class Controls extends Component {
             const newButtons = [...buttons];
             newButtons.push(createDefaultButton());
             setAttributes({ buttons: newButtons });
+            // console.log(`newButtons length: ${newButtons.length}`);
+            // console.log(`newButtons[0].buttonText: ${newButtons[0].buttonText}`);
+            // console.log(`newButtons[0].buttonURL: ${newButtons[0].buttonURL}`);
+            // console.log(`newButtons[0].newTab: ${String(newButtons[0].newTab)}`);
+            // console.log(`buttons length: ${buttons.length}`);
+            // console.log(`buttons[0].buttonText: ${buttons[0].buttonText}`);
+            // console.log(`buttons[0].buttonURL: ${buttons[0].buttonURL}`);
+            // console.log(`buttons[0].newTab: ${String(buttons[0].newTab)}`);
+            // let newButtons = [...buttons];
+            // const newButton = [createDefaultButton()];
+            // newButtons = newButtons.concat(newButton);
+            // setAttributes({ buttons: newButtons });
+            // console.log(`buttons length: ${buttons.length}`);
+            // console.log(`buttons[0].buttonText: ${buttons[0].buttonText}`);
+            // console.log(`buttons[0].buttonURL: ${buttons[0].buttonURL}`);
+            // console.log(`buttons[0].newTab: ${String(buttons[0].newTab)}`);
         };
 
         const renderAddActionBtn = () => (
             <Tooltip text={ __('Add Action Button') }>
                 <Button
                     className={ classesBtn }
-                    onClick={ onAddButton }
+                    onClick={() => {
+                        const newButtons = [...buttons];
+                        newButtons.push(createDefaultButton());
+                        setAttributes({ buttons: newButtons });
+                    }}
                 >
                     { __('Add Button') }
                 </Button>
@@ -101,12 +120,12 @@ export default class Controls extends Component {
                 }
                 <Toolbar>
                     <div className="wrapper-btn-custom-eleven-online">
-                        { buttons.length < 4 && renderAddActionBtn() }
+                        { buttons.length < 3 && renderAddActionBtn() }
                     </div>
                 </Toolbar>
                 <Toolbar>
                     <div className="wrapper-btn-custom-eleven-online">
-                        { buttons.length && renderRemoveActionBtn() }
+                        { buttons.length > 0 && renderRemoveActionBtn() }
                     </div>
                 </Toolbar>
             </BlockControls>

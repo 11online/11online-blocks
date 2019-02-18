@@ -1,7 +1,6 @@
 const attributes = {
     headline: {
         type: 'string',
-        default: 'h2',
     },
     message: {
         type: 'string',
@@ -16,13 +15,7 @@ const attributes = {
     },
     buttons: {
         type: 'array',
-        default: [
-            {
-                buttonURL: 'http://',
-                buttonText: 'Click here',
-                newTab: true,
-            },
-        ],
+        default: [],
     },
     buttonStyleClass: {
         type: 'string',

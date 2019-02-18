@@ -71,7 +71,7 @@ export default class Inspector extends Component {
                 />
             </PanelBody>
               
-            { buttons.length && 
+            { buttons.length > 0 && 
                 <PanelBody>
                     <SelectControl
                         label={ __("Button Style Settings") }
@@ -98,7 +98,7 @@ export default class Inspector extends Component {
                         { value: "bgrColor", label: __("Background Color") },
                         { value: "bgrNone", label: __("None") },
                     ]}
-                    onChange={ onChangeBgrOption }
+                      onChange={(value) => onChangeBgrOption(value) }
                 />
             </PanelBody>
 
