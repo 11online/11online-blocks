@@ -123,7 +123,7 @@ export default class Inspector extends Component {
                        min={ 0 }
                        max={ 100 }
                     />
-                </PanelBody>
+            </PanelBody>
         </InspectorControls>
       );
     }
