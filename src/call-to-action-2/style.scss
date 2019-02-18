@@ -1,4 +1,4 @@
-.call-to-action {
+.call-to-action-2 {
     position: relative;
     margin-bottom: 30px;
     padding: 20px;
@@ -18,4 +18,17 @@
     background-size: cover;   
     position: absolute;
     z-index: -1; 
+}
+
+.btn-wrapper {
+    margin-top: 20px;
+}
+
+div[class^="custom-button-"] {
+    display: inline-block;
+}
+
+.custom-button-2,
+.custom-button-3 {
+    margin-left: 15px;
 }
