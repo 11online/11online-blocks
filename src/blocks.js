@@ -21,5 +21,6 @@ import './cards/block.js';
 import './container/block.js';
 import './new-cards/block.js';
 import './postcard/block.js';
+import './post-selector/block.js';
 
 //import './paragraphs/block.js';
