@@ -174,7 +174,7 @@ export default class Card extends Component {
                                 {isEditing && currentCard === index ? renderForEditing() : renderForDone()}
                                 {cards[index].imgID &&
                                     <div
-                                        className="newcard-eleven-online-img" style={ { backgroundImage: `url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 } }
+                                        className="newcard-eleven-online-img" style={ { backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 } }
                                 ></div>
                                 }
                             </div>
@@ -189,7 +189,7 @@ export default class Card extends Component {
                             {cards[index].imgID &&
                                 <div
                                 className="newcard-eleven-online-img"
-                                style={ { backgroundImage: `url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 }}
+                                style={ { backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${cards[index].imgURL})`, opacity: Number(cards[index].imgOpacity) * 0.1 }}
                             ></div>
                             }
                         </div> 
