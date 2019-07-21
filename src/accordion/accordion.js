@@ -92,7 +92,6 @@ export default class Accordion extends Component {
                         { isInEditor ? 
                             <RichText
                                 tagName="p"
-                                formattingControls={ [ 'bold', 'italic', 'strikethrough' ] }
                                 placeholder={ __( 'Add your paragraph content' ) }
                                 value={ text }
                                 style={ { color: colorFontControl, margin: '0 0 5px' } }
