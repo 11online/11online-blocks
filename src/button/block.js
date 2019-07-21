@@ -142,7 +142,7 @@ registerBlockType( 'eleven-online/block-button', {
 		const classes = classnames(className, extraClass, 'button')
 		return (
 			<div style={{textAlign: align}}>
-				<a className={classes} href={link} {...newTab ? {target: '_blank'} : null}>
+				<a className={classes} href={link} {...newTab ? {target: '_blank', rel: "noopener noreferrer"} : null}>
 					{ text }
 				</a>
 			</div>
