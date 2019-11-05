@@ -26,55 +26,71 @@ export default class Container extends Component {
     render() {
         const {
             attributes: {
-                bgrOption, 
+                bgrOption,
+				useOverlay,
                 colorBackgroundControl,
+				colorOverlayControl,
                 imgID,
                 imgURL,
                 imgOpacity,
                 padTop,
-                padBottom,               
+                padBottom,
             },
             className,
             setAttributes,
             isSelected,
-            inEditor,         
-        } = this.props;    
+            inEditor,
+        } = this.props;
 
         const classes = classnames( className, 'background-eleven-online' );
         const divStyle = {
-            backgroundColor: colorBackgroundControl, 
-            paddingTop: `${String(padTop)}px`, 
+            backgroundColor: colorBackgroundControl,
+            paddingTop: `${String(padTop)}px`,
             paddingBottom: `${String(padBottom)}px`,
         };
+
+		const overlayStyle =  useOverlay ?
+				{
+					height: `100%`,
+					width: `100%`,
+					position: `absolute`,
+					top: `0`,
+					left: `0`,
+					backgroundColor: colorOverlayControl,
+					opacity: `.6`
+
+				} : ``;
 
         const renderContainer = (isInEditor) => {
             return (
                 <div className={ classes } style={ divStyle }>
-                    { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> } 
+                    { isInEditor ? <InnerBlocks /> : <InnerBlocks.Content /> }
                     { imgID &&
-                        <div 
+                        <div
                             className="img-background-background-eleven-online"
-                            style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1 } }
+                            style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1}}
                         ></div>
                     }
-                </div>                        
+					{ useOverlay ==='yes' ? <div className="image-overlay" style={overlayStyle}></div> : ''
+					}
+                </div>
             );
         }
 
         return (
-            inEditor ? 
+            inEditor ?
                 <Fragment>
                     { isSelected &&
-                        <Fragment> 
-                            { isSelected &&  
+                        <Fragment>
+                            { isSelected &&
                                 <BlockControls>
-                                    { (bgrOption === 'bgrImage') && 
+                                    { (bgrOption === 'bgrImage') &&
                                         <ImageControl
                                             attributes={ {imgID, imgURL} }
                                             setAttributes={ (newAttributes) => {
                                                 setAttributes({ imgID: newAttributes.imgID, imgURL: newAttributes.imgURL }) } }
                                         />
-                                    }         
+                                    }
                                 </BlockControls>
                             }
                             { isSelected && <Inspector {...{ setAttributes, ...this.props }} /> }
@@ -82,10 +98,10 @@ export default class Container extends Component {
                     }
                     { renderContainer(true) }
                 </Fragment>
-            : 
+            :
                 <Fragment>
                     { renderContainer(false) }
-                </Fragment>   
+                </Fragment>
         );
     }
 }

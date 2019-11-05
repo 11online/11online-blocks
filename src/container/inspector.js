@@ -22,13 +22,15 @@ export default class Inspector extends Component {
         super( ...arguments );
         this.props = props;
     }
-  
+
     render() {
       const {
         attributes: {
             bgrOption,
             imgOpacity,
             colorBackgroundControl,
+			useOverlay,
+			colorOverlayControl,
             padTop,
             padBottom,
         },
@@ -51,6 +53,14 @@ export default class Inspector extends Component {
 
             setAttributes({ bgrOption: value });
         };
+		const onChangeOverlayOptions= (value) => {
+			setAttributes({ useOverlay: value });
+		};
+
+
+
+
+
 
       return (
         <InspectorControls>
@@ -81,8 +91,35 @@ export default class Inspector extends Component {
                         min={ 1 }
                         max={ 10 }
                     />
+					<SelectControl
+						label={ __("Use Overlay") }
+						help={ __("Do you want to use an overlay on the background image?") }
+						value={ useOverlay }
+						options={[
+							{ value: "yes", label: __("Yes") },
+							{ value: "no", label: __("No") },
+						]}
+						onChange={ onChangeOverlayOptions }
+					/>
+					{ useOverlay === 'yes' &&
+					<PanelColorSettings
+						title={__("Overlay Color")}
+						initialOpen={ false }
+						colorSettings={[
+							{
+								label: __("Overlay Color"),
+								help: __("Select Overlay Color"),
+								value: colorOverlayControl,
+								onChange: colorOverlayControl => {
+									setAttributes({ colorOverlayControl });
+								},
+							}
+						]}
+					/>
+					}
                 </PanelBody>
             }
+
 
             { bgrOption === 'bgrColor' &&
                 <PanelColorSettings

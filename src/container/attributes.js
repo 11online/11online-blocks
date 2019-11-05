@@ -13,8 +13,16 @@ const attributes = {
     },
     imgOpacity: {
         type: 'number',
-        default: '10', 
+        default: '10',
     },
+	useOverlay: {
+		type: 'string',
+		default: 'no'
+	},
+	colorOverlayControl: {
+		type: 'string',
+		default: 'transparent'
+	},
     colorBackgroundControl: {
         type: 'string',
         default: 'transparent'
