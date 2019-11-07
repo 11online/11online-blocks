@@ -30,6 +30,7 @@ export default class Container extends Component {
 				useOverlay,
                 colorBackgroundControl,
 				colorOverlayControl,
+				overlayOpacity,
                 imgID,
                 imgURL,
                 imgOpacity,
@@ -57,8 +58,8 @@ export default class Container extends Component {
 					top: `0`,
 					left: `0`,
 					backgroundColor: colorOverlayControl,
-					opacity: `.6`
-
+					opacity: overlayOpacity*0.01,
+					zIndex: `-1`,
 				} : ``;
 
         const renderContainer = (isInEditor) => {
@@ -71,7 +72,7 @@ export default class Container extends Component {
                             style={ { backgroundImage: `url(${ imgURL })`, opacity: imgOpacity*0.1}}
                         ></div>
                     }
-					{ useOverlay ==='yes' ? <div className="image-overlay" style={overlayStyle}></div> : ''
+					{ useOverlay === 'yes' ? <div className="image-overlay" style={overlayStyle}></div> : ''
 					}
                 </div>
             );
@@ -84,7 +85,7 @@ export default class Container extends Component {
                         <Fragment>
                             { isSelected &&
                                 <BlockControls>
-                                    { (bgrOption === 'bgrImage') &&
+                                    {(bgrOption === 'bgrImage') &&
                                         <ImageControl
                                             attributes={ {imgID, imgURL} }
                                             setAttributes={ (newAttributes) => {

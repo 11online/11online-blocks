@@ -31,6 +31,7 @@ export default class Inspector extends Component {
             colorBackgroundControl,
 			useOverlay,
 			colorOverlayControl,
+			overlayOpacity,
             padTop,
             padBottom,
         },
@@ -102,21 +103,35 @@ export default class Inspector extends Component {
 						onChange={ onChangeOverlayOptions }
 					/>
 					{ useOverlay === 'yes' &&
-					<PanelColorSettings
-						title={__("Overlay Color")}
-						initialOpen={ false }
-						colorSettings={[
-							{
-								label: __("Overlay Color"),
-								help: __("Select Overlay Color"),
-								value: colorOverlayControl,
-								onChange: colorOverlayControl => {
-									setAttributes({ colorOverlayControl });
-								},
+					<PanelBody>
+						<PanelColorSettings
+							title={__("Overlay Color")}
+							initialOpen={ false }
+							colorSettings={[
+								{
+									label: __("Overlay Color"),
+									help: __("Select Overlay Color"),
+									value: colorOverlayControl,
+									onChange: colorOverlayControl => {
+										setAttributes({ colorOverlayControl });
+									},
+								}
+							]}
+						/>
+						<RangeControl
+								beforeIcon="arrow-left-alt2"
+								afterIcon="arrow-right-alt2"
+								label={ __("Overlay Color Opacity" ) }
+								help={ __("Overlay color opacity on the scale from 1 to 10") }
+								value={  overlayOpacity }
+								onChange={ overlayOpacity => setAttributes( { overlayOpacity } ) }
+								initialPosition={ 75 }
+								min={ 10 }
+								max={ 100 }
+						/>
+					</PanelBody>
+
 							}
-						]}
-					/>
-					}
                 </PanelBody>
             }
 

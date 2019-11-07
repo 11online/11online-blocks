@@ -17,16 +17,20 @@ const attributes = {
     },
 	useOverlay: {
 		type: 'string',
-		default: 'no'
+		default: 'no',
 	},
 	colorOverlayControl: {
 		type: 'string',
-		default: 'transparent'
+		default: 'transparent',
 	},
     colorBackgroundControl: {
         type: 'string',
-        default: 'transparent'
+        default: 'transparent',
     },
+	overlayOpacity: {
+		type: 'number',
+		default: '75',
+	},
     padTop: {
         type: 'number',
         default: '20',
